@@ -6,12 +6,15 @@ Living docs for the Clean Up - Give Back monorepo. Templates are copy-only.
 
 | Doc | Purpose |
 |-----|---------|
-| [current.md](current.md) | What runs today |
-| [architecture.md](architecture.md) | System Mermaid diagrams (frontend, backend, integrations) |
-| [progress.md](progress.md) | Session-by-session engineer log (source for in-app Updates copy) |
+| [start-here.md](start-here.md) | **Portfolio walkthrough** — mobile, admin, API, end-to-end flow |
+| [screens/README.md](screens/README.md) | Mobile routes + admin pages → source files |
+| [SAMPLE_DATA.md](SAMPLE_DATA.md) | Mocks, placeholders, sanitized identifiers |
+| [architecture.md](architecture.md) | System Mermaid diagrams (frontend, backend, admin, integrations) |
+| [current.md](current.md) | Capability snapshot (sanitized) |
+| [progress.md](progress.md) | Build log stub (full log omitted from sample) |
 | [implementation-plan.md](implementation-plan.md) | Planned work and milestones |
-| [accounts-and-access.md](accounts-and-access.md) | Org accounts; **TestFlight via Fastlane / EAS local** (no secrets in repo) |
-| [supabase.md](supabase.md) | Supabase + Fly setup for sessions (schema, env vars) |
+| [accounts-and-access.md](accounts-and-access.md) | No production credentials in this sample |
+| [supabase.md](supabase.md) | Supabase + sessions API setup (env var names only) |
 | [reports/](reports/) | Session / decision reports |
 | [research/shipping-integration-2026-08.md](research/shipping-integration-2026-08.md) | Shipping/tracking research brief |
 | [research/shippo-vs-easypost-2026-08.md](research/shippo-vs-easypost-2026-08.md) | Shippo vs EasyPost costs, volume, order→USPS flow, setup, API (2026-08-20) |
@@ -31,7 +34,7 @@ Living docs for the Clean Up - Give Back monorepo. Templates are copy-only.
 | Path | Purpose |
 |------|---------|
 | [frontend/brand.md](frontend/brand.md) | Colors, fonts, copy tone (Figma token reference) |
-| [frontend/screen-map.md](frontend/screen-map.md) | PRD → Figma → code screen inventory |
+| [frontend/screen-map.md](frontend/screen-map.md) | Redirect → [screens/README.md](screens/README.md) |
 | [frontend/context/](frontend/context/) | Scoped living context (app, components, assets, …) |
 | [frontend/specs/figma-to-native-handoff.md](frontend/specs/figma-to-native-handoff.md) | Figma-to-RN migration spec and acceptance criteria |
 | [frontend/specs/](frontend/specs/) | All feature specs and PRDs |
@@ -47,8 +50,6 @@ Living docs for the Clean Up - Give Back monorepo. Templates are copy-only.
 | [frontend/specs/photo-checkpoint-dual-capture.md](frontend/specs/photo-checkpoint-dual-capture.md) | Checkpoint capture (`expo-camera` sequential) |
 | [frontend/specs/minor-session-photos.md](frontend/specs/minor-session-photos.md) | Session photos 18+ only; 13–17 track without camera |
 | [frontend/specs/app-updates.md](frontend/specs/app-updates.md) | Account Updates / What’s New (curated from progress.md) |
-| [frontend/specs/expo-go-dev-networking.md](frontend/specs/expo-go-dev-networking.md) | Expo Go Metro LAN / tunnel / cellular testing |
-| [frontend/specs/expo-go-eas-tester-runbook.md](frontend/specs/expo-go-eas-tester-runbook.md) | Dual-runtime smoke checklist (Expo Go + EAS dev client) |
 | [frontend/specs/map-theme-and-weather-icons.md](frontend/specs/map-theme-and-weather-icons.md) | Standard light/dark map theme + weather glyphs |
 | [frontend/specs/live-session-lock-screen-widget.md](frontend/specs/live-session-lock-screen-widget.md) | **Proposed** — iOS Lock Screen/Dynamic Island Live Activity for active sessions |
 

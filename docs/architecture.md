@@ -2,9 +2,11 @@
 
 Mermaid overview of the Clean Up - Give Back monorepo: Expo app, Fly sessions API, Supabase, admin portal, client-only integrations, and deferred scaffolds.
 
-**Scope:** There is one live backend HTTP service (`backend/sessions` on Fly). Maps and weather are client-side. `backend/maps` and `backend/payments` are scaffolds only. Admin is a separate Next.js app that talks mainly to Supabase.
+**Scope:** There is one backend HTTP service (`backend/sessions`). Maps and weather are client-side. `backend/maps` is a scaffold only. The production admin console is [`admin-web-app/`](../admin-web-app/) (Next.js App Router). Legacy [`admin/`](../admin/) is archived — SQL migrations only.
 
-Related: [current.md](current.md), [supabase.md](supabase.md), [backend/specs/sessions-api.md](backend/specs/sessions-api.md), [adr/ADR-004-sessions-backend-supabase-fly.md](adr/ADR-004-sessions-backend-supabase-fly.md), [adr/overview.md](adr/overview.md).
+**Start here:** [start-here.md](start-here.md) · **Screens:** [screens/README.md](screens/README.md) · **Mocks:** [SAMPLE_DATA.md](SAMPLE_DATA.md)
+
+Related: [current.md](current.md), [supabase.md](supabase.md), [admin-web-app.md](admin-web-app.md), [backend/specs/sessions-api.md](backend/specs/sessions-api.md), [adr/ADR-004-sessions-backend-supabase-fly.md](adr/ADR-004-sessions-backend-supabase-fly.md), [adr/overview.md](adr/overview.md).
 
 ---
 
@@ -35,7 +37,7 @@ Related: [current.md](current.md), [supabase.md](supabase.md), [backend/specs/se
 flowchart TB
   subgraph clients [Clients]
     Expo["Expo app\nfrontend/"]
-    Admin["Admin portal\nadmin/ Next.js :3001"]
+    Admin["Admin console\nadmin-web-app/"]
   end
 
   subgraph fly [Fly.io example-sessions :8080]
@@ -210,3 +212,82 @@ sequenceDiagram
 ```
 
 GPS is client-owned mid-session; the finalized polyline is persisted on `PATCH /sessions/:id/finalize`.
+
+---
+
+## 5. Admin console internal structure
+
+Production admin lives in [`admin-web-app/`](../admin-web-app/). Pages under `src/app/` compose UI from `src/components/pages/` and server actions in `src/actions/`.
+
+```mermaid
+flowchart TB
+  subgraph app [admin-web-app]
+    Routes["App Router\nsrc/app/"]
+    Pages["Page components\ncomponents/pages/"]
+    Actions["Server actions\nactions/sessions.ts …"]
+    Live["Live data loaders\nlib/live-data.ts"]
+    UI["Shared UI\ncomponents/ui/"]
+  end
+
+  subgraph routes [Key routes]
+    Dash["/dashboard"]
+    Sess["/sessions"]
+    Vol["/volunteers"]
+    Ord["/orders"]
+    Ev["/events"]
+    Mail["/emails"]
+  end
+
+  Routes --> Pages
+  Pages --> UI
+  Pages --> Actions
+  Pages --> Live
+  Routes --> Dash
+  Routes --> Sess
+  Routes --> Vol
+  Routes --> Ord
+  Routes --> Ev
+  Routes --> Mail
+```
+
+Session moderation detail: preview drawer loads route polyline + signed checkpoint photos; approve/decline writes Postgres, audit log, volunteer notification, and optional email. See [admin-web-app.md](admin-web-app.md).
+
+---
+
+## 6. End-to-end approval flow (mobile + admin + API)
+
+How a volunteer session moves from field capture to an approvable record and service letter.
+
+```mermaid
+sequenceDiagram
+  participant V as Mobile app
+  participant Auth as Supabase Auth
+  participant API as Sessions API
+  participant DB as Postgres
+  participant Stor as Storage
+  participant A as Admin console
+  participant Mail as Resend
+
+  V->>Auth: Sign in (email / OAuth)
+  Auth-->>V: access_token
+  V->>API: POST /sessions
+  API->>DB: insert active session
+  loop Live cleanup
+    V->>V: Background GPS + map
+    V->>Stor: Upload checkpoint photos
+    V->>API: POST /sessions/:id/checkpoints
+    API->>DB: insert checkpoint rows
+  end
+  V->>API: PATCH /sessions/:id/finalize
+  API->>DB: status = under_review
+  A->>DB: List / load session evidence
+  A->>Stor: Signed URLs for photos
+  A->>API: Approve or decline (server action)
+  API->>DB: status = approved | declined
+  A->>Mail: Transactional email (optional)
+  A->>DB: volunteer_notifications row
+  V->>API: GET service-letter.pdf (approved only)
+  API-->>V: PDF bytes
+```
+
+Volunteer-facing status and PDF download: [`SessionDetailScreen.tsx`](../frontend/src/features/figma-screens/screens/SessionDetailScreen.tsx). Admin session UI: [`SessionsPage.tsx`](../admin-web-app/src/components/pages/SessionsPage.tsx) + [`SessionPreviewDrawer.tsx`](../admin-web-app/src/components/ui/SessionPreviewDrawer.tsx).

@@ -79,6 +79,20 @@ For “what runs today,” start at [docs/current.md](docs/current.md).
 
 ---
 
+## Explore the sample
+
+| Doc | Purpose |
+|-----|---------|
+| **[docs/start-here.md](docs/start-here.md)** | Five-minute walkthrough — mobile, admin, API, and how they connect |
+| [docs/architecture.md](docs/architecture.md) | Mermaid system diagrams |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Short link hub |
+| [docs/screens/README.md](docs/screens/README.md) | Every screen and admin page → source file |
+| [docs/SAMPLE_DATA.md](docs/SAMPLE_DATA.md) | Mocks, placeholders, and what would be live |
+| [SECURITY.md](SECURITY.md) | No secrets policy |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | PR expectations |
+
+---
+
 ## Viewing this sample
 
 This repository is **source only**. It is not wired to a backend, Apple team, or EAS project, and it is not set up to install or run on a phone.
@@ -99,11 +113,12 @@ Browse [`frontend/`](frontend/), [`admin-web-app/`](admin-web-app/), and [`backe
 
 | Start here | |
 |------------|--|
+| [docs/start-here.md](docs/start-here.md) | Product walkthrough (mobile + admin + API) |
+| [docs/screens/README.md](docs/screens/README.md) | Screen and page index |
 | [docs/README.md](docs/README.md) | Full docs index |
-| [docs/current.md](docs/current.md) | What runs in production / locally today |
+| [docs/current.md](docs/current.md) | Capability snapshot |
 | [docs/architecture.md](docs/architecture.md) | System diagrams |
 | [docs/progress.md](docs/progress.md) | Build log (omitted from this sample) |
-| [docs/agents/](docs/agents/) | Agent / contributor instructions |
 
 Brand: forest green `#009540`, Sanchez + Noto Sans — see [docs/frontend/brand.md](docs/frontend/brand.md).
 
