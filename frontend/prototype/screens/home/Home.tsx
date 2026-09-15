@@ -64,9 +64,9 @@ const CHART_DATA_YEAR = [
 ];
 
 const TOP_LOCATIONS = [
-  { name: 'Des Plaines River Trail', hours: '18.5 hrs' },
+  { name: 'Sample River Trail', hours: '18.5 hrs' },
   { name: 'Lake Park', hours: '12.0 hrs' },
-  { name: 'Downtown Des Plaines', hours: '7.5 hrs' },
+  { name: 'Downtown Sample', hours: '7.5 hrs' },
 ] as const;
 
 const RECENT_LOGS = [
@@ -252,7 +252,7 @@ export function Home({ go }: Props) {
         <View className="bg-surface-container-low border border-outline-variant/20 rounded-xl p-5 mb-8">
           <Text className="font-headline text-lg font-bold text-on-background mb-1">Community Cleanup Day</Text>
           <Text className="font-label text-sm text-on-surface-variant">Sat, Jun 8 · 10:00 AM</Text>
-          <Text className="font-label text-sm text-on-surface-variant mb-4">Des Plaines River Trail</Text>
+          <Text className="font-label text-sm text-on-surface-variant mb-4">Sample River Trail</Text>
           <PrimaryButton
             label="View Event"
             onPress={() => go('event-detail')}

@@ -15,7 +15,7 @@
 
 ### 1. Who we are
 
-- Clean Up - Give Back (501(c)(3) nonprofit), Des Plaines, IL
+- Clean Up - Give Back (501(c)(3) nonprofit), Example City, IL
 - Contact: privacy@example.org
 - Effective date: July 20, 2026; last updated: July 23, 2026 at 5:17 PM CDT
 
@@ -135,7 +135,7 @@ Also see [privacy-and-data-protection.md](privacy-and-data-protection.md) §7.
 ### 12. Contact us
 
 - Email: privacy@example.org
-- Mailing: Clean Up - Give Back, Des Plaines, IL (full street address TBD)
+- Mailing: Clean Up - Give Back, Example City, IL (full street address TBD)
 
 ---
 

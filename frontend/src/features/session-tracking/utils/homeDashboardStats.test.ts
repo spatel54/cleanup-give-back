@@ -278,7 +278,7 @@ describe('formatImpactPlacesCopy', () => {
       id: 's1',
       startedAtMs: Date.parse('2026-07-14T10:00:00'),
       durationSeconds: 3600,
-      locationLabel: 'Lake Park, Des Plaines, IL',
+      locationLabel: 'Lake Park, Example City, IL',
     });
     const river = stat({
       id: 's2',

@@ -18,7 +18,7 @@ Volunteers and admins can download a multi-page PDF for **approved** cleanup ses
 
 - [x] AC1: **Approved only** — PDF endpoints return 4xx when any requested session is not `approved`.
 - [x] AC2: **Ownership** — Volunteers may only request their own sessions; admin key bypasses ownership.
-- [x] AC3: **Letter page** — Includes org logo, address/phone, Tax ID `82-4822640`, today’s date, volunteer name, hours line, stewardship paragraphs, signature image, Executive Director block and email.
+- [x] AC3: **Letter page** — Includes org logo, address/phone, Tax ID `00-0000000`, today’s date, volunteer name, hours line, stewardship paragraphs, signature image, Executive Director block and email.
 - [x] AC4: **Hours** — Per session uses `adjusted_hours` when set, else `duration_seconds / 3600`. Multi-select sums hours and uses earliest `started_at` through latest `ended_at` (fallback `started_at`).
 - [x] AC5: **Evidence** — For each session (chronological): title/activity, start/end/duration, static map PNG with GPS route, checkpoint selfie and progress photos with capture times.
 - [x] AC6: **Single session** — `GET /sessions/:id/service-letter.pdf` returns letter + that session’s evidence.

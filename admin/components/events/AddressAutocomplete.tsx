@@ -137,7 +137,7 @@ export function AddressAutocomplete({
           type="text"
           value={address}
           onChange={(e) => handleManualChange(e.target.value)}
-          placeholder="600 E Algonquin Rd, Des Plaines, IL 60018"
+          placeholder="100 Sample St, Example City, IL 60018"
           className={`${FIELD} pl-[2.25rem]`}
           autoComplete="off"
         />

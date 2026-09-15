@@ -9,12 +9,11 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.shivpat.cleanupgiveback",
-      "appleTeamId": "A8JJ3C7C6A",
+      "bundleIdentifier": "com.example.cleanupgiveback",
       "usesAppleSignIn": true,
       "entitlements": {
         "com.apple.security.application-groups": [
-          "group.com.shivpat.cleanupgiveback"
+          "group.com.example.cleanupgiveback"
         ]
       },
       "infoPlist": {
@@ -24,7 +23,7 @@
       }
     },
     "android": {
-      "package": "com.shivpat.cleanupgiveback",
+      "package": "com.example.cleanupgiveback",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -148,18 +147,6 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "1de519ca-ce6f-4267-889d-2c2af0e1fed4"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/1de519ca-ce6f-4267-889d-2c2af0e1fed4"
     }
   }
 }

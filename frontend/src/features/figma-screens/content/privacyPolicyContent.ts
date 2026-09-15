@@ -50,7 +50,7 @@ export const PRIVACY_POLICY_INDEX_ROWS: PrivacyPolicyIndexRow[] = [
 export const WHAT_WE_COLLECT_SECTIONS: PrivacySection[] = [
   {
     title: 'Who we are',
-    body: 'Clean Up - Give Back is a registered 501(c)(3) nonprofit based in Des Plaines, Illinois. Our mobile app (iOS and Android) helps volunteers and court-ordered participants track, verify, and document community service hours. We collect only the data we need to run the app and verify your service hours.',
+    body: 'Clean Up - Give Back is a registered 501(c)(3) nonprofit based in Example City, Illinois. Our mobile app (iOS and Android) helps volunteers and court-ordered participants track, verify, and document community service hours. We collect only the data we need to run the app and verify your service hours.',
   },
   {
     title: 'Account details',
@@ -279,7 +279,7 @@ export const HOW_WE_PROTECT_IT_SECTIONS: PrivacySection[] = [
   },
   {
     title: 'Contact us',
-    body: 'Organization: Clean Up - Give Back. Email: privacy@example.org. Mailing address: Clean Up - Give Back, Des Plaines, IL.',
+    body: 'Organization: Clean Up - Give Back. Email: privacy@example.org. Mailing address: Clean Up - Give Back, Example City, IL.',
   },
   {
     title: 'Resources',

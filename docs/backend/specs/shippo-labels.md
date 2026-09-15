@@ -54,7 +54,7 @@ Existing `tracking_number` / `carrier` still used by Order History and shipped e
 | `SHIPPO_API_TOKEN` | Yes (`shippo_test_…` first) |
 | `SHIP_FROM_PHONE` | Yes (carrier requirement) |
 | `SHIPPO_WEBHOOK_SECRET` | For webhooks only |
-| `SHIP_FROM_NAME` / `STREET1` / `CITY` / `STATE` / `ZIP` | Optional; defaults to 600 East Algonquin Road, Des Plaines, IL 60016 |
+| `SHIP_FROM_NAME` / `STREET1` / `CITY` / `STATE` / `ZIP` | Optional; defaults to 100 Sample Street, Example City, IL 00000 |
 | `SHIP_PARCEL_{KIT,TOTE,DEFAULT}_{L,W,H,LB}` | Optional; defaults **16 × 5 × 2 in @ 1 lb** |
 | `ADMIN_API_KEY` | Yes (admin proxy) |
 

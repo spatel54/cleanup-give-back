@@ -20,7 +20,7 @@ export const previewSessionsList: SessionListItem[] = [
   },
   {
     id: 'des-plaines-river',
-    title: 'Des Plaines River Trail Clean Up',
+    title: 'Sample River Trail Clean Up',
     dateLabel: 'Oct 22, 2026',
     timeLabel: '8:00–10:00 AM',
     sortDate: '2026-10-22',

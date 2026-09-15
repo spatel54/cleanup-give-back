@@ -58,7 +58,7 @@ export const mockReviewedSession = {
 };
 
 /**
- * Mocked walking-path polyline near the Des Plaines River Trail, IL —
+ * Mocked walking-path polyline near the Sample River Trail, IL —
  * matches the "River Trail Cleanup" mock session title. [longitude, latitude].
  * Static reference only — no live GPS in this pass.
  */

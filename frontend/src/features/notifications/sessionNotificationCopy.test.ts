@@ -7,7 +7,7 @@ import {
 
 describe('sessionNotificationCopy', () => {
   it('shortens a comma-separated address to the place name', () => {
-    expect(shortSessionPlaceName('Lake Park, Des Plaines, IL')).toBe('Lake Park');
+    expect(shortSessionPlaceName('Lake Park, Example City, IL')).toBe('Lake Park');
     expect(shortSessionPlaceName('  ')).toBeNull();
     expect(shortSessionPlaceName('Unknown')).toBeNull();
   });

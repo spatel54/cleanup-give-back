@@ -26,7 +26,7 @@ const shippedTracked = buildOrderEmailHtml({
   totalCents: 5000,
   shippingAddress: {
     line1: '600 E Algonquin Road',
-    city: 'Des Plaines',
+    city: 'Example City',
     state: 'IL',
     postalCode: '60018',
     country: 'US',
@@ -49,7 +49,7 @@ const trackerBundle = buildOrderEmailHtml({
   shippingLabel: 'FREE',
   shippingAddress: {
     line1: '600 E Algonquin Road',
-    city: 'Des Plaines',
+    city: 'Example City',
     state: 'IL',
     postalCode: '60018',
     country: 'US',

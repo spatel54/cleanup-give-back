@@ -69,12 +69,12 @@ export function EventDetail({ go }: Props) {
               Community Cleanup Day
             </Text>
             <Text style={styles.eventMeta}>Sat, Jun 8 · 10:00 AM</Text>
-            <Text style={styles.eventMeta}>Des Plaines River Trail</Text>
+            <Text style={styles.eventMeta}>Sample River Trail</Text>
 
             <View style={styles.descriptionGap} />
 
             <Text style={styles.description}>
-              Join us for a community-wide cleanup along the Des Plaines River Trail.
+              Join us for a community-wide cleanup along the Sample River Trail.
               Supplies provided. All volunteers welcome.
             </Text>
 

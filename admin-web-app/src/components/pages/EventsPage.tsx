@@ -33,7 +33,7 @@ export type DemoEvent = {
 
 /**
  * Single sample fixture when the Supabase `events` table is empty.
- * Mirrors mobile `downtownRiverfrontEvent` (Des Plaines pin + Unsplash photo stand-ins).
+ * Sample event pin + Unsplash photo stand-ins.
  */
 export const EVENTS: DemoEvent[] = [
   {
@@ -42,7 +42,7 @@ export const EVENTS: DemoEvent[] = [
     description:
       "Join us for a community clean-up at the downtown riverfront! Let's come together to beautify our local waterways and enjoy a day of teamwork and fun. Bring your friends and family, and help us make a difference!",
     location: "Clean Up - Give Back",
-    address: "600 E Algonquin Rd, Des Plaines, IL, 60018",
+    address: "100 Sample St, Example City, IL, 00000",
     lat: 42.0417,
     lng: -87.887,
     organizer: "D214 Life Program",

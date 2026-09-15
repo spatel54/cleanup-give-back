@@ -28,11 +28,15 @@ frontend/fastlane/report.xml
 .env
 .env.*
 !.env.example
+!.env.local.example
 credentials.local.md
 **/credentials.local.md
 .codex/config.toml
 
-# Tool-generated artifacts
+# IDE / agent noise
+.idea/
+.cursor/*.log
+*.log
 .playwright-mcp/
 .specstory/history/
 .specstory/statistics.json

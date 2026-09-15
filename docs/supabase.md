@@ -114,7 +114,7 @@ fly secrets set \
 | `SUPABASE_SERVICE_ROLE_KEY` | Settings → API → service_role — service letter PDFs, signed Storage URLs |
 | `ADMIN_API_KEY` | Generate locally; must match admin portal `ADMIN_API_KEY` for `/api/service-letter/*` and Shippo Buy label |
 | `SHIPPO_API_TOKEN` | Shippo dashboard API token (`shippo_test_…` until live) |
-| `SHIP_FROM_PHONE` | Required for labels; ship-from address defaults to Des Plaines office |
+| `SHIP_FROM_PHONE` | Required for labels; ship-from address defaults to sample office |
 
 Store real values in `credentials.local.md` (gitignored) or a password manager — **not** in `docs/`.
 

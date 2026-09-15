@@ -20,8 +20,8 @@
 
 <p>
   <a href="https://cleanupgiveback.org/"><img src="https://img.shields.io/badge/Website-cleanupgiveback.org-009540" alt="Website" /></a>
-  <img src="https://img.shields.io/badge/iOS-supported-lightgrey?logo=apple&logoColor=white" alt="iOS" />
-  <img src="https://img.shields.io/badge/Android-supported-3DDC84?logo=android&logoColor=white" alt="Android" />
+  <img src="https://img.shields.io/badge/iOS-source-lightgrey?logo=apple&logoColor=white" alt="iOS source" />
+  <img src="https://img.shields.io/badge/Android-source-3DDC84?logo=android&logoColor=white" alt="Android source" />
   <img src="https://img.shields.io/badge/docs-living-009540" alt="Living docs" />
 </p>
 
@@ -79,32 +79,11 @@ For “what runs today,” start at [docs/current.md](docs/current.md).
 
 ---
 
-## Quick start (mobile)
+## Viewing this sample
 
-From the repo root:
+This repository is **source only**. It is not wired to a backend, Apple team, or EAS project, and it is not set up to install or run on a phone.
 
-```bash
-npm install --prefix frontend
-npm start
-```
-
-Or inside `frontend/`:
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-Scan the QR code with **Expo Go**.
-
-| Command | When to use it |
-|---------|----------------|
-| `npm start` | Default **tunnel** — works across Wi‑Fi, hotspot, or cellular |
-| `npm run start:lan` | Same Wi‑Fi as the Mac — fastest |
-| `npm run start:device` / `npm run start:tunnel` | Tunnel aliases |
-
-Networking details: [docs/frontend/specs/expo-go-dev-networking.md](docs/frontend/specs/expo-go-dev-networking.md).
+Browse [`frontend/`](frontend/), [`admin-web-app/`](admin-web-app/), and [`backend/`](backend/) in the editor. Do not run `npm start`, Expo Go, or EAS/TestFlight from this copy.
 
 ### Frontend layout (cheat sheet)
 

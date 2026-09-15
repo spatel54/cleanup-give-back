@@ -998,9 +998,9 @@ Do not show estimated pounds of trash, carbon savings, or environmental savings 
 │ └───────────────┘ └───────────────┘ │
 │                                     │
 │ Top Locations                       │
-│ Des Plaines River Trail   18.5 hrs  │
+│ Sample River Trail   18.5 hrs  │
 │ Lake Park                 12.0 hrs  │
-│ Downtown Des Plaines       7.5 hrs  │
+│ Downtown Sample       7.5 hrs  │
 │                                     │
 │ Recent Logs                  See All│
 │ ┌──────────────┐ ┌──────────────┐  │
@@ -1064,7 +1064,7 @@ Allow users to view Clean-Up Give Back events inside the app while also providin
 │                                     │
 │ Community Cleanup Day               │
 │ Sat, Jun 8 · 10:00 AM               │
-│ Des Plaines River Trail             │
+│ Sample River Trail             │
 │                                     │
 │ Short event description explaining  │
 │ what volunteers can expect.         │

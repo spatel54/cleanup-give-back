@@ -50,7 +50,7 @@ const DEFAULT_DETAIL: SessionDetailData = {
   title: 'Downtown Riverfront Clean-up',
   status: 'approved',
   dateTimeLabel: 'July 15 at 5PM',
-  locationAddress: '600 E Algonquin Rd, Des Plaines, IL, 60018',
+  locationAddress: '100 Sample St, Example City, IL, 00000',
   description: 'Cleaned litter along the riverfront trail and surrounding park area.',
   hoursLabel: '2.5',
   hoursUnitLabel: 'HOURS',

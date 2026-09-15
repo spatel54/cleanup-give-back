@@ -5,19 +5,19 @@ export type { HomeDashboardData, ImpactMonthSummary, ImpactStat, RecentSessionSu
 
 /**
  * Mock location-mapped remote thumbnails (stand-in for Google Places photos).
- * Keys are stable Unsplash Source URLs keyed by Des Plaines / Mt Prospect venues.
+ * Mock location-mapped remote thumbnails (stand-in for Google Places photos).
  */
 const EVENT_IMAGE_BY_LOCATION: Record<string, { uri: string }> = {
-  '600 E Algonquin Rd, Des Plaines, IL 60016, USA': {
+  '100 Sample St, Example City, IL 00000, USA': {
     uri: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80',
   },
-  '1425 N McKinley Rd, Des Plaines, IL 60016, USA': {
+  '300 Sample Blvd, Example City, IL 00000, USA': {
     uri: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80',
   },
-  '2200 E Algonquin Rd, Mt Prospect, IL 60056, USA': {
+  '200 Sample Ave, Example City, IL 00000, USA': {
     uri: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80',
   },
-  '800 Central Rd, Glenview, IL 60025, USA': {
+  '400 Sample Way, Example City, IL 00000, USA': {
     uri: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80',
   },
 };

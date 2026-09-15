@@ -53,7 +53,7 @@ const SESSIONS: SessionCard[] = [
   },
   {
     id: '3',
-    title: 'Downtown Des Plaines',
+    title: 'Downtown Sample',
     status: 'not-approved',
     date: 'May 28 · 1:00–2:00 PM',
     duration: '1.0 hr · River Cleanup',

@@ -59,7 +59,7 @@ create policy "admin_delete_event_photos" on storage.objects
     and (auth.jwt() ->> 'role') = 'admin'
   );
 
--- 4. Enrich the published Des Plaines sample with gallery placeholders
+-- 4. Enrich the published Example City sample with gallery placeholders
 --    (matches mobile Unsplash stand-ins for 600 E Algonquin Rd)
 update public.events
 set

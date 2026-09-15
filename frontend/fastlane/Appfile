@@ -1,3 +1,2 @@
-app_identifier('com.shivpat.cleanupgiveback')
-apple_id('support@example.org')
-team_id('A8JJ3C7C6A')
+# Sample copy — device builds and TestFlight submit are disabled.
+app_identifier('com.example.cleanupgiveback')

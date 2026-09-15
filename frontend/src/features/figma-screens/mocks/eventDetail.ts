@@ -61,7 +61,7 @@ export const downtownRiverfrontEvent: EventDetail = {
   dateTimeLabel: 'July 15 from 5PM - 7PM',
   calendarStartIso: '2026-07-15T17:00:00',
   calendarEndIso: '2026-07-15T19:00:00',
-  addressShort: '600 E Algonquin Rd, Des Plaines, IL, 60018',
+  addressShort: '100 Sample St, Example City, IL, 00000',
   overview:
     "Join us for a community clean-up at the downtown riverfront! Let's come together to beautify our local waterways and enjoy a day of teamwork and fun. Bring your friends and family, and help us make a difference!",
   organizer: {
@@ -72,8 +72,8 @@ export const downtownRiverfrontEvent: EventDetail = {
   whatToBring: DEFAULT_WHAT_TO_BRING,
   whatToBringDescription: DEFAULT_WHAT_TO_BRING_DESCRIPTION,
   locationName: 'Clean Up - Give Back',
-  locationAddress: '600 E Algonquin Rd, Des Plaines, IL, 60018',
-  // Approximate pin for 600 E Algonquin Rd, Des Plaines, IL
+  locationAddress: '100 Sample St, Example City, IL, 00000',
+  // Approximate pin for 100 Sample St, Example City, IL
   coordinate: { latitude: 42.0417, longitude: -87.887 },
   headerImages: [HEADER, HEADER, HEADER, HEADER],
 };
@@ -83,17 +83,17 @@ const EVENT_DETAILS: Record<string, EventDetail> = {
   'ev-2': {
     ...downtownRiverfrontEvent,
     id: 'ev-2',
-    title: 'McKinley Road Clean-up',
+    title: 'Sample Road Clean-up',
     registeredCount: 9,
     dateTimeLabel: 'July 27 from 9AM - 11AM',
     calendarStartIso: '2026-07-27T09:00:00',
     calendarEndIso: '2026-07-27T11:00:00',
-    addressShort: '1425 N McKinley Rd, Des Plaines, IL, 60016',
-    locationAddress: '1425 N McKinley Rd, Des Plaines, IL, 60016',
+    addressShort: '300 Sample Blvd, Example City, IL, 00000',
+    locationAddress: '300 Sample Blvd, Example City, IL, 00000',
     coordinate: { latitude: 42.0512, longitude: -87.9005 },
     organizer: {
       name: 'Park District Volunteer Corps',
-      bio: 'Local volunteers keeping Des Plaines parks and trails clean year-round.',
+      bio: 'Local volunteers keeping Example City parks and trails clean year-round.',
       image: ORGANIZER,
     },
   },
@@ -105,8 +105,8 @@ const EVENT_DETAILS: Record<string, EventDetail> = {
     dateTimeLabel: 'August 3 from 1PM - 3:30PM',
     calendarStartIso: '2026-08-03T13:00:00',
     calendarEndIso: '2026-08-03T15:30:00',
-    addressShort: '2200 E Algonquin Rd, Mt Prospect, IL, 60056',
-    locationAddress: '2200 E Algonquin Rd, Mt Prospect, IL, 60056',
+    addressShort: '200 Sample Ave, Example City, IL, 00000',
+    locationAddress: '200 Sample Ave, Example City, IL, 00000',
     coordinate: { latitude: 42.0458, longitude: -87.9372 },
     organizer: {
       name: 'Northwest Community Partners',
