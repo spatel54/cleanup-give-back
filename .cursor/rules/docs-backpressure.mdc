@@ -30,7 +30,7 @@ A task is **not complete** until living docs under `docs/` match the change. Tem
 | End of session | [progress.md](../../docs/progress.md) |
 | User-visible capability changed | [current.md](../../docs/current.md) |
 | Brand, UI tokens, or copy tone | [brand.md](../../docs/frontend/brand.md) |
-| Org account access (no secrets in repo) | [accounts-and-access.md](../../docs/accounts-and-access.md) |
+| Org account access (no secrets in repo) | [SECURITY.md](../../SECURITY.md) |
 | Agent commands or repo layout | [agents/AGENTS.md](../../docs/agents/AGENTS.md) |
 | Product vision or setup | root `README.md` only |
 

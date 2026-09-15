@@ -70,4 +70,4 @@ open frontend/design/stitch_htmls/welcome___standardized_progress.html
 
 - [start-here.md](start-here.md) — product walkthrough  
 - [screens/README.md](screens/README.md) — route → component index  
-- [accounts-and-access.md](accounts-and-access.md) — no production accounts in this sample
+- [SECURITY.md](../SECURITY.md) — no production credentials in this sample

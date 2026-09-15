@@ -15,7 +15,7 @@ Handles cart checkout, order history, tracker unlock ($59.99 access + included k
 
 ## Integrations
 
-- **Stripe** — `STRIPE_SECRET_KEY` + `STRIPE_WEBHOOK_SECRET` on Fly; publishable key in `frontend/.env` only. See [accounts-and-access.md](../../accounts-and-access.md).
+- **Stripe** — `STRIPE_SECRET_KEY` + `STRIPE_WEBHOOK_SECRET` on Fly; publishable key in `frontend/.env` only. See `frontend/.env.example` and [SECURITY.md](../../SECURITY.md).
 - Resend — order-placed (webhook) and order-shipped (admin fulfillment). Spec: [order-emails.md](../specs/order-emails.md)
 - **Shippo** — admin Buy label on Fly (`POST /shipping/rates`, `/shipping/buy-label`). Checkout still uses 25% shop shipping / tracker FREE. Paste tracking remains. Spec: [shippo-labels.md](../specs/shippo-labels.md).
 

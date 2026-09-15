@@ -86,7 +86,7 @@ Metro clears inherited `CI=true` so fast refresh stays enabled. If tunnel/ngrok 
 
 ### EAS development build (background GPS + native MapLibre)
 
-See [accounts-and-access.md](accounts-and-access.md). After installing a development build: `cd frontend && npm run start:dev-client`. **Rebuild required** after `app.json` / `expo-task-manager` plugin changes. Checkpoint photos use **`expo-camera`** in both Expo Go and the dev client.
+This sample is not configured for device builds. After installing a development build on a full deployment: `cd frontend && npm run start:dev-client`. **Rebuild required** after `app.json` / `expo-task-manager` plugin changes. Checkpoint photos use **`expo-camera`** in both Expo Go and the dev client.
 
 ## Key paths
 

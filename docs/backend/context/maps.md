@@ -52,7 +52,7 @@ Read-only route previews: `SessionRouteMapPreview` (+ WebView variant) with Play
 
 ## Integrations
 
-- **Map tiles:** Carto Voyager / Dark Matter (Standard) and Esri World Imagery (Satellite / Hybrid) via MapLibre vector styles — no API key. **CARTO raster** snapshots (Home Recent Cleanups, event location WebView pins) require `EXPO_PUBLIC_CARTO_BASEMAP_API_KEY` ([accounts-and-access.md](../../accounts-and-access.md)).
+- **Map tiles:** Carto Voyager / Dark Matter (Standard) and Esri World Imagery (Satellite / Hybrid) via MapLibre vector styles — no API key. **CARTO raster** snapshots (Home Recent Cleanups, event location WebView pins) require `EXPO_PUBLIC_CARTO_BASEMAP_API_KEY` (see `frontend/.env.example`).
 - **Weather:** Open-Meteo — no API key
 - **Frontend:** `expo-location`, `expo-task-manager`, `react-native-webview` (Expo Go map), `@maplibre/maplibre-react-native` (native builds)
 - **Backend:** route persistence via sessions API only

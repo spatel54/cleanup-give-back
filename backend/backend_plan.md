@@ -163,7 +163,7 @@ _Photo upload, checkpoint, and validation logic is described within Phase 2 abov
     | Deploy API (Railway/Fly)                                        | Backend   |
     | Production Supabase environment (prod keys, same project)        | Backend   |
     | EAS preview/prod build, TestFlight, Play internal track         | Frontend  |
-    | Complete `docs/accounts-and-access.md`: org owns all accounts   | Both      |
+    | Operator credentials live outside repo (see `SECURITY.md`)   | Both      |
     | End-to-end test script for all critical flows                   | Both      |
 
 - **User Testing Checklist**

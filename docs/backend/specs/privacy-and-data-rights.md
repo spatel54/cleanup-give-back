@@ -59,7 +59,7 @@ Supabase (Postgres, Auth, Storage) must support privacy compliance from day one:
 ### AC-9: Third-party DPAs
 
 - [ ] Supabase, Stripe, Fly.io, Resend, and map-tile vendor (CARTO / Esri) DPAs executed before production
-- [ ] Documented in [accounts-and-access.md](../../accounts-and-access.md)
+- [ ] Documented in operator runbook (not included in this sample)
 
 ## Schema sketch
 

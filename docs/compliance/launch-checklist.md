@@ -32,7 +32,7 @@ Suggested work order is at the [bottom](#suggested-order-of-work).
 | [mobile-app-privacy-policy-outline.md](mobile-app-privacy-policy-outline.md) | Draft policy outline for counsel |
 | [privacy-and-data-rights.md](../backend/specs/privacy-and-data-rights.md) | Cascade delete, export, retention jobs |
 | [ADR-003](../adr/ADR-003-minor-data-protection-baseline.md) | Strictest-baseline architecture |
-| [accounts-and-access.md](../accounts-and-access.md) | Processors and env (no secrets) |
+| [SECURITY.md](../../SECURITY.md) | No secrets in this sample |
 | [implementation-plan.md](../implementation-plan.md) | Privacy & compliance milestone list |
 
 ---
@@ -187,7 +187,7 @@ Suggested work order is at the [bottom](#suggested-order-of-work).
 
 ## 6. Payments *(when Stripe ships — do not block launch on this today)*
 
-Shop, donate, and tracker checkout are UI mocks; `backend/payments/` is empty. See [accounts-and-access.md](../accounts-and-access.md).
+Shop, donate, and tracker checkout are UI mocks; `backend/payments/` is empty. See [SAMPLE_DATA.md](../SAMPLE_DATA.md).
 
 - [ ] Stripe only on server; never store PAN; publishable key in client only. *(when shipped)*
 - [ ] **Webhooks** (signed) update order/donation/unlock status — not the success URL. *(when shipped)*
@@ -271,7 +271,7 @@ Order these after Privacy/Terms are counsel-reviewed and deletion/export are rea
 |----------|-----|---------------------|---------------|
 | **Privacy / product counsel memo** | Illinois-aware privacy counsel | COPPA block, teens 13–17 + GPS/selfies, **BIPA** (photos vs face templates), court-letter sharing, retention vs deletion | Written opinion + redlined policy/ToS. Highest ROI. |
 | **Data Protection Impact Assessment** | Counsel + engineering | Already outlined in privacy-and-data-protection.md §8; sign-off is unchecked | Internal DPIA, not a public seal |
-| **Processor DPAs** | Supabase, Fly, Vercel, Resend, map/geocode vendors; Stripe when live | Contractual processing terms | Signed DPAs, listed in accounts-and-access |
+| **Processor DPAs** | Supabase, Fly, Vercel, Resend, map/geocode vendors; Stripe when live | Contractual processing terms | Signed DPAs (not included in this sample) |
 | **Application penetration test** | CREST / similar firm; **open-book** (source + staging + volunteer + admin roles) | Independent report Admin can show courts/schools; finds RLS/admin-role issues a badge will not | Report + retest of criticals. Scope: Expo app, Fly API, admin, Storage |
 | **Google Play MASA (AL2)** | [App Defense Alliance](https://appdefensealliance.dev/masa) authorized lab | Only Play-visible **“Independent security review”** badge. Built on MASVS. Valid ~365 days. Does **not** certify Data Safety accuracy. | Lab test of the **store APK**. AL1 is self-scan only — no Play badge |
 

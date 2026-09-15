@@ -100,4 +100,4 @@ When tunnel drops repeatedly on cellular:
 ## References
 
 - [session-tracking-expo-go.md](session-tracking-expo-go.md) — device testing for GPS/sessions
-- [accounts-and-access.md](../../accounts-and-access.md) — EAS dev client (separate from Expo Go LAN/tunnel)
+- EAS dev client setup is not included in this sample (separate from Expo Go LAN/tunnel)

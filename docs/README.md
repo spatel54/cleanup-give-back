@@ -13,7 +13,7 @@ Living docs for the Clean Up - Give Back monorepo. Templates are copy-only.
 | [current.md](current.md) | Capability snapshot (sanitized) |
 | [progress.md](progress.md) | Build log stub (full log omitted from sample) |
 | [implementation-plan.md](implementation-plan.md) | Planned work and milestones |
-| [accounts-and-access.md](accounts-and-access.md) | No production credentials in this sample |
+| [SECURITY.md](../SECURITY.md) | No production credentials in this sample |
 | [supabase.md](supabase.md) | Supabase + sessions API setup (env var names only) |
 | [reports/](reports/) | Session / decision reports |
 | [research/shipping-integration-2026-08.md](research/shipping-integration-2026-08.md) | Shipping/tracking research brief |

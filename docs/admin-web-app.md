@@ -30,7 +30,7 @@ CleanUpGiveBackApp/
 ### Authentication
 - **`/login`**: Email/password via Supabase `signInWithPassword`; requires `user_metadata.role === 'admin'`. Branded full-page canvas uses `GradientBarsBackground` (`components/ui/gradient-bars-background.tsx`) — cream `#fcf9f8`, soft forest-green bars (`rgba(0,149,64,0.14)`), slow pulse, `prefers-reduced-motion` respected. Password field uses the same `EyeIcon` / `EyeOffIcon` (`react-icons/io5` `IoEye` / `IoEyeOff`) show/hide toggle as Account and mobile onboarding.
 - **Middleware** (`src/middleware.ts`): When `BYPASS_AUTH` is off, unauthenticated users redirect to `/login`; signed-in non-admins are signed out with `?error=access_denied`. When `BYPASS_AUTH=true`, auth is skipped but `/login` is still served for UI preview.
-- Sample credentials: [accounts-and-access.md](accounts-and-access.md).
+- No production credentials in this sample — see [SECURITY.md](../SECURITY.md).
 
 ### Navigation Sections (sidebar order)
 - **Home** (`/`): Overview metrics and recent activity

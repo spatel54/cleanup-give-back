@@ -136,7 +136,7 @@ Status tags: **Shipped** · **Partial** · **Near-term** · **Blocked (external)
 3. Verify middleware / layout / Server Actions / `assertAdmin` all enforce the claim when bypass is off.
 4. Smoke-test login, denied non-admin, logout, and an approve action end-to-end.
 
-Ops/login notes: [accounts-and-access.md](../accounts-and-access.md).
+Ops/login notes: not included in this sample — see [SECURITY.md](../../SECURITY.md).
 
 ---
 
@@ -344,7 +344,7 @@ Targets ≥ 44×44 px. Audits: [mobile-responsiveness-audit-2026-07-28.md](mobil
 | Bypass | `BYPASS_AUTH` local/demo only; **false in production** |
 | Service role | Server-only; never shipped to the browser |
 | Mutations | Write `admin_audit_log` |
-| Secrets | Documented in [accounts-and-access.md](../accounts-and-access.md) — never commit `.env.local` |
+| Secrets | Never commit `.env.local` — see [SECURITY.md](../../SECURITY.md) |
 
 ---
 
