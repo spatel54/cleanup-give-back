@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ "$1" = "run" ] && [ "$2" = "specs" ]; then
+  exit 0
+fi
+exit 0

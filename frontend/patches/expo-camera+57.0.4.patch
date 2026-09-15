@@ -1,0 +1,268 @@
+diff --git a/node_modules/expo-camera/build/Camera.types.d.ts b/node_modules/expo-camera/build/Camera.types.d.ts
+index 0ee50ec..4adf945 100644
+--- a/node_modules/expo-camera/build/Camera.types.d.ts
++++ b/node_modules/expo-camera/build/Camera.types.d.ts
+@@ -212,8 +212,31 @@ export type PictureSavedListener = (event: {
+ export type AvailableLensesChangedListener = (event: {
+     nativeEvent: AvailableLenses;
+ }) => void;
++export type LensInfo = {
++    /** Stable identifier, for example `'AVCaptureDeviceTypeBuiltInUltraWideCamera'`. */
++    deviceType: string;
++    /** Locale-dependent display name, for example `'Back Ultra Wide Camera'`. */
++    localizedName: string;
++};
++/**
++ * Zoom range of the device currently feeding the session.
++ * On virtual multi-lens devices `min` (`videoZoomFactor` 1.0) is the widest constituent
++ * lens, and `switchOverFactors` gives the factor at which each hand-off happens.
++ * @platform ios
++ */
++export type CameraZoomCapabilities = {
++    deviceType: string;
++    min: number;
++    max: number;
++    switchOverFactors: number[];
++    constituentDeviceTypes: string[];
++};
+ export type AvailableLenses = {
+     lenses: string[];
++    /** @platform ios */
++    lensInfo?: LensInfo[];
++    /** @platform ios */
++    zoom?: CameraZoomCapabilities;
+ };
+ /**
+  * @hidden
+@@ -327,6 +350,13 @@ export type CameraViewProps = ViewProps & {
+      * @default 0
+      */
+     zoom?: number;
++    /**
++     * An absolute `videoZoomFactor` for the active lens, clamped to the device's supported range.
++     * Takes precedence over `zoom` when set. Use the `zoom` capabilities reported by
++     * `onAvailableLensesChanged` to map optical factors onto this value.
++     * @platform ios
++     */
++    zoomFactor?: number;
+     /**
+      * Used to select image or video output.
+      * @default 'picture'
+@@ -494,6 +524,7 @@ export type CameraNativeProps = {
+     autoFocus?: FocusMode;
+     mute?: boolean;
+     zoom?: number;
++    zoomFactor?: number;
+     ratio?: CameraRatio;
+     barcodeScannerSettings?: BarcodeSettings;
+     barcodeScannerEnabled?: boolean;
+diff --git a/node_modules/expo-camera/ios/CameraViewModule.swift b/node_modules/expo-camera/ios/CameraViewModule.swift
+index cccd73f..0956da6 100644
+--- a/node_modules/expo-camera/ios/CameraViewModule.swift
++++ b/node_modules/expo-camera/ios/CameraViewModule.swift
+@@ -136,6 +136,13 @@ public final class CameraViewModule: Module, ScannerResultHandler {
+         }
+       }
+ 
++      Prop("zoomFactor") { (view, zoomFactor: Double?) in
++        let next = zoomFactor.map { CGFloat($0) }
++        if view.zoomFactor != next {
++          view.zoomFactor = next
++        }
++      }
++
+       Prop("mode") { (view, mode: CameraMode?) in
+         if let mode, view.mode != mode {
+           view.mode = mode
+diff --git a/node_modules/expo-camera/ios/Current/CameraSessionManager.swift b/node_modules/expo-camera/ios/Current/CameraSessionManager.swift
+index 7a6568c..5e6baf0 100644
+--- a/node_modules/expo-camera/ios/Current/CameraSessionManager.swift
++++ b/node_modules/expo-camera/ios/Current/CameraSessionManager.swift
+@@ -14,6 +14,7 @@ protocol CameraSessionManagerDelegate: AnyObject {
+   var torchEnabled: Bool { get }
+   var autoFocus: AVCaptureDevice.FocusMode { get }
+   var zoom: CGFloat { get }
++  var zoomFactor: CGFloat? { get }
+   var onMountError: EventDispatcher { get }
+   var onCameraReady: EventDispatcher { get }
+   var permissionsManager: EXPermissionsInterface? { get }
+@@ -87,8 +88,10 @@ class CameraSessionManager: NSObject, DeviceDiscoveryDelegate {
+     ? deviceDiscovery.backCameraLenses
+     : deviceDiscovery.frontCameraLenses
+ 
++    // `localizedName` changes with the device language, so accept the stable
++    // `deviceType` identifier as well (matches expo/expo#42916).
+     let selectedDevice = lenses.first {
+-      $0.localizedName == delegate.selectedLens
++      $0.localizedName == delegate.selectedLens || $0.deviceType.rawValue == delegate.selectedLens
+     }
+ 
+     if let selectedDevice {
+@@ -217,13 +220,55 @@ class CameraSessionManager: NSObject, DeviceDiscoveryDelegate {
+     do {
+       try device.lockForConfiguration()
+       defer { device.unlockForConfiguration() }
+-      let minZoom = 1.0
+-      device.videoZoomFactor = minZoom * pow(device.activeFormat.videoMaxZoomFactor / minZoom, delegate.zoom)
++
++      if let zoomFactor = delegate.zoomFactor {
++        let lower = device.minAvailableVideoZoomFactor
++        let upper = min(device.maxAvailableVideoZoomFactor, device.activeFormat.videoMaxZoomFactor)
++        let target = max(lower, min(upper, zoomFactor))
++        // Ramp instead of an instant snap, matching the stock Camera app's smooth
++        // pinch-zoom feel and giving auto-exposure time to settle across a lens
++        // hand-off (e.g. ultra-wide -> wide at 1x) instead of a hard jump-cut.
++        device.ramp(toVideoZoomFactor: target, withRate: 8.0)
++      } else {
++        let minZoom = 1.0
++        device.videoZoomFactor = minZoom * pow(device.activeFormat.videoMaxZoomFactor / minZoom, delegate.zoom)
++      }
+     } catch {
+       log.info("\(#function): \(error.localizedDescription)")
+     }
+   }
+ 
++  func getAvailableLensInfo() -> [[String: String]] {
++    guard let delegate else {
++      return []
++    }
++
++    let availableLenses = delegate.presetCamera == AVCaptureDevice.Position.back
++    ? deviceDiscovery.backCameraLenses
++    : deviceDiscovery.frontCameraLenses
++
++    return availableLenses
++      .sorted { $0.localizedName < $1.localizedName }
++      .map { ["deviceType": $0.deviceType.rawValue, "localizedName": $0.localizedName] }
++  }
++
++  // Zoom range of the device currently feeding the session. `switchOverFactors`
++  // and `constituentDeviceTypes` let callers locate the real 1x anchor on virtual
++  // multi-lens devices, where `videoZoomFactor` 1.0 is the ultra-wide.
++  func getZoomCapabilities() -> [String: Any] {
++    guard let device = captureDeviceInput?.device else {
++      return [:]
++    }
++
++    return [
++      "deviceType": device.deviceType.rawValue,
++      "min": Double(device.minAvailableVideoZoomFactor),
++      "max": Double(min(device.maxAvailableVideoZoomFactor, device.activeFormat.videoMaxZoomFactor)),
++      "switchOverFactors": device.virtualDeviceSwitchOverVideoZoomFactors.map { $0.doubleValue },
++      "constituentDeviceTypes": device.constituentDevices.map { $0.deviceType.rawValue }
++    ]
++  }
++
+   func getAvailableLenses() -> [String] {
+     guard let delegate else {
+       return []
+diff --git a/node_modules/expo-camera/ios/Current/CameraView.swift b/node_modules/expo-camera/ios/Current/CameraView.swift
+index 4692d00..7df4054 100644
+--- a/node_modules/expo-camera/ios/Current/CameraView.swift
++++ b/node_modules/expo-camera/ios/Current/CameraView.swift
+@@ -147,6 +147,16 @@ public class CameraView: ExpoView, EXAppLifecycleListener, EXCameraInterface, Ca
+     }
+   }
+ 
++  // Absolute `videoZoomFactor`. Takes precedence over `zoom` when set, so callers
++  // can address real optical factors instead of a fraction of an unknown device max.
++  var zoomFactor: CGFloat? {
++    didSet {
++      sessionQueue.async {
++        self.sessionManager.updateZoom()
++      }
++    }
++  }
++
+   // MARK: - Events
+ 
+   let onCameraReady = EventDispatcher()
+@@ -249,13 +259,19 @@ public class CameraView: ExpoView, EXAppLifecycleListener, EXCameraInterface, Ca
+   }
+ 
+   func emitAvailableLenses() {
++    var payload: [String: Any] = [
++      "lenses": sessionManager.getAvailableLenses(),
++      "lensInfo": sessionManager.getAvailableLensInfo()
++    ]
++    // Omitted entirely rather than sent empty, so listeners can treat its presence
++    // as "this build reports zoom capabilities".
++    let zoomCapabilities = sessionManager.getZoomCapabilities()
++    if !zoomCapabilities.isEmpty {
++      payload["zoom"] = zoomCapabilities
++    }
++
+     DispatchQueue.main.async { [weak self] in
+-      guard let self else {
+-        return
+-      }
+-      self.onAvailableLensesChanged([
+-        "lenses": self.sessionManager.getAvailableLenses()
+-      ])
++      self?.onAvailableLensesChanged(payload)
+     }
+   }
+ 
+diff --git a/node_modules/expo-camera/src/Camera.types.ts b/node_modules/expo-camera/src/Camera.types.ts
+index 7cf0a07..1b31852 100644
+--- a/node_modules/expo-camera/src/Camera.types.ts
++++ b/node_modules/expo-camera/src/Camera.types.ts
+@@ -237,8 +237,35 @@ export type PictureSavedListener = (event: {
+  */
+ export type AvailableLensesChangedListener = (event: { nativeEvent: AvailableLenses }) => void;
+ 
++export type LensInfo = {
++  /** Stable identifier, for example `'AVCaptureDeviceTypeBuiltInUltraWideCamera'`. */
++  deviceType: string;
++  /** Locale-dependent display name, for example `'Back Ultra Wide Camera'`. */
++  localizedName: string;
++};
++
++/**
++ * Zoom range of the device currently feeding the session.
++ * On virtual multi-lens devices `min` (`videoZoomFactor` 1.0) is the widest constituent
++ * lens, and `switchOverFactors` gives the factor at which each hand-off happens.
++ * @platform ios
++ */
++export type CameraZoomCapabilities = {
++  deviceType: string;
++  min: number;
++  max: number;
++  switchOverFactors: number[];
++  constituentDeviceTypes: string[];
++};
++
+ // @docsMissing
+-export type AvailableLenses = { lenses: string[] };
++export type AvailableLenses = {
++  lenses: string[];
++  /** @platform ios */
++  lensInfo?: LensInfo[];
++  /** @platform ios */
++  zoom?: CameraZoomCapabilities;
++};
+ 
+ /**
+  * @hidden
+@@ -362,6 +389,13 @@ export type CameraViewProps = ViewProps & {
+    * @default 0
+    */
+   zoom?: number;
++  /**
++   * An absolute `videoZoomFactor` for the active lens, clamped to the device's supported range.
++   * Takes precedence over `zoom` when set. Use the `zoom` capabilities reported by
++   * `onAvailableLensesChanged` to map optical factors onto this value.
++   * @platform ios
++   */
++  zoomFactor?: number;
+   /**
+    * Used to select image or video output.
+    * @default 'picture'
+@@ -527,6 +561,7 @@ export type CameraNativeProps = {
+   autoFocus?: FocusMode;
+   mute?: boolean;
+   zoom?: number;
++  zoomFactor?: number;
+   ratio?: CameraRatio;
+   barcodeScannerSettings?: BarcodeSettings;
+   barcodeScannerEnabled?: boolean;

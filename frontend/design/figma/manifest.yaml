@@ -1,0 +1,704 @@
+# Figma screen manifest
+# Single source of truth mapping Figma screens to future Expo Router route keys.
+#
+# status values:
+#   designed     — screen exists in Figma; not yet built as native RN
+#   bound        — design tokens fully applied in Figma; ready for RN implementation
+#   implemented  — native RN screen shipped in src/app/; legacy HTML route can be removed
+#   missing      — no Figma frame found anywhere in the file as of 2026-08-09 audit; needs net-new design
+#
+# legacyHtmlKey — the HTML_MAP key in frontend/src/app/prototype/[screen].tsx (migration reference only)
+# figmaNode     — Figma node-id. "NEEDS-VISUAL-VERIFICATION" means a candidate frame exists but the exact
+#                 routeKey<->node assignment could not be confirmed from names/structure alone — see
+#                 gap-worklist-2026-08-09.md for the candidate list each Phase 3 section agent must resolve
+#                 with screenshots before binding.
+#
+# 2026-08-09 catch-up audit: real Figma page structure is 6 pages (not the 7 this file originally assumed):
+# 1·Onboarding (77:2), 2·Home & Events (77:3), 3·Shop & Payments (77:4), 4·Session Tracking (77:5),
+# 5·Sessions History (77:6), 6·Account & Settings (77:7). There is no "7·Compliance & Legal" page — those
+# frames (privacy_policy, what-we-collect, etc.) physically live on the Account & Settings page (77:7).
+# figmaPage below reflects the REAL location, not the page name originally assumed when a routeKey was added.
+
+fileKey: DrDcQH14n7ntDQ80F7au9S
+designSystemNode: "1:3"
+
+# ---------------------------------------------------------------------------
+# Page 1 · Onboarding (Figma page 77:2, section 627:29 "Onboarding Flow")
+# ---------------------------------------------------------------------------
+screens:
+  - routeKey: splash-loading
+    figmaPage: "1·Onboarding"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: missing
+    notes: "Confirmed absent 2026-08-09 (no frame found on Onboarding page). Native AppSplashScreen uses color/primary + cream brand mark."
+
+  - routeKey: parent-permission-confirmation
+    figmaPage: "1·Onboarding"
+    figmaNode: "728:901"
+    legacyHtmlKey: ""
+    prdSection: "6.0d"
+    status: implemented
+    notes: "Confirmed 2026-08-09: frame admin_permission_contact still at 728:901. Native `/under-age`."
+
+  - routeKey: parent-permission-learn-why
+    figmaPage: "1·Onboarding"
+    figmaNode: "833:314"
+    legacyHtmlKey: ""
+    prdSection: "6.0d"
+    status: implemented
+    notes: "Confirmed 2026-08-09: frame admin_permission_learn_why still at 833:314. Native `/under-age-learn-why`."
+
+  - routeKey: welcome
+    figmaPage: "1·Onboarding"
+    figmaNode: "112:6776"
+    legacyHtmlKey: welcome___standardized_progress
+    prdSection: "6.1"
+    status: implemented
+    notes: "Confirmed 2026-08-09, screenshot-verified against WelcomeScreen.tsx (hero photo, headline, email/password fields, Log In/Create Account buttons) — exact match. Second frame named `welcome` at 817:299 is visually unrelated (plain green-gradient splash mark, no form content) despite the shared layer name — NOT a welcome iteration, not bound to any routeKey. Possible unconfirmed splash-loading candidate, but no code references it — needs its own confirmation-gated review if ever pursued, not assumed here."
+
+  - routeKey: create-account
+    figmaPage: "1·Onboarding"
+    figmaNode: "105:2"
+    legacyHtmlKey: create_account___standardized_progress
+    prdSection: "6.2"
+    status: implemented
+
+  - routeKey: creating-account
+    figmaPage: "1·Onboarding"
+    figmaNode: "137:73"
+    legacyHtmlKey: ""
+    prdSection: "6.2"
+    status: implemented
+    notes: "Interstitial while account is created — rotating Did-you-know facts + linear progress bar; then account-phone."
+    implNotes: "@route creating-account @motion progress=linear 4200ms facts=rotate+fade @nav replace=account-phone"
+
+  - routeKey: account-phone
+    figmaPage: "1·Onboarding"
+    figmaNode: "712:323"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CORRECTED 2026-08-09 (was incorrectly marked missing) — frame `details_account` at 712:323 (mislabeled layer name, shares it with account-details) is actually the phone-number step with country-code picker. Confirmed via screenshot AND frontend/src/screens/AccountPhoneScreen.tsx line 53, which already carries the doc comment referencing this exact node id. No net-new design needed."
+
+  - routeKey: account-details
+    figmaPage: "1·Onboarding"
+    figmaNode: "112:6882"
+    legacyHtmlKey: account_details___standardized_progress
+    prdSection: "6.3"
+    status: implemented
+    notes: "Confirmed 2026-08-09, screenshot-verified against AccountDetailsScreen.tsx (Birthday + Service Type grid) — exact match. Frame 712:323 (shares layer name `details_account`) is NOT a duplicate of this screen — its actual content is a phone-number step; see account-phone entry below. Progress pills step 2/5 (shared with account-phone). Continue → /location-permission (or /under-age if <18)."
+
+  - routeKey: personal-details
+    figmaPage: "1·Onboarding"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: missing
+    notes: "Confirmed absent 2026-08-09 — no frame found anywhere in the file. Route exists in code. Needs net-new design."
+
+  - routeKey: location-permission
+    figmaPage: "1·Onboarding"
+    figmaNode: "725:553"
+    legacyHtmlKey: ""
+    prdSection: "6.3"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Onboarding location permission (step 3/5). Enable/Not now → /camera-permission. Session-guide twin is permission-location (728:639) via /session-setup-step6."
+
+  - routeKey: camera-permission
+    figmaPage: "1·Onboarding"
+    figmaNode: "725:613"
+    legacyHtmlKey: ""
+    prdSection: "6.3"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Onboarding camera permission (step 4/5). Enable/Not now → /notification-preference. Session-guide twin is permission-camera (728:658) via /session-setup-step7."
+
+  - routeKey: notification-preference
+    figmaPage: "1·Onboarding"
+    figmaNode: "112:7130"
+    legacyHtmlKey: notification_preference___standardized_redo
+    prdSection: "6.4"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame notif_account."
+
+  - routeKey: setup-complete
+    figmaPage: "1·Onboarding"
+    figmaNode: "133:93"
+    legacyHtmlKey: setup_complete
+    prdSection: "6.5"
+    status: implemented
+    notes: "Frame is layer-named `create_account` (not `create_account_success` as previously documented) but node id 133:93 confirmed unchanged 2026-08-09. Continue → home-tour."
+
+  - routeKey: home-tour
+    figmaPage: "1·Onboarding"
+    figmaNode: "137:527"
+    legacyHtmlKey: coachmark_tutorial
+    prdSection: "6.6"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Tour step 1 — home impact dashboard preview."
+
+  - routeKey: shop-tour
+    figmaPage: "1·Onboarding"
+    figmaNode: "137:115"
+    prdSection: "6.6"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Tour step 2 — shop gear preview."
+
+  - routeKey: track-tour
+    figmaPage: "1·Onboarding"
+    figmaNode: "137:431"
+    prdSection: "6.6"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Tour step 3 — live tracking map preview."
+
+  - routeKey: session-tour
+    figmaPage: "1·Onboarding"
+    figmaNode: "137:173"
+    prdSection: "6.6"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Tour step 4 — previous sessions list preview."
+
+  - routeKey: set-tour
+    figmaPage: "1·Onboarding"
+    figmaNode: "112:7170"
+    prdSection: "6.6"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Tour finale — Replay tour / Start Tracking / Go Home."
+
+  - routeKey: coachmark-tutorial
+    figmaPage: "1·Onboarding"
+    figmaNode: "137:527"
+    legacyHtmlKey: coachmark_tutorial
+    prdSection: "6.6"
+    status: implemented
+    notes: "Superseded by native home-tour → shop-tour → track-tour → session-tour → set-tour sequence. Not a distinct route."
+
+# ---------------------------------------------------------------------------
+# Page 2 · Home & Events (Figma page 77:3, section 627:98 "Home & Events")
+# ---------------------------------------------------------------------------
+  - routeKey: home
+    figmaPage: "2·Home & Events"
+    figmaNode: "137:2174"
+    legacyHtmlKey: home_hamburger
+    prdSection: "6.7"
+    status: implemented
+    notes: "Status corrected 2026-08-09 (was `designed`) — confirmed the router's active HomeScreen (frontend/src/features/figma-screens/screens/HomeScreen.tsx) implements this frame. home_dashboard___final_branding (406:291, on the Session Tracking page — misfiled) and home_hamburger HTML are earlier iterations."
+
+  - routeKey: event-detail
+    figmaPage: "2·Home & Events"
+    figmaNode: "196:226"
+    legacyHtmlKey: events_detail
+    prdSection: "6.8"
+    status: implemented
+    notes: "Confirmed 2026-08-09. events_detail frame (196:226). Register opens events_registration_confirmation (787:406). Address block (196:384) rebound to color/text/tertiary 2026-07-10."
+
+# ---------------------------------------------------------------------------
+# Page 3 · Shop & Payments (Figma page 77:4, section 627:166 "Shop Flow")
+# ---------------------------------------------------------------------------
+  - routeKey: shop
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "498:606"
+    legacyHtmlKey: shop_home___prd___reference_aligned
+    prdSection: "6.19"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Frame name shop_home."
+
+  - routeKey: product-detail
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "492:114"
+    legacyHtmlKey: product_detail__cleanup_kit___high_fidelity
+    prdSection: "6.21"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Kit frame shop_product_view. Per-SKU frames confirmed present: trash-grabber 909:126, tote-bags 905:166, adult-safety-vest 905:236, child-safety-vest 905:306."
+
+  - routeKey: product-detail/trash-grabber
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "909:126"
+    legacyHtmlKey: ""
+    prdSection: "6.21"
+    status: implemented
+
+  - routeKey: product-detail/tote-bags
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "905:166"
+    legacyHtmlKey: ""
+    prdSection: "6.21"
+    status: implemented
+
+  - routeKey: product-detail/adult-safety-vest
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "905:236"
+    legacyHtmlKey: ""
+    prdSection: "6.21"
+    status: implemented
+
+  - routeKey: product-detail/child-safety-vest
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "905:306"
+    legacyHtmlKey: ""
+    prdSection: "6.21"
+    status: implemented
+
+  - routeKey: cart
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "657:1585"
+    legacyHtmlKey: shopping_cart__no_tote_bag_
+    prdSection: "6.22"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Frame name shop_checkout (\"Your Cart\" header) — despite the name, this is the cart screen."
+
+  - routeKey: checkout
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "657:1809"
+    legacyHtmlKey: checkout_form
+    prdSection: "6.23"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Frame name shop_checkout_final."
+
+  - routeKey: purchase-confirmation
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "494:262"
+    legacyHtmlKey: thank_you___no_tote_bag_
+    prdSection: "6.24"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Frame name shop_confirmation. Note: frame `order_placed` (1168:3619, misfiled on the Session Tracking page) shows matching order-mode copy (\"Your order is on its way!...ships\") for PurchaseConfirmationScreen.tsx — likely a duplicate/order-mode variant of this same screen. Phase 4 to reconcile/relocate rather than leave orphaned on the wrong page."
+
+  - routeKey: donate
+    figmaPage: "3·Shop & Payments"
+    figmaNode: "412:4"
+    legacyHtmlKey: donate
+    prdSection: "6.20"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Frame name shop_donate."
+
+# ---------------------------------------------------------------------------
+# Page 4 · Session Tracking (Figma page 77:5, section 627:319 "Session Tracking Flow")
+# ---------------------------------------------------------------------------
+  - routeKey: session-setup-guide
+    figmaPage: "4·Session Tracking"
+    figmaNode: "229:189"
+    legacyHtmlKey: session_setup___prd_aligned_standardized
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot: \"How does this work? Let's walk through it.\" + pill 1/6, no Previous button — matches SessionSetupGuideScreen.tsx verbatim. Was 1 of 7 identically-named `session_setup_guide` frames; all 7 now individually resolved (see sibling step entries). Step6/7 remain the separate location_permission/camera_permission frames; live-session is 251:439, unrelated despite the shared old layer name."
+
+  - routeKey: session-setup
+    figmaPage: "4·Session Tracking"
+    figmaNode: "260:1312"
+    legacyHtmlKey: session_setup___prd_aligned_standardized
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot + code comment: \"Session Setup\" app bar, \"Ready to Make an Impact?\" form, Start Session — matches SessionSetupFormScreen.tsx, which already carries the code comment `Figma session_setup_guide form (260:1312)`."
+
+  - routeKey: session-setup-step2
+    figmaPage: "4·Session Tracking"
+    figmaNode: "229:272"
+    legacyHtmlKey: ""
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot: \"First up is session setup.\" pill 2/6 — matches SessionSetupStep2Screen.tsx verbatim."
+
+  - routeKey: session-setup-step3
+    figmaPage: "4·Session Tracking"
+    figmaNode: "229:351"
+    legacyHtmlKey: ""
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot: \"Time is ticking…\" pill 3/6, live-tracker illustration — matches SessionSetupStep3Screen.tsx verbatim."
+
+  - routeKey: session-setup-step4
+    figmaPage: "4·Session Tracking"
+    figmaNode: "249:369"
+    legacyHtmlKey: ""
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot: \"Checkpoint photos for verification.\" pill 4/6, \"30 mins\" + camera popup — matches SessionSetupStep4Screen.tsx verbatim."
+
+  - routeKey: session-setup-step5
+    figmaPage: "4·Session Tracking"
+    figmaNode: "249:387"
+    legacyHtmlKey: ""
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot: \"Now that the session is over, sit back and relax!\" pill 5/6, \"Under Review\" summary card — matches SessionSetupStep5Screen.tsx verbatim."
+
+  - routeKey: session-setup-step6
+    figmaPage: "4·Session Tracking"
+    figmaNode: "728:639"
+    legacyHtmlKey: ""
+    prdSection: "6.10"
+    status: implemented
+    notes: "Confirmed 2026-08-09. This is the permission-location twin frame (location_permission)."
+
+  - routeKey: session-setup-step7
+    figmaPage: "4·Session Tracking"
+    figmaNode: "728:658"
+    legacyHtmlKey: ""
+    prdSection: "6.10"
+    status: implemented
+    notes: "Confirmed 2026-08-09. This is the permission-camera twin frame (camera_permission)."
+
+  - routeKey: session-setup-complete
+    figmaPage: "4·Session Tracking"
+    figmaNode: "251:405"
+    legacyHtmlKey: ""
+    prdSection: "6.9"
+    status: implemented
+    notes: "RESOLVED 2026-08-09 via screenshot + code comment: \"That's it! Let's get tracking!\" celebration, Start Tracking/Previous, all 6 pills filled — matches SessionSetupCompleteScreen.tsx, code comment `Figma session_setup_guide finale (251:405)`."
+
+  - routeKey: live-session
+    figmaPage: "4·Session Tracking"
+    figmaNode: "251:439"
+    legacyHtmlKey: live_session___refined_map_tracker
+    prdSection: "6.11"
+    status: implemented
+    notes: "Confirmed 2026-08-09 — layer renamed to `session_setup_guide` but node id 251:439 unchanged and still has Map + Main Container children matching this screen. Do not confuse with the 7 session-setup-guide candidates above."
+
+  - routeKey: photo-capture
+    figmaPage: "4·Session Tracking"
+    figmaNode: "383:239"
+    legacyHtmlKey: ""
+    prdSection: "6.12"
+    status: implemented
+    notes: "CONFIRMED 2026-08-09 via screenshot: PIP selfie + full-bleed progress photo + Submit button — matches PhotoCaptureScreen.tsx's BeRealPreview component. Distinct from canonical photo_checkpoint at 364:115."
+
+  - routeKey: photo-checkpoint
+    figmaPage: "4·Session Tracking"
+    figmaNode: "364:115"
+    legacyHtmlKey: photo_checkpoint
+    prdSection: "6.12"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: photo-submitted
+    figmaPage: "4·Session Tracking"
+    figmaNode: "260:1571"
+    legacyHtmlKey: photo_submitted
+    prdSection: "6.12"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: missed-checkpoint
+    figmaPage: "4·Session Tracking"
+    figmaNode: "269:1587"
+    legacyHtmlKey: restart_required
+    prdSection: "6.13"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Frame name photo_missed."
+
+  - routeKey: submission-confirmation
+    figmaPage: "4·Session Tracking"
+    figmaNode: "269:1615"
+    legacyHtmlKey: submission_confirmation___prd_aligned
+    prdSection: "6.15"
+    status: implemented
+    notes: "Confirmed 2026-08-09. submission_confirmation___refined_design is the retired duplicate."
+
+  - routeKey: map-theme
+    figmaPage: "4·Session Tracking"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: missing
+    notes: "Confirmed absent 2026-08-09 — no frame found anywhere in the file. Route + spec exist in code (docs/frontend/specs/map-theme-and-weather-icons.md). Needs net-new design (deferred, confirmation-gated)."
+
+  - routeKey: free-hour
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1125:360"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CORRECTED 2026-08-09 (was incorrectly marked missing) — frame layer-named `disclaimer` (1125:360) is actually FreeHourScreen's content: \"One free hour! …explore the tracker for 1 hour before paying,\" pill 5/6. Matches FreeHourScreen.tsx, which already carries the code comment `Figma disclaimer (1125:360)`. Same frame also covers session-free-hour below (shared component)."
+
+  - routeKey: free-kit
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1126:451"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CONFIRMED 2026-08-09 via screenshot + code comment: \"Free cleanup kit! $49.99…\" matches FreeKitScreen.tsx, which carries the code comment `Figma free_kit (1126:451)`. Same frame also covers session-free-kit below (component doc: \"used in onboarding and session setup\")."
+
+  - routeKey: free-trial-done
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1141:2178"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CONFIRMED 2026-08-09 via screenshot: \"Your one hour is up! …$49.99…Pay Later…powered by stripe\" matches free-trial-done.tsx / FreeTrialModal exactly (route's own comment already documents node 1141:2178)."
+
+  - routeKey: session-free-hour
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1125:360"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CORRECTED 2026-08-09 (was incorrectly marked missing) — shares the free-hour frame (1125:360); both routes render the same FreeHourScreen component per its own code comment."
+
+  - routeKey: session-free-kit
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1126:451"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CORRECTED 2026-08-09 (was incorrectly marked missing) — shares the free-kit frame (1126:451) per FreeKitScreen.tsx's own \"used in onboarding and session setup\" comment."
+
+  - routeKey: session-feedback
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1126:1516"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: implemented
+    notes: "CONFIRMED 2026-08-09 via screenshot: title \"Rate your experience!\" is session-feedback's exact default copy (FeedbackScreen with no title override). See give-feedback entry below for the copy-variant caveat on that sibling route."
+
+# ---------------------------------------------------------------------------
+# Page 5 · Sessions History (Figma page 77:6, section 627:357 "Sessions History")
+# ---------------------------------------------------------------------------
+  - routeKey: sessions-list
+    figmaPage: "5·Sessions History"
+    figmaNode: "515:1791"
+    legacyHtmlKey: sessions_list___hybrid_redesign
+    prdSection: "6.16"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Filter chip corrected to Under Review (515:1906) 2026-07-10."
+
+  - routeKey: session-detail
+    figmaPage: "5·Sessions History"
+    figmaNode: "515:1848"
+    legacyHtmlKey: session_detail
+    prdSection: "6.18"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+# ---------------------------------------------------------------------------
+# Page 6 · Account & Settings (Figma page 77:7, section 627:373 "Account Flow")
+# NOTE: the former "Page 7 · Compliance & Legal" no longer exists as a separate
+# Figma page — all of its frames (privacy policy tree, request-data, etc.) are
+# physically on this page. figmaPage corrected below to match reality.
+# ---------------------------------------------------------------------------
+  - routeKey: account
+    figmaPage: "6·Account & Settings"
+    figmaNode: "569:896"
+    legacyHtmlKey: account
+    prdSection: "6.25"
+    status: implemented
+    notes: "Confirmed 2026-08-09. Note: frame `account_teen` (728:1074) is an UNBOUND teen-badge variant of this screen (same layout + green 'Teen Account' pill) — no code implements a teen-badge variant anywhere yet (grepped, no match). Per user decision 2026-08-09: left unbound, flagged as a design exploration only — not forced into any routeKey."
+
+  - routeKey: settings
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: settings
+    prdSection: "6.26"
+    status: missing
+    notes: "Still confirmed absent 2026-08-09 (was already 'FRAME MISSING' in the 2026-07-10 audit). HTML prototype only."
+
+  - routeKey: privacy-security
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: privacy_security
+    prdSection: "6.27"
+    status: designed
+    notes: "DEPRECATED — split into account-privacy + privacy-permissions. Do not implement natively. Confirmed absent 2026-08-09."
+
+  - routeKey: notification-settings
+    figmaPage: "6·Account & Settings"
+    figmaNode: "649:774"
+    legacyHtmlKey: notification_settings___refined_toggles
+    prdSection: "6.26"
+    status: designed
+    notes: "CONFIRMED 2026-08-09 via screenshot: frame `notifications` (649:774) shows toggle groups 'TRACKING & IMPACT' and 'COMMUNITY & STORE' — exactly a settings/toggles screen, distinct from both notification-preference (onboarding, 112:7130, different 4-item set) and the /notifications inbox route (still missing). Status stays `designed` (frame confirmed, no live RN route implements it yet)."
+
+  - routeKey: notifications
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: missing
+    notes: "New 2026-08-09: this is a distinct route (frontend/src/app/notifications.tsx, the notification center/inbox) from notification-settings above. No dedicated frame found for the inbox/center — the only `notifications`-named frame (649:774) reads as the preferences/toggles screen, already assigned to notification-settings."
+
+  - routeKey: order-history
+    figmaPage: "6·Account & Settings"
+    figmaNode: "854:116"
+    legacyHtmlKey: order_history
+    prdSection: "6.28"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: donation-history
+    figmaPage: "6·Account & Settings"
+    figmaNode: "854:205"
+    legacyHtmlKey: donation_history
+    prdSection: "6.29"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: export-service-record
+    figmaPage: "6·Account & Settings"
+    figmaNode: "854:383"
+    legacyHtmlKey: export_service_record
+    prdSection: "6.30"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: export-record-success
+    figmaPage: "6·Account & Settings"
+    figmaNode: "840:561"
+    legacyHtmlKey: ""
+    prdSection: "6.30"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: approval-history
+    figmaPage: "6·Account & Settings"
+    figmaNode: "854:294"
+    legacyHtmlKey: approval_history
+    prdSection: "7"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: account-privacy
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "6.37"
+    status: missing
+    notes: "REFUTED 2026-08-09: frame `account_teen` (728:1074) is NOT this hub — screenshot shows it's a teen-badge variant of the main `account` screen (avatar/stats/Records/Shop/Preferences/Permissions cards + 'Teen Account' pill), no privacy-hub content. AccountPrivacyScreen.tsx already has its own code comment noting Figma node 723:405 is missing and it was built from the PRD wireframe directly. Still genuinely missing from Figma — net-new design needed (confirmation-gated, not this pass). Previously NODE RETIRED (723:405 not found, 2026-07-10 audit)."
+
+  - routeKey: privacy-permissions
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "6.27"
+    status: missing
+    notes: "Still confirmed absent 2026-08-09. OS permissions only; split from deprecated privacy-security."
+
+  - routeKey: privacy-policy
+    figmaPage: "6·Account & Settings"
+    figmaNode: "728:995"
+    legacyHtmlKey: ""
+    prdSection: "6.31"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame `privacy_policy`. figmaPage corrected — physically on Account & Settings page (77:7), not a separate Compliance & Legal page (that page no longer exists)."
+
+  - routeKey: privacy-what-we-collect
+    figmaPage: "6·Account & Settings"
+    figmaNode: "728:1295"
+    legacyHtmlKey: ""
+    prdSection: "6.31"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame `what-we-collect`."
+
+  - routeKey: privacy-how-we-use-it
+    figmaPage: "6·Account & Settings"
+    figmaNode: "735:101"
+    legacyHtmlKey: ""
+    prdSection: "6.31"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame `how-we-use-it`."
+
+  - routeKey: privacy-who-we-share-it-with
+    figmaPage: "6·Account & Settings"
+    figmaNode: "735:160"
+    legacyHtmlKey: ""
+    prdSection: "6.31"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame `who-we-share-it-with`."
+
+  - routeKey: privacy-how-we-protect-it
+    figmaPage: "6·Account & Settings"
+    figmaNode: "735:219"
+    legacyHtmlKey: ""
+    prdSection: "6.31"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame `how-we-protect-it`."
+
+  - routeKey: terms-of-service
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "6.32"
+    status: missing
+    notes: "Still confirmed absent 2026-08-09."
+
+  - routeKey: privacy-rights-request
+    figmaPage: "6·Account & Settings"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "6.33"
+    status: missing
+    notes: "Still confirmed absent 2026-08-09. Note: request-data/request-data-sent below already cover the implemented rights-request flow in code; this routeKey may be redundant with those — Phase 4 to reconcile."
+
+  - routeKey: request-data
+    figmaPage: "6·Account & Settings"
+    figmaNode: "728:1385"
+    legacyHtmlKey: ""
+    prdSection: "6.33"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: request-data-sent
+    figmaPage: "6·Account & Settings"
+    figmaNode: "728:1648"
+    legacyHtmlKey: ""
+    prdSection: "6.33"
+    status: implemented
+    notes: "Confirmed 2026-08-09."
+
+  - routeKey: delete-account-confirm
+    figmaPage: "6·Account & Settings"
+    figmaNode: "725:361"
+    legacyHtmlKey: ""
+    prdSection: "6.35"
+    status: implemented
+    notes: "Confirmed 2026-08-09, frame `delete_account`."
+
+  - routeKey: permission-location
+    figmaPage: "4·Session Tracking"
+    figmaNode: "728:639"
+    legacyHtmlKey: ""
+    prdSection: "6.10"
+    status: implemented
+    notes: "Same frame as session-setup-step6 above — this is the session-setup-guide twin of onboarding's /location-permission. Session setup guide step 6 (/session-setup-step6). Title: Sanchez 30px."
+
+  - routeKey: permission-camera
+    figmaPage: "4·Session Tracking"
+    figmaNode: "728:658"
+    legacyHtmlKey: ""
+    prdSection: "6.10"
+    status: implemented
+    notes: "Same frame as session-setup-step7 above — this is the session-setup-guide twin of onboarding's /camera-permission. Session setup guide step 7 (/session-setup-step7). Title: Sanchez 30px."
+
+  - routeKey: give-feedback
+    figmaPage: "4·Session Tracking"
+    figmaNode: "1126:1516"
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: designed
+    notes: "PARTIAL 2026-08-09: shares the FeedbackScreen component with session-feedback (frame 1126:1516), but that frame's visible copy (\"Rate your experience!\") is session-feedback's default title, not give-feedback's override (\"We'd love your feedback!\"). Component is implemented; this specific copy variant has no dedicated frame depicting it. Status kept at `designed` rather than `implemented` to flag the gap — Phase 4 to decide if a distinct frame is worth creating."
+
+  - routeKey: feedback-thank-you
+    figmaPage: "4·Session Tracking"
+    figmaNode: ""
+    legacyHtmlKey: ""
+    prdSection: "—"
+    status: missing
+    notes: "Confirmed absent 2026-08-09 — no candidate frame found."
+
+# ---------------------------------------------------------------------------
+# Legacy / retired HTML keys (not canonical screens — do not implement)
+# ---------------------------------------------------------------------------
+legacy:
+  - htmlKey: welcome
+    notes: "Retired duplicate of welcome___standardized_progress."
+  - htmlKey: home_dashboard___final_branding
+    notes: "Earlier iteration of home_hamburger. Frame 406:291 confirmed still present 2026-08-09, misfiled on the Session Tracking page."
+  - htmlKey: sessions_list_view___standardized_refined
+    notes: "Earlier iteration of sessions_list___hybrid_redesign."
+  - htmlKey: sessions_calendar_view___with_toggle
+    notes: "Earlier iteration of sessions_calendar_view___standardized_refined. Both frames (88:123, 93:2) confirmed hidden in Figma 2026-08-09."
+  - htmlKey: submission_confirmation___refined_design
+    notes: "Retired duplicate of submission_confirmation___prd_aligned."
+  - htmlKey: cleanup_giveback_redone_prd_full_layouts_md
+    notes: "PRD reference document bundled as HTML — not a screen."
+  - htmlKey: welcome___standardized_progress
+    notes: "Alias used in SCREEN_RULES navigation; canonical routeKey is welcome."

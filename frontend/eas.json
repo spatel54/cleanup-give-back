@@ -1,0 +1,32 @@
+{
+  "cli": {
+    "version": ">= 12.0.0",
+    "appVersionSource": "remote",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development",
+      "env": {
+        "NPM_CONFIG_IGNORE_SCRIPTS": "true",
+        "EXPO_USE_PRECOMPILED_MODULES": "0"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview"
+    },
+    "production": {
+      "autoIncrement": true,
+      "channel": "production",
+      "environment": "production",
+      "node": "22.20.0",
+      "env": {
+        "NPM_CONFIG_IGNORE_SCRIPTS": "true",
+        "EXPO_USE_PRECOMPILED_MODULES": "0"
+      }
+    }
+  }
+}

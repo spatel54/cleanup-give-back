@@ -1,0 +1,17 @@
+import Svg, { Path } from 'react-native-svg';
+import type { NavIconProps } from './types';
+
+/**
+ * Ported from `frontend/assets/figma/home-screen/nav/sessions.svg`
+ * (Figma node 566:392, file DrDcQH14n7ntDQ80F7au9S).
+ */
+export function NavSessionsIcon({ color = '#3E4A3D', width = 21, height = 24 }: NavIconProps) {
+  return (
+    <Svg width={width} height={height} viewBox="0 0 21 24" fill="none">
+      <Path
+        d="M19.8333 24H1.16667C0.857247 24 0.560501 23.8736 0.341709 23.6485C0.122916 23.4235 0 23.1183 0 22.8V1.2C0 0.88174 0.122916 0.576515 0.341709 0.351472C0.560501 0.126428 0.857247 0 1.16667 0H19.8333C20.1428 0 20.4395 0.126428 20.6583 0.351472C20.8771 0.576515 21 0.88174 21 1.2V22.8C21 23.1183 20.8771 23.4235 20.6583 23.6485C20.4395 23.8736 20.1428 24 19.8333 24ZM5.83333 6V8.4H15.1667V6H5.83333ZM5.83333 10.8V13.2H15.1667V10.8H5.83333ZM5.83333 15.6V18H11.6667V15.6H5.83333Z"
+        fill={color}
+      />
+    </Svg>
+  );
+}

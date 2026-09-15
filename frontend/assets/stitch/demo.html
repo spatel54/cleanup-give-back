@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clean-Up Give Back — Demo Gallery</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #009540;
+      --green-light: #e6f4ec;
+      --surface: #fcf9f8;
+      --outline: #d8d0cd;
+      --text: #1a1c19;
+      --text-muted: #5e6e5a;
+      --sidebar-width: 220px;
+      /* iPhone 17 logical resolution: 393×852, scaled down ~73% to fit viewport */
+      --phone-w: 287px;
+      --phone-h: 622px;
+      --phone-radius: 38px;
+      --sidebar-transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html, body { height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0ede9; color: var(--text); }
+
+    /* ── Layout ── */
+    #shell { display: flex; height: 100vh; }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      background: #fff;
+      border-right: 1px solid var(--outline);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: width var(--sidebar-transition), min-width var(--sidebar-transition), opacity var(--sidebar-transition);
+    }
+    #sidebar.collapsed {
+      width: 0;
+      min-width: 0;
+      opacity: 0;
+      pointer-events: none;
+      border-right: none;
+    }
+
+    #sidebar-header {
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--outline);
+      background: var(--green);
+      color: #fff;
+      flex-shrink: 0;
+    }
+    #sidebar-header h1 { font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
+    #sidebar-header p { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+
+    #screen-nav { overflow-y: auto; flex: 1; padding: 8px 0; }
+
+    .nav-group { margin-bottom: 4px; }
+    .nav-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 8px 16px 4px;
+    }
+
+    .nav-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 7px 16px;
+      font-size: 12px;
+      color: var(--text);
+      border-radius: 0;
+      transition: background 0.12s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-item:hover { background: var(--green-light); color: var(--green); }
+    .nav-item.active { background: var(--green-light); color: var(--green); font-weight: 600; border-left: 3px solid var(--green); padding-left: 13px; }
+
+    /* ── Main area ── */
+    #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* ── Top bar ── */
+    #topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: #fff;
+      border-bottom: 1px solid var(--outline);
+      flex-shrink: 0;
+    }
+
+    #btn-back {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: 1px solid var(--outline);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text);
+      transition: background 0.12s;
+    }
+    #btn-back:hover { background: var(--green-light); border-color: var(--green); color: var(--green); }
+    #btn-back:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    #screen-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #screen-file {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Menlo', monospace;
+      white-space: nowrap;
+    }
+
+    #btn-sidebar-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: 1px solid var(--outline);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    #btn-sidebar-toggle:hover { background: var(--green-light); border-color: var(--green); color: var(--green); }
+    #btn-sidebar-toggle.active { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 600; }
+
+    #btn-restart {
+      background: none;
+      border: 1px solid var(--outline);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    #btn-restart:hover { background: var(--green-light); border-color: var(--green); color: var(--green); }
+
+    /* ── Phone container ── */
+    #phone-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 24px;
+    }
+
+    #phone-chrome {
+      width: var(--phone-w);
+      height: var(--phone-h);
+      background: #1a1a1a;
+      border-radius: var(--phone-radius);
+      box-shadow:
+        0 0 0 1.5px #444,
+        0 0 0 5px #1a1a1a,
+        0 0 0 6.5px #444,
+        0 20px 60px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 6px 8px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* iPhone 17 dynamic island */
+    #phone-notch {
+      width: 88px;
+      height: 26px;
+      background: #000;
+      border-radius: 0 0 16px 16px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    /* Camera dot */
+    #phone-notch::after {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: #1c1c1c;
+      border-radius: 50%;
+      border: 1.5px solid #2a2a2a;
+    }
+
+    #screen-frame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      border-radius: calc(var(--phone-radius) - 7px);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    #phone-home-bar {
+      width: 90px;
+      height: 3px;
+      background: #666;
+      border-radius: 2px;
+      margin-top: 6px;
+    }
+
+    /* Volume buttons */
+    #phone-chrome::before {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 76px;
+      width: 3px;
+      height: 22px;
+      background: #444;
+      border-radius: 2px 0 0 2px;
+      box-shadow: 0 32px 0 #444, 0 58px 0 #444;
+    }
+    /* Power button */
+    #phone-chrome::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 100px;
+      width: 3px;
+      height: 44px;
+      background: #444;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── Loading overlay ── */
+    #loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(252,249,248,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 36px;
+      z-index: 20;
+      transition: opacity 0.2s;
+    }
+    #loading-overlay.hidden { opacity: 0; pointer-events: none; }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid var(--outline);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1a1c19;
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      z-index: 100;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+<div id="shell">
+
+  <!-- ── Sidebar ── -->
+  <aside id="sidebar" class="collapsed">
+    <div id="sidebar-header">
+      <h1>Clean-Up Give Back</h1>
+      <p>Demo Gallery</p>
+    </div>
+    <nav id="screen-nav">
+
+      <div class="nav-group">
+        <div class="nav-group-label">Onboarding</div>
+        <button class="nav-item" data-screen="welcome.html">Welcome</button>
+        <button class="nav-item" data-screen="welcome___standardized_progress.html">Welcome (Progress)</button>
+        <button class="nav-item" data-screen="create_account___standardized_progress.html">Create Account</button>
+        <button class="nav-item" data-screen="account_details___standardized_progress.html">Account Details</button>
+        <button class="nav-item" data-screen="notification_preference___standardized_redo.html">Notification Preference</button>
+        <button class="nav-item" data-screen="setup_complete.html">Setup Complete</button>
+        <button class="nav-item" data-screen="coachmark_tutorial.html">Quick Tour</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Home</div>
+        <button class="nav-item" data-screen="home_dashboard___final_branding.html">Home Dashboard</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Sessions</div>
+        <button class="nav-item" data-screen="sessions_list_view___standardized_refined.html">Sessions List</button>
+        <button class="nav-item" data-screen="sessions_calendar_view___standardized_refined.html">Calendar View</button>
+        <button class="nav-item" data-screen="sessions_calendar_view___with_toggle.html">Calendar (Toggle)</button>
+        <button class="nav-item" data-screen="session_setup___prd_aligned_standardized.html">Session Setup</button>
+        <button class="nav-item" data-screen="live_session___refined_map_tracker.html">Live Session</button>
+        <button class="nav-item" data-screen="photo_checkpoint.html">Photo Checkpoint</button>
+        <button class="nav-item" data-screen="submission_confirmation___prd_aligned.html">Submission Confirmation</button>
+        <button class="nav-item" data-screen="submission_confirmation___refined_design.html">Submission (Refined)</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Shop</div>
+        <button class="nav-item" data-screen="shop_home___prd___reference_aligned.html">Shop Home</button>
+        <button class="nav-item" data-screen="product_detail__cleanup_kit___high_fidelity.html">Product Detail</button>
+        <button class="nav-item" data-screen="shopping_cart__no_tote_bag_.html">Shopping Cart</button>
+        <button class="nav-item" data-screen="checkout_form.html">Checkout</button>
+        <button class="nav-item" data-screen="thank_you___no_tote_bag_.html">Thank You</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Donate</div>
+        <button class="nav-item" data-screen="donate.html">Donate</button>
+        <button class="nav-item" data-screen="donation_history.html">Donation History</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Account</div>
+        <button class="nav-item" data-screen="account.html">Account</button>
+        <button class="nav-item" data-screen="approval_history.html">Approval History</button>
+        <button class="nav-item" data-screen="order_history.html">Order History</button>
+        <button class="nav-item" data-screen="export_service_record.html">Export Service Record</button>
+        <button class="nav-item" data-screen="notification_settings___refined_toggles.html">Notification Settings</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Other</div>
+        <button class="nav-item" data-screen="restart_required.html">Restart Required</button>
+        <button class="nav-item" data-screen="cleanup_giveback_redone_prd_full_layouts_md.html">Full Layout Doc</button>
+      </div>
+
+    </nav>
+  </aside>
+
+  <!-- ── Main ── -->
+  <div id="main">
+
+    <div id="topbar">
+      <button id="btn-sidebar-toggle" onclick="toggleSidebar()" title="Toggle screen list">☰ Screens</button>
+      <button id="btn-back" disabled onclick="goBack()">← Back</button>
+      <span id="screen-label">Welcome</span>
+      <span id="screen-file">welcome.html</span>
+      <button id="btn-restart" onclick="navigateTo('welcome.html')">↺ Restart</button>
+    </div>
+
+    <div id="phone-area">
+      <div id="phone-chrome">
+        <div id="phone-notch"></div>
+        <div id="loading-overlay"><div class="spinner"></div></div>
+        <iframe
+          id="screen-frame"
+          src="welcome.html"
+          title="App Preview"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+        ></iframe>
+        <div id="phone-home-bar"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── SCREEN token → filename mapping ──────────────────────────────────────────
+const SCREEN_MAP = {
+  SCREEN_52:  'setup_complete.html',
+  SCREEN_63:  'session_setup___prd_aligned_standardized.html',
+  SCREEN_70:  'submission_confirmation___prd_aligned.html',
+  SCREEN_88:  'shopping_cart__no_tote_bag_.html',
+  SCREEN_90:  'account_details___standardized_progress.html',
+  SCREEN_92:  'account.html',
+  SCREEN_93:  'sessions_list_view___standardized_refined.html',
+  SCREEN_96:  'sessions_list_view___standardized_refined.html',
+  SCREEN_98:  'welcome___standardized_progress.html',
+  SCREEN_104: 'live_session___refined_map_tracker.html',
+  SCREEN_118: 'shop_home___prd___reference_aligned.html',
+  SCREEN_143: 'session_setup___prd_aligned_standardized.html',
+  SCREEN_146: 'donate.html',
+  SCREEN_160: 'product_detail__cleanup_kit___high_fidelity.html',
+  SCREEN_170: 'checkout_form.html',
+};
+
+// ── Text-based button nav for screens with plain <button> elements ───────────
+// Format: { 'filename.html': [ [textFragment, 'target.html'], ... ] }
+const TEXT_NAV = {
+  'account.html': [
+    ['Export Service Record', 'export_service_record.html'],
+    ['Approval History',      'approval_history.html'],
+    ['Order History',         'order_history.html'],
+    ['Donation History',      'donation_history.html'],
+    ['Notifications',         'notification_settings___refined_toggles.html'],
+    ['Log Out',               'welcome.html'],
+  ],
+  'live_session___refined_map_tracker.html': [
+    ['Submit Photo', 'photo_checkpoint.html'],
+    ['End Session',  'submission_confirmation___prd_aligned.html'],
+  ],
+  'photo_checkpoint.html': [
+    ['Take Photo',   'live_session___refined_map_tracker.html'],
+  ],
+  'export_service_record.html': [
+    ['arrow_back',   'account.html'], // icon name matched via aria-label/icon text
+  ],
+};
+
+// ── Friendly screen names ────────────────────────────────────────────────────
+const SCREEN_NAMES = {
+  'welcome.html':                                        'Welcome',
+  'welcome___standardized_progress.html':               'Welcome (Progress)',
+  'create_account___standardized_progress.html':        'Create Account',
+  'account_details___standardized_progress.html':       'Account Details',
+  'notification_preference___standardized_redo.html':   'Notification Preference',
+  'setup_complete.html':                                 'Setup Complete',
+  'coachmark_tutorial.html':                             'Quick Tour',
+  'home_dashboard___final_branding.html':               'Home Dashboard',
+  'sessions_list_view___standardized_refined.html':     'Sessions List',
+  'sessions_calendar_view___standardized_refined.html': 'Calendar View',
+  'sessions_calendar_view___with_toggle.html':          'Calendar (Toggle)',
+  'session_setup___prd_aligned_standardized.html':      'Session Setup',
+  'live_session___refined_map_tracker.html':            'Live Session',
+  'photo_checkpoint.html':                               'Photo Checkpoint',
+  'submission_confirmation___prd_aligned.html':         'Submission Confirmation',
+  'submission_confirmation___refined_design.html':      'Submission (Refined)',
+  'shop_home___prd___reference_aligned.html':           'Shop Home',
+  'product_detail__cleanup_kit___high_fidelity.html':   'Product Detail',
+  'shopping_cart__no_tote_bag_.html':                    'Shopping Cart',
+  'checkout_form.html':                                  'Checkout',
+  'thank_you___no_tote_bag_.html':                       'Thank You',
+  'donate.html':                                         'Donate',
+  'donation_history.html':                               'Donation History',
+  'account.html':                                        'Account',
+  'approval_history.html':                               'Approval History',
+  'order_history.html':                                  'Order History',
+  'export_service_record.html':                          'Export Service Record',
+  'notification_settings___refined_toggles.html':       'Notification Settings',
+  'restart_required.html':                               'Restart Required',
+  'cleanup_giveback_redone_prd_full_layouts_md.html':   'Full Layout Doc',
+};
+
+// ── State ───────────────────────────────────────────────────────────────────
+let historyStack = ['welcome.html'];
+let historyPos = 0;
+let isInjecting = false;
+
+const frame    = document.getElementById('screen-frame');
+const loading  = document.getElementById('loading-overlay');
+const label    = document.getElementById('screen-label');
+const filespan = document.getElementById('screen-file');
+const backBtn  = document.getElementById('btn-back');
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+function navigateTo(filename, pushHistory = true) {
+  if (!filename) return;
+  // Normalize — strip any leading path
+  filename = filename.split('/').pop();
+  if (!filename.endsWith('.html')) filename += '.html';
+  if (!(SCREEN_NAMES[filename] !== undefined || filename)) return showToast('Screen not found: ' + filename);
+
+  if (pushHistory) {
+    historyStack = historyStack.slice(0, historyPos + 1);
+    historyStack.push(filename);
+    historyPos = historyStack.length - 1;
+  }
+
+  loading.classList.remove('hidden');
+  frame.src = filename;
+  updateTopbar(filename);
+  updateSidebar(filename);
+}
+
+function goBack() {
+  if (historyPos > 0) {
+    historyPos--;
+    const filename = historyStack[historyPos];
+    loading.classList.remove('hidden');
+    frame.src = filename;
+    updateTopbar(filename);
+    updateSidebar(filename);
+  }
+}
+
+function updateTopbar(filename) {
+  label.textContent    = SCREEN_NAMES[filename] || filename;
+  filespan.textContent = filename;
+  backBtn.disabled     = historyPos <= 0;
+}
+
+function updateSidebar(filename) {
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.screen === filename);
+  });
+}
+
+// ── Inject nav bridge into iframe after load ──────────────────────────────────
+function injectNav(filename) {
+  if (isInjecting) return;
+  isInjecting = true;
+  try {
+    const doc = frame.contentDocument;
+    if (!doc || !doc.body) { isInjecting = false; return; }
+
+    // Remove stale injected script
+    const old = doc.getElementById('__demo_bridge__');
+    if (old) old.remove();
+
+    const textNavForPage = TEXT_NAV[filename] || [];
+    const screenMapJson  = JSON.stringify(SCREEN_MAP);
+    const textNavJson    = JSON.stringify(textNavForPage);
+
+    const script = doc.createElement('script');
+    script.id = '__demo_bridge__';
+    script.textContent = `
+(function(){
+  var SM   = ${screenMapJson};
+  var TNAV = ${textNavJson};
+
+  function send(screen){
+    try { window.parent.postMessage({type:'navigate',screen:screen},'*'); } catch(e){}
+  }
+
+  function resolveToken(s){
+    return String(s).replace(/\\{\\{DATA:SCREEN:(SCREEN_\\d+)\\}\\}/g, function(_,t){
+      return SM[t] || '#';
+    });
+  }
+
+  // Fix href={{DATA:SCREEN:...}} on all anchors, then intercept .html clicks
+  function patchAnchors(root){
+    (root || document).querySelectorAll('a[href]').forEach(function(a){
+      var href = a.getAttribute('href') || '';
+      var resolved = resolveToken(href);
+      if(resolved !== href) a.setAttribute('href', resolved);
+
+      // Intercept .html navigations
+      if(!a.__demoBound){
+        a.__demoBound = true;
+        a.addEventListener('click', function(e){
+          var h = a.getAttribute('href') || '';
+          if(h && h.match(/\\.html$/) && !h.match(/^https?:/)){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            send(h);
+          }
+        }, true);
+      }
+    });
+  }
+
+  // Fix onclick="window.location.href='{{...}}'" → replace with postMessage call
+  function patchOnclicks(root){
+    (root || document).querySelectorAll('[onclick]').forEach(function(el){
+      var attr = el.getAttribute('onclick') || '';
+      if(!attr.includes('SCREEN_') && !attr.match(/window\\.location\\.href=['"][^'"]+\\.html['"]/)) return;
+      var resolved = resolveToken(attr);
+      var m = resolved.match(/window\\.location\\.href=['"]([^'"]+\\.html)['"]/);
+      if(m){
+        var target = m[1].split('/').pop();
+        el.setAttribute('onclick', '');
+        if(!el.__demoNav){
+          el.__demoNav = true;
+          el.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            send(target);
+          }, true);
+        }
+      }
+    });
+  }
+
+  // Text-based button handlers (for buttons without href/onclick)
+  function patchTextButtons(){
+    if(!TNAV.length) return;
+    document.querySelectorAll('button, a').forEach(function(el){
+      if(el.__demoNav) return;
+      var text = (el.textContent || '').trim();
+      var iconText = '';
+      var icon = el.querySelector('.material-symbols-outlined');
+      if(icon) iconText = (icon.textContent || '').trim();
+      for(var i=0;i<TNAV.length;i++){
+        var rule = TNAV[i];
+        if(text.indexOf(rule[0]) !== -1 || iconText === rule[0]){
+          (function(target){
+            el.__demoNav = true;
+            el.addEventListener('click', function(e){
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              send(target);
+            }, true);
+          })(rule[1]);
+          break;
+        }
+      }
+    });
+  }
+
+  // Override window.location for any remaining direct assignments
+  // (catches legacy onclick handlers set via JS, e.g. el.onclick = () => window.location.href='...')
+  try {
+    var _assign  = window.location.assign.bind(window.location);
+    var _replace = window.location.replace.bind(window.location);
+    window.location.assign = function(url){
+      var s = (url||'').split('/').pop();
+      if(s.match(/\\.html$/)) send(s); else _assign(url);
+    };
+    window.location.replace = function(url){
+      var s = (url||'').split('/').pop();
+      if(s.match(/\\.html$/)) send(s); else _replace(url);
+    };
+  } catch(e){}
+
+  // Run patches
+  function run(){
+    patchAnchors();
+    patchOnclicks();
+    patchTextButtons();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+
+  // Watch for dynamically added DOM (e.g. modals)
+  var mo = new MutationObserver(function(recs){
+    recs.forEach(function(r){
+      r.addedNodes.forEach(function(n){
+        if(n.nodeType === 1){
+          patchAnchors(n);
+          patchOnclicks(n);
+        }
+      });
+    });
+  });
+  mo.observe(document.body, {childList:true, subtree:true});
+})();
+`;
+    doc.head.appendChild(script);
+  } catch(e) {
+    console.warn('[demo] inject failed:', e);
+  }
+  isInjecting = false;
+}
+
+// ── iframe load handler ───────────────────────────────────────────────────────
+frame.addEventListener('load', function(){
+  loading.classList.add('hidden');
+
+  // Detect if the iframe navigated on its own (e.g. coachmark → home_dashboard)
+  let current = historyStack[historyPos];
+  try {
+    const loc = frame.contentWindow.location.href;
+    const detected = loc.split('/').pop().split('?')[0];
+    if(detected && detected.endsWith('.html') && detected !== current){
+      // Native navigation happened — update our state without duplicating history
+      historyStack = historyStack.slice(0, historyPos + 1);
+      historyStack.push(detected);
+      historyPos = historyStack.length - 1;
+      updateTopbar(detected);
+      updateSidebar(detected);
+      current = detected;
+    }
+  } catch(e){}
+
+  injectNav(current);
+});
+
+// ── postMessage handler (from injected bridge) ────────────────────────────────
+window.addEventListener('message', function(event){
+  if(event.data && event.data.type === 'navigate'){
+    var screen = (event.data.screen || '').split('/').pop();
+    if(screen) navigateTo(screen);
+  }
+});
+
+// ── Sidebar click handlers ────────────────────────────────────────────────────
+document.querySelectorAll('.nav-item').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    navigateTo(btn.dataset.screen);
+  });
+});
+
+// ── Sidebar toggle ────────────────────────────────────────────────────────────
+function toggleSidebar(){
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('btn-sidebar-toggle');
+  const collapsed = sidebar.classList.toggle('collapsed');
+  btn.classList.toggle('active', !collapsed);
+}
+
+// ── Toast util ───────────────────────────────────────────────────────────────
+var toastTimer;
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+updateTopbar('welcome.html');
+updateSidebar('welcome.html');
+</script>
+</body>
+</html>

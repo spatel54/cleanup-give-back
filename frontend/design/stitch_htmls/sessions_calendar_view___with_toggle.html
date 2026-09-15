@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sessions Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Noto+Sans:wght@400;600;700&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#89173c",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "inverse-primary": "#66de7f",
+                        "on-surface": "#1c1b1b",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#c64869",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffddb5",
+                        "on-primary-fixed": "#002109",
+                        "primary-container": "#008739",
+                        "surface-tint": "#006e2d",
+                        "tertiary": "#a62f51",
+                        "on-primary-container": "#f7fff2",
+                        "primary-fixed-dim": "#66de7f",
+                        "outline-variant": "#bdcaba",
+                        "on-tertiary-fixed": "#3f0016",
+                        "surface-container": "#f0edec",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb957",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-container": "#fcab29",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#005320",
+                        "secondary": "#835400",
+                        "background": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#83fb98",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "outline": "#6e7a6c",
+                        "surface-container-high": "#eae7e7",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed": "#2a1800",
+                        "on-background": "#1c1b1b",
+                        "tertiary-fixed": "#ffd9de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3e4a3d",
+                        "on-secondary-container": "#694300",
+                        "error-container": "#ffdad6",
+                        "primary": "#006b2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-side": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sanchez", "serif"],
+                        "display": ["Sanchez", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "label": ["Noto Sans", "sans-serif"],
+                        "data": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Sanchez', serif; }
+        .font-data { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom scrollbar for subtle appearance */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dcd9d9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bdcaba;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body">
+<!-- TopAppBar Semantic Shell Component -->
+<header class="fixed top-0 w-full z-40 bg-surface border-b border-outline-variant flex justify-between items-center px-6 py-2 h-16">
+<div class="flex items-center gap-4">
+<span class="font-headline text-xl font-bold text-primary">Clean Up Give Back</span>
+</div>
+<!-- Desktop Nav Items -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-label text-sm font-semibold border-b-2 border-primary py-4" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary font-label text-sm font-semibold transition-colors py-4" href="#">Shop</a>
+<a class="text-on-surface-variant hover:text-primary font-label text-sm font-semibold transition-colors py-4" href="#">Sessions</a>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label text-sm font-semibold hover:bg-primary-container transition-colors shadow-sm">
+                Track
+            </button>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container rounded-full p-2 transition-colors active:scale-95 duration-200 relative">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:opacity-80 transition-opacity">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUf3HZ1f0_r32to2rzRDVC9LvQaGbEUzsUQ23hJazN6JohsnxcORHj8iCWDpD3FXTbbtWycDzdD4_o8A2p8ydI3D9FcCMNAy9pm9YVLHryQR1AcA7IMkJc2zJNmzCuXghfYOIzn1Sdy6dL1ENtVKS-Gwc-YmjhICOfjpLr_TNx6_GpxEcps4AK0C78-m1mzXjaoqbdFB_l-MuN95uYSSYnDTekKPwkmQUA3NbL_b05hiArOXvAyLqV5dDs1TfivliWC062v4bHok">
+</button>
+</div>
+</header>
+<main class="w-full max-w-3xl mx-auto px-margin-side pt-stack-md">
+<!-- Calendar Section -->
+<section class="mb-stack-lg animate-fade-in-up"><div class="flex justify-center mb-stack-md"><div class="bg-surface-container-high p-1 rounded-full flex gap-1"><a href="{{DATA:SCREEN:SCREEN_96}}" class="px-6 py-1.5 rounded-full text-sm font-label font-semibold text-on-surface-variant hover:text-primary transition-colors">List</a><button class="px-6 py-1.5 rounded-full text-sm font-label font-semibold bg-primary text-on-primary shadow-sm">Calendar</button></div></div>
+<div class="flex items-center justify-between mb-stack-md">
+<div class="flex gap-2"><select class="bg-transparent font-headline text-headline-sm text-on-background border-none focus:ring-0 cursor-pointer"><option selected="">June</option><option>July</option><option>August</option></select><select class="bg-transparent font-headline text-headline-sm text-on-background border-none focus:ring-0 cursor-pointer"><option selected="">2024</option><option>2025</option></select></div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Mini Calendar Grid -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<!-- Days of week -->
+<div class="grid grid-cols-7 gap-1 mb-2 text-center">
+<div class="text-xs font-label text-on-surface-variant">S</div>
+<div class="text-xs font-label text-on-surface-variant">M</div>
+<div class="text-xs font-label text-on-surface-variant">T</div>
+<div class="text-xs font-label text-on-surface-variant">W</div>
+<div class="text-xs font-label text-on-surface-variant">T</div>
+<div class="text-xs font-label text-on-surface-variant">F</div>
+<div class="text-xs font-label text-on-surface-variant">S</div>
+</div>
+<!-- Dates Grid (Example: June 2024 starting Saturday) -->
+<div class="grid grid-cols-7 gap-y-3 gap-x-1 text-center font-data text-sm">
+<!-- Empty slots for previous month -->
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<!-- Day 1 -->
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">1</span>
+</div>
+<!-- Day 2 (With logged session) -->
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">2</span>
+<div class="absolute bottom-0 w-1 h-1 rounded-full bg-primary"></div>
+</div>
+<!-- Day 3 (Selected Date) -->
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full bg-primary text-on-primary font-bold shadow-sm cursor-pointer transform scale-110 transition-transform">
+<span class="">3</span>
+<div class="absolute -bottom-1.5 w-1 h-1 rounded-full bg-primary"></div>
+</div>
+<!-- Days 4-30... simplified for brevity, showing some dots -->
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">4</span>
+</div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">5</span>
+<div class="absolute bottom-0 w-1 h-1 rounded-full bg-primary"></div>
+</div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">6</span>
+</div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">7</span>
+<div class="absolute bottom-0 w-1 h-1 rounded-full bg-secondary-container"></div> <!-- Pending -->
+</div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface">
+<span class="">8</span>
+</div>
+<!-- Week 3 -->
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">9</span></div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">10</span><div class="absolute bottom-0 w-1 h-1 rounded-full bg-primary"></div></div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">11</span></div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">12</span></div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">13</span></div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">14</span><div class="absolute bottom-0 w-1 h-1 rounded-full bg-primary"></div></div>
+<div class="relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface"><span class="">15</span></div>
+<!-- Remaining days implied for structural layout -->
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">16</span></div>
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">17</span></div>
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">18</span></div>
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">19</span></div>
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">20</span></div>
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">21</span></div>
+<div class="text-on-surface-variant opacity-50 relative flex flex-col items-center justify-center h-8 w-8 mx-auto rounded-full"><span class="">22</span></div>
+</div>
+</div>
+<!-- Summary Stats for selected period (Optional, but adds data-forward feel) -->
+<div class="grid grid-cols-3 gap-2 mt-4 text-center">
+<div class="bg-surface-container-low border border-outline-variant rounded-lg py-2">
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider mb-1">Total Hrs</div>
+<div class="font-data font-bold text-primary">12.5</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg py-2">
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider mb-1">Impact</div>
+<div class="font-data font-bold text-primary">45kg</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg py-2">
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider mb-1">Sessions</div>
+<div class="font-data font-bold text-primary">8</div>
+</div>
+</div>
+</section>
+<!-- Sessions Log for Selected Date -->
+<section><div class="flex justify-center mb-stack-md"><div class="bg-surface-container-low border border-outline-variant rounded-lg p-1 flex gap-1"><a href="{{DATA:SCREEN:SCREEN_96}}" class="px-6 py-1.5 rounded text-sm font-headline font-medium text-on-surface-variant hover:text-on-surface transition-all focus:outline-none">List</a><button class="px-6 py-1.5 rounded bg-primary text-on-primary font-headline font-medium text-sm shadow-sm transition-all focus:outline-none">Calendar</button></div></div>
+<div class="flex items-baseline justify-between mb-stack-md border-b border-outline-variant pb-2">
+<h3 class="font-headline text-headline-sm text-on-background">Activity on <span class="text-primary font-data">Jun 3</span></h3>
+<span class="text-sm font-label text-on-surface-variant">2 Sessions</span>
+</div>
+<div class="flex flex-col gap-stack-md">
+<!-- Session Card 1: Approved -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col sm:flex-row hover:shadow-md transition-shadow group" onclick="window.location.href='{{DATA:SCREEN:SCREEN_63}}'">
+<!-- Mini Map placeholder -->
+<div class="h-32 sm:h-auto sm:w-40 relative bg-surface-container-high border-b sm:border-b-0 sm:border-r border-outline-variant shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A top-down view of a stylized digital map showing a winding path through a green park area. The visual aesthetic is clean, minimalist, and utilizes a light mode color palette with soft whites, pale grays, and subtle primary green accents. The route is marked with a crisp line. The overall mood is active and environmentally focused, resembling a high-end fitness or environmental tracking application interface." data-location="City Park" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAtcP5yKOam69zPJfvsFl5ziH8f6PiK2FVXnwwDPfv7sqzX6ILSh4yG1z67p08b-4e80jGV8HRqOrP0KHxikxkLv3Oo1zoZLOrm3B57VATT3kh1akU-9ggdd2gbQagSE-wSNu8FuhPRF1ebiXfrNvlpPfLvGt7983FAEnG94QI1gMUEqRLSwKz_h02UQkWY2v85k0XgbI4-8FWS-QVh8CExJooIgJKkvE13v6oHQy0o3J1s8sJcvGkD_nBNrvPWvmFF1GFeZgFqlmI'); opacity: 0.8;"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-data font-bold text-on-surface">
+<span class="material-symbols-outlined text-[14px]">route</span>
+                            3.2 km
+                        </div>
+</div>
+<!-- Session Details -->
+<div class="p-4 flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-headline text-lg font-bold text-on-background group-hover:text-primary transition-colors">Morning River Cleanup</h4>
+<div class="text-sm font-label text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-data">07:30 AM - 09:15 AM</span>
+</div>
+</div>
+<!-- Status Tag: Approved -->
+<div class="flex items-center gap-1 bg-primary/10 border border-primary text-primary px-2 py-1 rounded-sm text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Approved
+                            </div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-outline-variant/30">
+<div>
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Duration</div>
+<div class="font-data font-medium text-on-background text-lg">1h 45m</div>
+</div>
+<div>
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Weight Collected</div>
+<div class="font-data font-medium text-primary text-lg">12.5 kg</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Session Card 2: Under Review -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col sm:flex-row hover:shadow-md transition-shadow group" onclick="window.location.href='{{DATA:SCREEN:SCREEN_63}}'">
+<!-- Mini Map placeholder -->
+<div class="h-32 sm:h-auto sm:w-40 relative bg-surface-container-high border-b sm:border-b-0 sm:border-r border-outline-variant shrink-0 grayscale-[30%]">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A stylized, minimalist digital map view showing an urban street route. The color palette is muted and light, primarily utilizing off-whites and pale grays with subtle secondary amber highlights. The route is distinctly marked but appears slightly less vibrant than a completed active route. The aesthetic is modern, clean, and data-forward, suitable for a calm, professional activity tracking app." data-location="Urban Trail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCg_9bBfDMQFXrvaTdbJeqrU5p0UjKrHtxO7phUo1OD6MiUIHxPtTUiuKXr9rp9XI3vIeOuE_OsyFIO_F6a915CnAu37MN4O-1VC0__qQDdjtlJNitJmZNfaURw79EIkmzZuji2_gM7mk0YQcBNzuXaGUg8dKVQz50MUTPCbnyj7ju1vQscu-8dHySa2UQq3HJcDu78MrO02GmBCQS1c2UWWNX64GWOi2RBemvFpPP8QxD-PoRDLKNgv3C0tslWsMWiNNio0Xsxt8U'); opacity: 0.7;"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-data font-bold text-on-surface">
+<span class="material-symbols-outlined text-[14px]">route</span>
+                            1.8 km
+                        </div>
+</div>
+<!-- Session Details -->
+<div class="p-4 flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-headline text-lg font-bold text-on-background group-hover:text-secondary-container transition-colors">Downtown Alley Sweep</h4>
+<div class="text-sm font-label text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-data">04:00 PM - 04:45 PM</span>
+</div>
+</div>
+<!-- Status Tag: Under Review -->
+<div class="flex items-center gap-1 bg-secondary-container/10 border border-secondary-container text-on-secondary-container px-2 py-1 rounded-sm text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                                Under Review
+                            </div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-outline-variant/30">
+<div>
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Duration</div>
+<div class="font-data font-medium text-on-background text-lg">45m</div>
+</div>
+<div>
+<div class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Est. Weight</div>
+<div class="font-data font-medium text-secondary-container text-lg">~4.0 kg</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Empty State Example (Hidden by default, shown if no sessions) -->
+<!--
+        <div class="py-stack-lg flex flex-col items-center justify-center text-center opacity-70">
+            <div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 text-outline">
+                <span class="material-symbols-outlined text-3xl">event_busy</span>
+            </div>
+            <p class="font-headline text-lg text-on-surface mb-2">No activity logged on this date.</p>
+            <p class="text-sm font-body text-on-surface-variant max-w-xs">Select a date with a green dot to view your past impact sessions.</p>
+        </div>
+        -->
+</main>
+<!-- BottomNavBar Semantic Shell Component -->
+<nav class="bg-surface dark:bg-background text-primary dark:text-primary-fixed font-label text-label-md fixed bottom-0 w-full z-50 border-t border-outline-variant dark:border-outline pb-4 pt-2 px-2 flex justify-around items-end md:hidden"><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200 flex-1" href="{{DATA:SCREEN:SCREEN_93}}"><span class="material-symbols-outlined text-2xl">home</span><span class="font-label text-[10px] font-semibold mt-1">Home</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200 flex-1" href="{{DATA:SCREEN:SCREEN_118}}"><span class="material-symbols-outlined text-2xl">shopping_bag</span><span class="font-label text-[10px] font-semibold mt-1">Shop</span></a><div class="flex-1 flex justify-center -mt-6"><a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full w-14 h-14 shadow-lg active:scale-95 transition-transform duration-200 border-4 border-surface" href="{{DATA:SCREEN:SCREEN_143}}"><span class="material-symbols-outlined text-3xl">add</span></a></div><a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-xl px-4 py-1.5 transition-colors active:scale-95 duration-200 flex-1" href="#"><span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">history</span><span class="font-label text-[10px] font-semibold mt-1">Sessions</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200 flex-1" href="{{DATA:SCREEN:SCREEN_92}}"><span class="material-symbols-outlined text-2xl">person</span><span class="font-label text-[10px] font-semibold mt-1">Account</span></a></nav>
+<!-- Simple interaction script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simple visual feedback for calendar date selection
+            const dates = document.querySelectorAll('.grid-cols-7 > .relative.cursor-pointer');
+            
+            dates.forEach(date => {
+                date.addEventListener('click', function() {
+                    // Remove active state from all
+                    dates.forEach(d => {
+                        d.classList.remove('bg-primary', 'text-on-primary', 'font-bold', 'shadow-sm', 'scale-110');
+                        d.classList.add('hover:bg-surface-container-low', 'text-on-surface');
+                        
+                        // Fix the dot color if it has one
+                        const dot = d.querySelector('.absolute.bottom-0');
+                        if(dot) {
+                            dot.classList.remove('-bottom-1.5');
+                            dot.classList.add('bottom-0');
+                            // Reset dot color based on some logic (hardcoded for demo)
+                            if(d.textContent.trim() === '7') dot.className = 'absolute bottom-0 w-1 h-1 rounded-full bg-secondary-container';
+                            else dot.className = 'absolute bottom-0 w-1 h-1 rounded-full bg-primary';
+                        }
+                    });
+                    
+                    // Add active state to clicked
+                    this.classList.remove('hover:bg-surface-container-low', 'text-on-surface');
+                    this.classList.add('bg-primary', 'text-on-primary', 'font-bold', 'shadow-sm', 'scale-110');
+                    
+                    // Adjust dot position if present
+                    const dot = this.querySelector('.absolute.bottom-0');
+                    if(dot) {
+                        dot.classList.remove('bottom-0', 'bg-secondary-container');
+                        dot.classList.add('-bottom-1.5', 'bg-primary'); // Make dot white or primary when active
+                    }
+                    
+                    // Update header (demo only)
+                    const day = this.querySelector('span').textContent;
+                    document.querySelector('h3.font-headline').innerHTML = `Activity on <span class="text-primary font-data">Jun ${day}</span>`;
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

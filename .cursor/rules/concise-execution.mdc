@@ -1,0 +1,28 @@
+---
+description: Concise task wrap-ups and mid-execution clarifying questions
+alwaysApply: true
+---
+
+# Concise execution
+
+## While the task is running
+
+- Ask clarifying questions **as soon as** you hit ambiguity, a fork, or a blocker — do not batch them until the end.
+- Prefer short, concrete questions (one decision at a time when possible).
+- **Pause** until the user answers when blocked or the next step is ambiguous. Do not guess past a meaningful product/UX/architecture choice.
+- Use sensible defaults only for low-impact details that do not change intent; still mention the assumption briefly if it matters later.
+
+## After the task is done
+
+- Keep the wrap-up short: what changed, where, and any follow-up the user must act on.
+- Do **not** narrate the full process, restate the plan, or write long “here’s everything I did” summaries.
+- Skip recap sections, lengthy rationale, and optional next-step essays unless the user asks.
+- One or two sentences of outcome + file pointers is enough when the work succeeded.
+
+### Bad (after completion)
+
+> I first inspected the route, then updated the component, then synced docs, then ran tsc. Here’s a detailed breakdown of each file and why…
+
+### Good (after completion)
+
+> Updated volunteer detail layout in `admin-web-app/src/app/volunteers/[id]/page.tsx` and synced `docs/admin-web-app.md`. Ready for your review.

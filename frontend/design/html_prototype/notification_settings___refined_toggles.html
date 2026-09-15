@@ -1,0 +1,288 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Impact &amp; Action - Notification Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e5e2e1",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-container": "#f7fff2",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "tertiary-container": "#c64869",
+                        "on-surface-variant": "#3e4a3d",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container": "#f0edec",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#006b2c",
+                        "outline": "#6e7a6c",
+                        "on-secondary-fixed": "#2a1800",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffd9de",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#89173c",
+                        "on-primary-fixed-variant": "#005320",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#fcab29",
+                        "surface": "#fcf9f8",
+                        "outline-variant": "#bdcaba",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb957",
+                        "secondary-fixed": "#ffddb5",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed": "#3f0016",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#66de7f",
+                        "primary-container": "#008739",
+                        "primary-fixed": "#83fb98",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-fixed": "#002109",
+                        "on-surface": "#1c1b1b",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-container": "#694300",
+                        "secondary": "#835400",
+                        "tertiary": "#a62f51",
+                        "primary-fixed-dim": "#66de7f",
+                        "on-background": "#1c1b1b",
+                        "surface-tint": "#006e2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-side": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sanchez", "serif"],
+                        "display": ["Sanchez", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "label": ["Noto Sans", "sans-serif"],
+                        "data": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["34px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "data-lg": ["28px", { lineHeight: "32px", letterSpacing: "-0.05em", fontWeight: "500" }],
+                        "data-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style class="">body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: theme('fontFamily.body');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Standardized Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #009540 !important;
+        }
+        .toggle-checkbox {
+            right: 0;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        .toggle-label {
+            background-color: #E0E0E0;
+            transition: all 0.3s ease-in-out;
+            border-radius: 9999px;
+            width: 100%;
+            height: 100%;
+        }
+        .toggle-dot {
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border-radius: 9999px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .toggle-checkbox:checked ~ .toggle-dot {
+            transform: translateX(24px);
+            border-color: transparent !important;
+        }</style>
+<style>body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: theme('fontFamily.body');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Standardized Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #009540 !important;
+        }
+        .toggle-checkbox {
+            right: 0;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        .toggle-label {
+            background-color: #E0E0E0;
+            transition: all 0.3s ease-in-out;
+            border-radius: 9999px;
+            width: 100%;
+            height: 100%;
+        }
+        .toggle-dot {
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border-radius: 9999px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .toggle-checkbox:checked ~ .toggle-dot {
+            transform: translateX(24px);
+            border-color: transparent !important;
+        }</style></head>
+<body class="min-h-screen flex flex-col pb-24 md:pb-0 relative bg-background text-on-background">
+<!-- TopAppBar -->
+<!-- The nav shell is suppressed as this is a Settings sub-page (transactional/focused task) -->
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-background border-b border-outline-variant dark:border-outline flex items-center justify-between px-6 py-4 transition-colors">
+<a aria-label="Go back" class="text-primary dark:text-primary-fixed hover:bg-surface-container-low transition-colors active:scale-95 duration-200 p-2 rounded-full -ml-2" href="account.html"><span class="material-symbols-outlined text-[24px]">arrow_back</span></a>
+<h1 class="font-headline text-headline-sm font-semibold text-on-surface">Notifications</h1>
+<div class="w-10"></div> <!-- Placeholder to balance flex -->
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col w-full max-w-2xl mx-auto px-margin-side py-stack-lg">
+<div class="mb-stack-lg">
+<p class="font-body text-body-md text-on-surface-variant">
+                Manage how we contact you regarding your impact journey. We recommend keeping approval status notifications on.
+            </p>
+</div>
+<div class="space-y-stack-md flex flex-col">
+<!-- Category: Tracking & Impact -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-variant p-6 flex flex-col gap-4">
+<h2 class="font-label text-label-md text-on-surface uppercase tracking-wider mb-2 border-b border-surface-variant pb-2">Tracking &amp; Impact</h2>
+<!-- Toggle: Session Reviews -->
+<div class="flex items-start justify-between py-2 group">
+<div class="flex flex-col pr-4">
+<span class="font-body text-body-md font-semibold text-on-surface mb-1">Session Reviews</span>
+<span class="font-body text-data-sm text-on-surface-variant">Get a summary when you finish a clean-up walk.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer group">
+<input checked="" class="sr-only peer" id="toggle_session" type="checkbox">
+<div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#009540]"></div>
+</div>
+</div>
+<!-- Toggle: Approval Status -->
+<div class="flex items-start justify-between py-2 group">
+<div class="flex flex-col pr-4">
+<span class="font-body text-body-md font-semibold text-on-surface mb-1">Approval Status</span>
+<span class="font-body text-data-sm text-on-surface-variant">Crucial updates on pending verifications and rejected sessions.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer group">
+<input checked="" class="sr-only peer" id="toggle_approval" type="checkbox">
+<div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#009540]"></div>
+</div>
+</div>
+<!-- Toggle: Photo Checkpoints -->
+<div class="flex items-start justify-between py-2 group">
+<div class="flex flex-col pr-4">
+<span class="font-body text-body-md font-semibold text-on-surface mb-1">Photo Checkpoints</span>
+<span class="font-body text-data-sm text-on-surface-variant">Reminders to take before/after photos during long sessions.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer group">
+<input class="sr-only peer" id="toggle_photos" type="checkbox">
+<div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#009540]"></div>
+</div>
+</div>
+</div>
+<!-- Category: Community & Store -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-variant p-6 flex flex-col gap-4">
+<h2 class="font-label text-label-md text-on-surface uppercase tracking-wider mb-2 border-b border-surface-variant pb-2">Community &amp; Store</h2>
+<!-- Toggle: New Events -->
+<div class="flex items-start justify-between py-2 group">
+<div class="flex flex-col pr-4">
+<span class="font-body text-body-md font-semibold text-on-surface mb-1">New Events</span>
+<span class="font-body text-data-sm text-on-surface-variant">Alerts for upcoming community clean-ups in your area.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer group">
+<input checked="" class="sr-only peer" id="toggle_events" type="checkbox">
+<div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#009540]"></div>
+</div>
+</div>
+<!-- Toggle: Shop/Orders -->
+<div class="flex items-start justify-between py-2 group">
+<div class="flex flex-col pr-4">
+<span class="font-body text-body-md font-semibold text-on-surface mb-1">Shop &amp; Orders</span>
+<span class="font-body text-data-sm text-on-surface-variant">Updates on gear shipments and new reward availability.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer group">
+<input class="sr-only peer" id="toggle_shop" type="checkbox">
+<div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#009540]"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to toggle checked state on the UI side visually
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.toggle-checkbox');
+            checkboxes.forEach(box => {
+                box.addEventListener('change', (e) => {
+                    const dot = e.target.parentElement.querySelector('.toggle-dot');
+                    const label = e.target.parentElement.querySelector('.toggle-label');
+                    if (e.target.checked) {
+                        dot.style.transform = 'translateX(100%)';
+                        dot.style.borderColor = '#006b2c'; // primary
+                        label.style.backgroundColor = '#006b2c';
+                    } else {
+                        dot.style.transform = 'translateX(0)';
+                        dot.style.borderColor = '#e5e2e1'; // surface-variant
+                        label.style.backgroundColor = '#e5e2e1';
+                    }
+                });
+                
+                // Initialize state
+                const dot = box.parentElement.querySelector('.toggle-dot');
+                const label = box.parentElement.querySelector('.toggle-label');
+                if (box.checked) {
+                    dot.style.transform = 'translateX(100%)';
+                    dot.style.borderColor = '#006b2c';
+                    label.style.backgroundColor = '#006b2c';
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

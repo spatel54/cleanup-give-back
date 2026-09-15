@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+# Code Conventions
+- Files: Apply strictly to `**/*.tsx` and `**/*.ts`.
+- Routing: Strictly utilize Expo Router (file-based navigation in `frontend/src/app/`). Stack roots include `(tabs)` and `+not-found.tsx`.
+- Styling: Rely on React Navigation's Light/Dark theming. Utilize shared UI hooks `useColorScheme` and `useThemeColor`.
+- UI Components: Default to `ThemedView`, `ThemedText`, and `Collapsible`. Colors and fonts: follow [docs/frontend/brand.md](../../docs/frontend/brand.md) (Forest Green `#009540`, Sanchez, Noto Sans).

@@ -1,0 +1,215 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Order History — Clean-Up Give Back</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e5e2e1",
+                    "surface-dim": "#dcd9d9",
+                    "on-primary-container": "#f7fff2",
+                    "tertiary-fixed-dim": "#ffb2bf",
+                    "tertiary-container": "#c64869",
+                    "on-surface-variant": "#3e4a3d",
+                    "surface-container-low": "#f6f3f2",
+                    "surface-container": "#f0edec",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "primary": "#009540",
+                    "outline": "#6e7a6c",
+                    "on-secondary-fixed": "#2a1800",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#ffd9de",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "background": "#fcf9f8",
+                    "on-tertiary-fixed-variant": "#89173c",
+                    "on-primary-fixed-variant": "#005320",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-container": "#fcab29",
+                    "surface": "#fcf9f8",
+                    "outline-variant": "#bdcaba",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#ffb957",
+                    "secondary-fixed": "#ffddb5",
+                    "inverse-surface": "#313030",
+                    "on-tertiary-fixed": "#3f0016",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#66de7f",
+                    "primary-container": "#008739",
+                    "primary-fixed": "#83fb98",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#643f00",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-fixed": "#002109",
+                    "on-surface": "#1c1b1b",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#eae7e7",
+                    "on-secondary-container": "#694300",
+                    "secondary": "#835400",
+                    "tertiary": "#a62f51",
+                    "primary-fixed-dim": "#66de7f",
+                    "on-background": "#1c1b1b",
+                    "surface-tint": "#006e2d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Sanchez"
+                    ],
+                    "display": [
+                            "Sanchez"
+                    ],
+                    "body": [
+                            "Noto Sans"
+                    ],
+                    "label": [
+                            "Noto Sans"
+                    ]
+            },
+            "fontSize": {}
+    },
+        },
+      }
+    </script>
+<style>
+        /* Custom Utilities for Typography mapping from Design System */
+        .text-display-lg { font-size: 34px; line-height: 40px; letter-spacing: -0.02em; font-weight: 700; }
+        .text-headline-md { font-size: 24px; line-height: 32px; font-weight: 600; }
+        .text-headline-sm { font-size: 20px; line-height: 28px; font-weight: 600; }
+        .text-body-lg { font-size: 18px; line-height: 28px; font-weight: 400; }
+        .text-body-md { font-size: 16px; line-height: 24px; font-weight: 400; }
+        .text-label-md { font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.01em; }
+        .text-data-lg { font-size: 28px; line-height: 32px; font-weight: 500; letter-spacing: -0.05em; }
+        .text-data-sm { font-size: 14px; line-height: 20px; font-weight: 400; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body">
+<!-- TopAppBar -->
+<header class="bg-surface w-full top-0 sticky border-b border-outline-variant flex items-center justify-between px-6 py-4 z-40">
+<a class="text-primary hover:bg-surface-container-low transition-colors active:scale-95 duration-200 p-2 -ml-2 rounded-full flex items-center justify-center" href="account.html"><span class="material-symbols-outlined">arrow_back</span></a>
+<h1 class="font-headline text-headline-md font-semibold text-on-surface">Donation History</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-3xl mx-auto px-6 pt-8 pb-28">
+<div class="mb-8">
+
+<p class="font-body text-body-md text-on-surface-variant">Review your past equipment requests and purchases.</p>
+</div>
+<!-- Orders List -->
+<div class="flex flex-col gap-6">
+<!-- Order Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label text-label-md text-on-surface-variant block mb-1">ORDER #49201</span>
+<span class="font-body text-body-md text-on-surface">October 12, 2023</span>
+</div>
+<div class="bg-surface-container py-1 px-3 rounded-full flex items-center gap-1 border border-outline-variant/50">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label text-label-md text-primary">Delivered</span>
+</div>
+</div>
+<div class="border-t border-outline-variant border-dashed my-4"></div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline text-headline-sm text-on-surface">Trash Clean-up Kit</h3>
+<span class="font-data-lg text-primary">$45.00</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant bg-surface py-2 px-3 rounded-lg border border-surface-variant w-fit">
+<span class="material-symbols-outlined text-[18px]">mark_email_read</span>
+<span class="font-body text-body-md text-sm">Confirmation receipt sent to email</span>
+</div>
+</div>
+<!-- Order Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label text-label-md text-on-surface-variant block mb-1">ORDER #48892</span>
+<span class="font-body text-body-md text-on-surface">September 28, 2023</span>
+</div>
+<div class="bg-surface-container py-1 px-3 rounded-full flex items-center gap-1 border border-outline-variant/50">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label text-label-md text-primary">Delivered</span>
+</div>
+</div>
+<div class="border-t border-outline-variant border-dashed my-4"></div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline text-headline-sm text-on-surface">Heavy Duty Gloves (Pair)</h3>
+<span class="font-data-lg text-primary">$12.50</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant bg-surface py-2 px-3 rounded-lg border border-surface-variant w-fit">
+<span class="material-symbols-outlined text-[18px]">mark_email_read</span>
+<span class="font-body text-body-md text-sm">Confirmation receipt sent to email</span>
+</div>
+</div>
+<!-- Order Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:bg-surface-container-low transition-colors duration-200 opacity-80">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label text-label-md text-on-surface-variant block mb-1">ORDER #47105</span>
+<span class="font-body text-body-md text-on-surface">July 05, 2023</span>
+</div>
+<div class="bg-surface-container py-1 px-3 rounded-full flex items-center gap-1 border border-outline-variant/50">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label text-label-md text-on-surface-variant">Delivered</span>
+</div>
+</div>
+<div class="border-t border-outline-variant border-dashed my-4"></div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline text-headline-sm text-on-surface">Session Supporter Pack</h3>
+<span class="font-data-lg text-on-surface-variant">$0.00</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant bg-surface py-2 px-3 rounded-lg border border-surface-variant w-fit">
+<span class="material-symbols-outlined text-[18px]">mark_email_read</span>
+<span class="font-body text-body-md text-sm">Confirmation receipt sent to email</span>
+</div>
+</div>
+</div>
+</main>
+<!-- MD3 Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-20 flex items-center justify-around bg-[#ece8e6] border-t border-outline-variant px-4">
+  <button class="flex flex-col items-center gap-0.5 min-w-[48px] justify-center px-3 py-1 rounded-xl hover:bg-surface-container transition-colors duration-150 active:scale-[0.95]">
+    <span class="flex items-center justify-center w-12 h-8 "><span class="material-symbols-outlined text-2xl" data-icon="home" style="font-variation-settings: 'FILL' 0;">home</span></span>
+    <span class="font-label text-[11px] text-on-surface-variant">Home</span>
+  </button>
+  <button class="flex flex-col items-center gap-0.5 min-w-[48px] justify-center px-3 py-1 rounded-xl hover:bg-surface-container transition-colors duration-150 active:scale-[0.95]">
+    <span class="flex items-center justify-center w-12 h-8 "><span class="material-symbols-outlined text-2xl" data-icon="shopping_bag" style="font-variation-settings: 'FILL' 0;">shopping_bag</span></span>
+    <span class="font-label text-[11px] text-on-surface-variant">Shop</span>
+  </button>
+  <button class="flex flex-col items-center justify-center -mt-5 px-2 active:scale-[0.95] transition-transform duration-150">
+    <span class="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-on-primary shadow-md hover:opacity-90 transition-opacity duration-150"><span class="material-symbols-outlined text-[28px]" data-icon="add" style="font-variation-settings: 'FILL' 1;">add</span></span>
+    <span class="font-label text-[11px] text-on-surface-variant mt-1">Track</span>
+  </button>
+  <button class="flex flex-col items-center gap-0.5 min-w-[48px] justify-center px-3 py-1 rounded-xl hover:bg-surface-container transition-colors duration-150 active:scale-[0.95]">
+    <span class="flex items-center justify-center w-12 h-8 "><span class="material-symbols-outlined text-2xl" data-icon="history" style="font-variation-settings: 'FILL' 0;">history</span></span>
+    <span class="font-label text-[11px] text-on-surface-variant">Sessions</span>
+  </button>
+  <button class="flex flex-col items-center gap-0.5 min-w-[48px] justify-center px-3 py-1 rounded-xl hover:bg-surface-container transition-colors duration-150 active:scale-[0.95]">
+    <span class="flex items-center justify-center w-12 h-8 rounded-full bg-[#c2ecce]"><span class="material-symbols-outlined text-2xl" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span></span>
+    <span class="font-label text-[11px] font-semibold text-on-surface">Account</span>
+  </button>
+</nav>
+
+
+</body></html>

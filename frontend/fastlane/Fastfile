@@ -1,0 +1,75 @@
+# TestFlight without EAS cloud iOS quota: build on this Mac, upload via EAS Submit.
+# Run from frontend/:  fastlane ios build | fastlane ios submit | fastlane ios beta
+#
+# Prerequisites: Xcode, eas-cli, frontend/.env (EXPO_PUBLIC_*), Apple team access.
+# Live Activity / widget builds may need EXPO_NO_CAPABILITY_SYNC=1 (see docs/accounts-and-access.md).
+
+default_platform(:ios)
+
+FRONTEND_ROOT = File.expand_path('..', __dir__)
+
+def frontend_ipas
+  Dir.chdir(FRONTEND_ROOT) do
+    Dir.glob('build-*.ipa').sort_by { |path| File.mtime(path) }
+  end
+end
+
+platform :ios do
+  desc 'Production .ipa on this Mac (eas build --local; does not use EAS cloud iOS quota)'
+  lane :build do
+    unless File.directory?(File.join(FRONTEND_ROOT, 'ios'))
+      UI.important('ios/ missing — run: npx expo prebuild (see docs/xcode-build.md)')
+    end
+
+    ENV['FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT'] = '120' if ENV['FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT'].to_s.empty?
+    if ENV['EXPO_NO_CAPABILITY_SYNC'].to_s.empty? && File.exist?(File.join(FRONTEND_ROOT, 'targets/live-session-widget'))
+      ENV['EXPO_NO_CAPABILITY_SYNC'] = '1'
+    end
+
+    eas_local_bin = File.join(FRONTEND_ROOT, 'scripts', 'eas-local-bin')
+    bun_shim = File.join(FRONTEND_ROOT, 'scripts', 'bun-shim')
+    # eas-local-bin shims unset GEM_PATH so EAS local plugin's pod/fastlane checks succeed.
+    ENV['PATH'] = [eas_local_bin, bun_shim, '/opt/homebrew/bin', ENV['PATH']]
+      .select { |segment| segment && !segment.empty? }
+      .join(':')
+    ENV.delete('GEM_PATH')
+    ENV.delete('GEM_HOME')
+    sh('node', File.join(FRONTEND_ROOT, 'scripts', 'patch-eas-local-keychain.mjs'))
+
+    Dir.chdir(FRONTEND_ROOT) do
+      sh(
+        'eas', 'build',
+        '--platform', 'ios',
+        '--profile', 'production',
+        '--local',
+        '--non-interactive'
+      )
+    end
+  end
+
+  desc 'Upload newest frontend/build-*.ipa to TestFlight (EAS Submit + App Store Connect API key on EAS)'
+  lane :submit do
+    ipas = frontend_ipas
+    UI.user_error!('No build-*.ipa in frontend/. Run: cd frontend && fastlane ios build') if ipas.empty?
+
+    ipa = ipas.last
+    UI.success("Submitting #{File.basename(ipa)}")
+
+    Dir.chdir(FRONTEND_ROOT) do
+      sh(
+        'eas', 'submit',
+        '--platform', 'ios',
+        '--path', ipa,
+        '--profile', 'production',
+        '--non-interactive',
+        '--no-wait'
+      )
+    end
+  end
+
+  desc 'Local production build, then submit to TestFlight'
+  lane :beta do
+    build
+    submit
+  end
+end

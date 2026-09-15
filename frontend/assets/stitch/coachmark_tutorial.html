@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Quick Tour - Clean-Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sanchez:wght@400;600;700&family=Noto+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#009540", "on-primary": "#ffffff", "primary-container": "#008739",
+        "on-primary-container": "#f7fff2", "primary-fixed": "#83fb98", "primary-fixed-dim": "#66de7f",
+        "secondary": "#835400", "on-secondary": "#ffffff", "secondary-container": "#fcab29",
+        "surface": "#fcf9f8", "on-surface": "#1c1b1b", "surface-variant": "#e5e2e1",
+        "on-surface-variant": "#3e4a3d", "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f6f3f2", "surface-container": "#f0edec",
+        "surface-container-high": "#eae7e7", "surface-container-highest": "#e5e2e1",
+        "outline": "#6e7a6c", "outline-variant": "#bdcaba",
+        "background": "#fcf9f8", "on-background": "#1c1b1b"
+      },
+      fontFamily: { "headline": ["Sanchez","serif"], "body": ["Noto Sans","sans-serif"], "label": ["Noto Sans","sans-serif"] },
+      fontSize: {
+        "display-lg": ["34px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],
+        "headline-md": ["24px",{lineHeight:"32px",fontWeight:"600"}],
+        "headline-sm": ["20px",{lineHeight:"28px",fontWeight:"600"}],
+        "body-lg": ["18px",{lineHeight:"28px",fontWeight:"400"}],
+        "body-md": ["16px",{lineHeight:"24px",fontWeight:"400"}],
+        "label-md": ["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Noto Sans', sans-serif; min-height: max(884px, 100dvh); }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* Emil: custom strong ease-out */
+:root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+
+/* Step content transitions — Emil: fade + subtle translate, not scale(0) */
+.step-panel {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  pointer-events: none;
+}
+.step-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.step-panel.exit-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.step-panel.enter-right {
+  transform: translateX(24px);
+}
+
+/* Stagger icon animation on step enter */
+.step-panel.active .step-icon {
+  animation: iconPop 300ms var(--ease-out) both;
+  animation-delay: 80ms;
+}
+@keyframes iconPop {
+  from { opacity: 0; transform: scale(0.85) translateY(6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.step-panel.active .step-text {
+  animation: fadeUp 280ms var(--ease-out) both;
+  animation-delay: 140ms;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Emil: buttons — active press scale, transition only transform not all */
+.btn-primary {
+  transition: transform 140ms var(--ease-out), background-color 140ms ease, color 140ms ease;
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-ghost {
+  transition: transform 140ms var(--ease-out), background-color 140ms ease, opacity 140ms ease;
+}
+.btn-ghost:active { transform: scale(0.97); }
+
+/* Progress dot transition */
+.dot {
+  transition: width 220ms var(--ease-out), background-color 200ms ease, opacity 150ms ease;
+}
+
+/* Emil: hover only on devices with a pointer */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { background-color: #005320; }
+  .btn-ghost:hover { background-color: #f0edec; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body antialiased overflow-hidden">
+
+<!-- Skip button -->
+<div class="flex justify-end px-6 pt-6 z-10 relative">
+  <button id="btn-skip" class="btn-ghost text-on-surface-variant font-label text-label-md px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-outline/50">
+    Skip
+  </button>
+</div>
+
+<!-- Step panels container -->
+<div class="flex-1 relative" id="panels-container">
+
+  <!-- Step 1: Home Impact Dashboard -->
+  <div class="step-panel active" data-step="0">
+    <div class="step-icon w-24 h-24 rounded-2xl bg-primary-container flex items-center justify-center mb-6 shadow-md">
+      <span class="material-symbols-outlined text-primary text-[44px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48;">dashboard</span>
+    </div>
+    <div class="step-text text-center max-w-xs">
+      <h2 class="text-headline-md font-headline text-on-background mb-3">Home Impact Dashboard</h2>
+      <p class="text-body-md text-on-surface-variant">See your total hours, sessions, and community impact at a glance. Your contributions are tracked and displayed here.</p>
+    </div>
+  </div>
+
+  <!-- Step 2: Center Track Button -->
+  <div class="step-panel" data-step="1">
+    <div class="step-icon w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-6 shadow-md">
+      <span class="material-symbols-outlined text-on-primary text-[44px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48;">add_circle</span>
+    </div>
+    <div class="step-text text-center max-w-xs">
+      <h2 class="text-headline-md font-headline text-on-background mb-3">Center Track Button</h2>
+      <p class="text-body-md text-on-surface-variant">The large green button at the bottom of every screen starts a new cleanup session. Tap it any time you're ready to make an impact.</p>
+    </div>
+  </div>
+
+  <!-- Step 3: Photo Checkpoints -->
+  <div class="step-panel" data-step="2">
+    <div class="step-icon w-24 h-24 rounded-2xl bg-surface-container-high flex items-center justify-center mb-6 shadow-md">
+      <span class="material-symbols-outlined text-on-surface-variant text-[44px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48;">photo_camera</span>
+    </div>
+    <div class="step-text text-center max-w-xs">
+      <h2 class="text-headline-md font-headline text-on-background mb-3">Photo Checkpoints</h2>
+      <p class="text-body-md text-on-surface-variant">During a session, take before-and-after photos to document your work. Photos are required for session approval and service record credit.</p>
+    </div>
+  </div>
+
+  <!-- Step 4: Sessions -->
+  <div class="step-panel" data-step="3">
+    <div class="step-icon w-24 h-24 rounded-2xl bg-surface-container-high flex items-center justify-center mb-6 shadow-md">
+      <span class="material-symbols-outlined text-on-surface-variant text-[44px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48;">event_note</span>
+    </div>
+    <div class="step-text text-center max-w-xs">
+      <h2 class="text-headline-md font-headline text-on-background mb-3">Sessions</h2>
+      <p class="text-body-md text-on-surface-variant">Browse your past and upcoming sessions in list or calendar view. Track your progress and review session details and approval status.</p>
+    </div>
+  </div>
+
+  <!-- Step 5: Shop + Donate -->
+  <div class="step-panel" data-step="4">
+    <div class="step-icon w-24 h-24 rounded-2xl bg-surface-container-high flex items-center justify-center mb-6 shadow-md">
+      <span class="material-symbols-outlined text-secondary text-[44px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48;">shopping_bag</span>
+    </div>
+    <div class="step-text text-center max-w-xs">
+      <h2 class="text-headline-md font-headline text-on-background mb-3">Shop + Donate</h2>
+      <p class="text-body-md text-on-surface-variant">Order cleanup equipment like gloves and bags, or make a direct donation to support the program. Every contribution helps.</p>
+    </div>
+  </div>
+
+  <!-- Step 6: Account + Export Records -->
+  <div class="step-panel" data-step="5">
+    <div class="step-icon w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-6 shadow-md">
+      <span class="material-symbols-outlined text-primary text-[44px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48;">verified_user</span>
+    </div>
+    <div class="step-text text-center max-w-xs">
+      <h2 class="text-headline-md font-headline text-on-background mb-3">Account + Export Records</h2>
+      <p class="text-body-md text-on-surface-variant">Manage your profile, view approval history, and export your official service record as a PDF — perfect for school credit or volunteer verification.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom controls -->
+<div class="px-6 pb-10 flex flex-col items-center gap-5">
+  <!-- Progress dots -->
+  <div class="flex gap-2 items-center" id="dots-container">
+    <div class="dot h-2 w-6 rounded-full bg-primary" data-dot="0"></div>
+    <div class="dot h-2 w-2 rounded-full bg-outline-variant opacity-60" data-dot="1"></div>
+    <div class="dot h-2 w-2 rounded-full bg-outline-variant opacity-60" data-dot="2"></div>
+    <div class="dot h-2 w-2 rounded-full bg-outline-variant opacity-60" data-dot="3"></div>
+    <div class="dot h-2 w-2 rounded-full bg-outline-variant opacity-60" data-dot="4"></div>
+    <div class="dot h-2 w-2 rounded-full bg-outline-variant opacity-60" data-dot="5"></div>
+  </div>
+
+  <!-- Nav buttons -->
+  <div class="w-full max-w-sm flex gap-3">
+    <button id="btn-back" class="btn-ghost flex-1 border border-outline-variant text-on-surface-variant font-label text-label-md py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-outline/50 opacity-0 pointer-events-none" aria-label="Previous step">
+      Back
+    </button>
+    <button id="btn-next" class="btn-primary flex-1 bg-primary text-on-primary font-label text-label-md py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50">
+      Next
+    </button>
+  </div>
+</div>
+
+<script>
+const TOTAL = 6;
+let current = 0;
+let animating = false;
+
+const panels = document.querySelectorAll('.step-panel');
+const dots = document.querySelectorAll('[data-dot]');
+const btnNext = document.getElementById('btn-next');
+const btnBack = document.getElementById('btn-back');
+const btnSkip = document.getElementById('btn-skip');
+
+function goTo(next, dir) {
+  if (animating || next < 0 || next >= TOTAL) return;
+  animating = true;
+
+  const outPanel = panels[current];
+  const inPanel = panels[next];
+
+  // Emil: exit current — fast (160ms)
+  outPanel.classList.add(dir > 0 ? 'exit-left' : '');
+  if (dir < 0) {
+    outPanel.style.opacity = '0';
+    outPanel.style.transform = 'translateX(24px)';
+    outPanel.style.transition = 'opacity 160ms var(--ease-out), transform 160ms var(--ease-out)';
+  }
+  outPanel.classList.remove('active');
+
+  // Emil: prime the incoming panel off-screen
+  inPanel.style.opacity = '0';
+  inPanel.style.transform = `translateX(${dir > 0 ? '24px' : '-24px'})`;
+  inPanel.style.transition = 'none';
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // Reset inline styles so CSS class takes over
+      outPanel.style.cssText = '';
+      outPanel.classList.remove('exit-left');
+
+      inPanel.style.cssText = '';
+      inPanel.classList.add('active');
+
+      current = next;
+      updateUI();
+
+      setTimeout(() => { animating = false; }, 240);
+    });
+  });
+}
+
+function updateUI() {
+  // Dots
+  dots.forEach((d, i) => {
+    if (i === current) {
+      d.style.width = '24px';
+      d.classList.remove('bg-outline-variant', 'opacity-60');
+      d.classList.add('bg-primary');
+    } else {
+      d.style.width = '8px';
+      d.classList.remove('bg-primary');
+      d.classList.add('bg-outline-variant', 'opacity-60');
+    }
+  });
+
+  // Back button
+  if (current === 0) {
+    btnBack.classList.add('opacity-0', 'pointer-events-none');
+  } else {
+    btnBack.classList.remove('opacity-0', 'pointer-events-none');
+  }
+
+  // Next button
+  if (current === TOTAL - 1) {
+    btnNext.textContent = 'Done';
+  } else {
+    btnNext.textContent = 'Next';
+  }
+}
+
+btnNext.addEventListener('click', () => {
+  if (current === TOTAL - 1) {
+    window.location.href = 'home_dashboard___final_branding.html';
+  } else {
+    goTo(current + 1, 1);
+  }
+});
+
+btnBack.addEventListener('click', () => { goTo(current - 1, -1); });
+btnSkip.addEventListener('click', () => { window.location.href = 'home_dashboard___final_branding.html'; });
+</script>
+</body></html>

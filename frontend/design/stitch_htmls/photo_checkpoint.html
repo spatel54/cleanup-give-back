@@ -1,0 +1,149 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Photo Checkpoint</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ba1a1a",
+                        "secondary": "#835400",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#c64869",
+                        "on-primary-fixed": "#002109",
+                        "inverse-surface": "#313030",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "primary-fixed": "#83fb98",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#89173c",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#fcab29",
+                        "on-background": "#1c1b1b",
+                        "on-secondary-container": "#694300",
+                        "on-primary-container": "#f7fff2",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1c1b1b",
+                        "primary-fixed-dim": "#66de7f",
+                        "on-tertiary-fixed": "#3f0016",
+                        "outline": "#6e7a6c",
+                        "tertiary-fixed": "#ffd9de",
+                        "inverse-primary": "#66de7f",
+                        "outline-variant": "#bdcaba",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "surface": "#fcf9f8",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-high": "#eae7e7",
+                        "background": "#fcf9f8",
+                        "surface-tint": "#006e2d",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary": "#a62f51",
+                        "on-error": "#ffffff",
+                        "primary": "#006b2c",
+                        "surface-container": "#f0edec",
+                        "on-surface-variant": "#3e4a3d",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-primary-fixed-variant": "#005320",
+                        "secondary-fixed-dim": "#ffb957",
+                        "on-secondary-fixed": "#2a1800",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "primary-container": "#008739"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-side": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    fontFamily: {
+                        "headline": ["Sanchez", "serif"],
+                        "display": ["Sanchez", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "label": ["Noto Sans", "sans-serif"],
+                        "data": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-full font-body antialiased relative overflow-hidden">
+<!-- Background Map/Live Session Simulation -->
+<div class="absolute inset-0 z-0">
+<img alt="Map background" class="w-full h-full object-cover opacity-50 grayscale contrast-125" data-alt="An overhead satellite view of a lush green park intersected by winding walking paths, rendered in a bright, high-contrast light mode aesthetic. The environment feels energetic and clean, dominated by vibrant primary green (#009540) foliage against stark white concrete pathways. The lighting simulates clear daytime sunshine, casting soft, crisp shadows. The overall mood is active, purposeful, and focused on environmental stewardship, fitting seamlessly behind an impact-tracking interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxx-JbnsxGhJFHYuIWlT2NJLjYRrz8670ljeKvHbr46Nm3QzxtNcT5VHcUeQ-6qna3cC94Tit9DAnvpgcREPQrqmtLdIyQwaSPsrLEDcb5wBlGEB7cwNlkh-1ldeAOnxDa0n1wj06iFLIVIC5NxSX2vjnYIZ5pz0pPcdCm8Sjp2xYf_oEtbVYG9z1SpZJusP9EE8JBcB2Aiboy0g7ff5ir19uK-sS5eQeEx9Xm05XoD2wxF4HD0m2q5kN_VuELigIoA5scoOYZRF4">
+</div>
+<!-- Overlay Backdrop -->
+<div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm z-10 flex flex-col justify-end md:justify-center items-center pb-8 md:pb-0 px-margin-side">
+<!-- Bottom Sheet / Modal -->
+<div class="bg-surface w-full max-w-md rounded-t-xl md:rounded-xl shadow-xl overflow-hidden flex flex-col transform transition-transform duration-300 ease-out translate-y-0 relative z-20 border border-outline-variant">
+<!-- Handle (Mobile) -->
+<div class="w-full flex justify-center pt-4 pb-2 md:hidden">
+<div class="w-12 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+<div class="p-6 flex flex-col items-center text-center space-y-stack-md relative">
+<!-- Close Button (Web/Tablet) -->
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface hidden md:block transition-colors">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<!-- Icon/Illustration -->
+<div class="w-20 h-20 rounded-full bg-secondary-container/20 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[40px] text-secondary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add_a_photo</span>
+</div>
+<!-- Headline -->
+<h2 class="font-headline font-semibold text-[24px] leading-[32px] text-on-surface">
+                    Photo required
+                </h2>
+<!-- Body -->
+<p class="font-body text-[16px] leading-[24px] text-on-surface-variant max-w-[280px]">
+                    Submit a photo to verify your cleanup progress. We require a check-in every 30 minutes to ensure safety and track impact accurately.
+                </p>
+<!-- Action Area -->
+<div class="w-full pt-stack-md flex flex-col space-y-stack-sm">
+<button class="w-full h-14 bg-primary text-on-primary font-label text-[16px] font-semibold rounded-[8px] flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                        Take Photo
+                    </button>
+
+</div>
+<!-- Timer Context -->
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant bg-surface-container-low px-4 py-2 rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+<span class="font-data text-[14px]">Next check-in: 29:59</span>
+</div>
+</div>
+</div>
+</div>
+
+
+</body></html>

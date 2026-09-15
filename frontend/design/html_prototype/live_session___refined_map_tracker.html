@@ -1,0 +1,237 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Live Cleanup Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#a62f51",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005320",
+                        "on-surface-variant": "#3e4a3d",
+                        "surface-container": "#f0edec",
+                        "inverse-primary": "#66de7f",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#f7fff2",
+                        "on-primary-fixed": "#002109",
+                        "on-secondary-fixed": "#2a1800",
+                        "surface-dim": "#dcd9d9",
+                        "surface": "#fcf9f8",
+                        "primary-container": "#008739",
+                        "secondary-fixed": "#ffddb5",
+                        "primary-fixed": "#83fb98",
+                        "secondary-container": "#fcab29",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "surface-container-low": "#f6f3f2",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#3f0016",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "inverse-surface": "#313030",
+                        "tertiary-container": "#c64869",
+                        "primary-fixed-dim": "#66de7f",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary-fixed-dim": "#ffb957",
+                        "tertiary-fixed": "#ffd9de",
+                        "surface-variant": "#e5e2e1",
+                        "secondary": "#835400",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#006b2c",
+                        "on-secondary-container": "#694300",
+                        "surface-tint": "#006e2d",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#1c1b1b",
+                        "outline-variant": "#bdcaba",
+                        "outline": "#6e7a6c",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#89173c",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-side": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sanchez", "serif"],
+                        "display": ["Sanchez", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "label": ["Noto Sans", "sans-serif"],
+                        "data": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["34px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "data-lg": ["28px", { lineHeight: "32px", letterSpacing: "-0.05em", fontWeight: "500" }],
+                        "data-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .map-bg {
+            background-color: #1c1b1b;
+            background-image: radial-gradient(circle at center, #313030 0%, #1c1b1b 100%);
+            background-size: cover;
+            background-position: center;
+        }
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(0, 107, 44, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 107, 44, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 107, 44, 0); }
+        }
+        /* Topographic line simulation */
+        .topo-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.15;
+            background-image: repeating-radial-gradient(
+                circle at 50% 50%,
+                transparent 0,
+                transparent 40px,
+                #ffffff 40px,
+                #ffffff 41px
+            ),
+            repeating-radial-gradient(
+                circle at 80% 20%,
+                transparent 0,
+                transparent 60px,
+                #ffffff 60px,
+                #ffffff 61px
+            );
+            pointer-events: none;
+        }
+        .route-line {
+            position: absolute;
+            top: 40%;
+            left: 20%;
+            width: 60%;
+            height: 40%;
+            border-left: 4px solid #006b2c;
+            border-bottom: 4px solid #006b2c;
+            border-bottom-left-radius: 24px;
+            transform: skew(-15deg) rotate(-10deg);
+            filter: drop-shadow(0 0 8px rgba(0, 107, 44, 0.5));
+        }
+        .user-location {
+            position: absolute;
+            top: 80%;
+            left: 80%;
+            width: 16px;
+            height: 16px;
+            background-color: #006b2c;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen relative overflow-hidden">
+<!-- Background Map Element -->
+<div aria-hidden="true" class="absolute inset-0 bg-surface-container-low z-0" data-alt="A light-mode detailed street and terrain map visualization. The map uses soft grays and whites for roads and terrain. A prominent brand green walking path snakes across the map, indicating the active cleanup route."><img alt="Detailed road map with tracked route" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1aqKQuzYAJ5Sq__EtycIB_6cdZSZaC1G3iuxnjAfRwdCGzlrGVa9G8P76J210zM9EWtGNxkiRYU5UZoOvVM6moTMVSe8ZQzhLAwVkRixDVoeQx-VHMFhUBdUzX2PhArR3AtQMO_sqB5Bim36hv0emTDrCSvyo6JgrP3rvPMNHgL_ll8vdwTORHRvx3eUWRVuxaTJMu8NsUI8dJZE_qpjuawoHJM09wFJSmHexJ55hIGObt8CLzFPlTO3FH6QVkj3nX3X0oZvQ7O8"></div>
+<!-- Top App Bar Area (Overlay) -->
+<header class="absolute top-0 left-0 w-full z-20 pt-6 px-margin-side flex items-center justify-center"><div class="flex items-center gap-2 bg-surface/90 px-4 py-1 rounded-full border border-outline-variant/50 shadow-sm"><span class="w-2 h-2 bg-primary rounded-full pulse"></span><span class="font-label font-label-md text-on-surface uppercase tracking-widest">Live</span></div></header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex flex-col h-screen px-margin-side pb-8 pt-16">
+<!-- Status & Metrics (Top Center) -->
+<div class="flex flex-col items-center mt-4"><div class="text-center mb-2 bg-surface/80 p-4 rounded-xl mt-0"><div class="font-data leading-none font-medium tracking-tight drop-shadow-lg text-on-primary-fixed text-[72px]" id="session-timer">00:47:20</div><div class="font-label font-label-md text-on-surface uppercase tracking-widest mt-4">Total Distance: 0.9 miles</div></div></div>
+<div class="flex-grow"></div> <!-- Spacer -->
+<!-- Bottom Control Panel -->
+<div class="w-full max-w-md mx-auto space-y-4">
+<!-- Checkpoint Card -->
+<div class="bg-surface rounded-xl p-5 border border-outline-variant/50 shadow-lg relative overflow-hidden">
+<div class="flex justify-between items-center mb-4"><div><h3 class="font-headline font-headline-sm text-on-surface">Checkpoint Photo</h3></div><div class="flex gap-2"><div class="w-8 h-2 rounded-full bg-primary"></div><div class="w-8 h-2 rounded-full bg-surface-dim"></div><div class="w-8 h-2 rounded-full bg-surface-dim"></div></div></div><div class="mb-4"><p class="font-body font-body-md text-on-surface-variant flex items-center gap-2">Next photo due in: <span class="font-data font-data-sm font-medium text-on-primary-fixed">17:42</span></p></div>
+<!-- Progress Bar -->
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-3">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label font-label-md rounded-lg py-4 flex items-center justify-center gap-2 transition-colors shadow-md">
+<span class="material-symbols-outlined">photo_camera</span>
+                    Submit Photo
+                </button>
+<button class="w-full bg-surface hover:bg-surface-container-low text-on-surface font-label font-label-md border border-outline-variant rounded-lg py-4 flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">stop_circle</span>
+                    End Session
+                </button>
+</div>
+</div>
+</main>
+<!-- Map Controls (Floating Right) -->
+<div class="absolute right-margin-side bottom-[320px] z-10 flex flex-col gap-3">
+<button aria-label="Map Layers" class="w-12 h-12 rounded-full bg-surface/90 backdrop-blur-md border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors shadow-lg">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button aria-label="Center Location" class="w-12 h-12 rounded-full bg-surface/90 backdrop-blur-md border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors shadow-lg">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+<script>
+        // Simple timer logic for interaction demonstration
+        let seconds = 20;
+        let minutes = 42;
+        let hours = 0;
+        
+        setInterval(() => {
+            seconds++;
+            if(seconds >= 60) {
+                seconds = 0;
+                minutes++;
+            }
+            if(minutes >= 60) {
+                minutes = 0;
+                hours++;
+            }
+            
+            const display = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('session-timer').textContent = display;
+        }, 1000);
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body></html>

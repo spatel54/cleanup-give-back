@@ -1,0 +1,166 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Missed Checkpoint</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "secondary": "#835400",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#c64869",
+                    "on-primary-fixed": "#002109",
+                    "inverse-surface": "#313030",
+                    "tertiary-fixed-dim": "#ffb2bf",
+                    "primary-fixed": "#83fb98",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#89173c",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary-fixed": "#ffddb5",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#fcab29",
+                    "on-background": "#1c1b1b",
+                    "on-secondary-container": "#694300",
+                    "on-primary-container": "#f7fff2",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f3f0ef",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1c1b1b",
+                    "primary-fixed-dim": "#66de7f",
+                    "on-tertiary-fixed": "#3f0016",
+                    "outline": "#6e7a6c",
+                    "tertiary-fixed": "#ffd9de",
+                    "inverse-primary": "#66de7f",
+                    "outline-variant": "#bdcaba",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dcd9d9",
+                    "surface": "#fcf9f8",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-container-high": "#eae7e7",
+                    "background": "#fcf9f8",
+                    "surface-tint": "#006e2d",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary": "#a62f51",
+                    "on-error": "#ffffff",
+                    "primary": "#009540",
+                    "surface-container": "#f0edec",
+                    "on-surface-variant": "#3e4a3d",
+                    "on-secondary-fixed-variant": "#643f00",
+                    "on-primary-fixed-variant": "#005320",
+                    "secondary-fixed-dim": "#ffb957",
+                    "on-secondary-fixed": "#2a1800",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#fcf9f8",
+                    "primary-container": "#008739"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                "margin-side": "24px",
+                "gutter": "16px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "headline": ["Sanchez", "serif"],
+                    "display": ["Sanchez", "serif"],
+                    "body": ["Noto Sans", "sans-serif"],
+                    "label": ["Noto Sans", "sans-serif"],
+                    "data": ["JetBrains Mono", "monospace"]
+            },
+            "fontSize": {
+                "display-lg": ["34px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                "data-lg": ["28px", { lineHeight: "32px", letterSpacing: "-0.05em", fontWeight: "500" }],
+                "data-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+        .font-headline { font-family: 'Sanchez', serif; }
+        .font-body { font-family: 'Noto Sans', sans-serif; }
+        .font-data { font-family: 'JetBrains Mono', monospace; }
+        
+        .error-pulse {
+            animation: pulse-soft 2s infinite;
+        }
+        
+        @keyframes pulse-soft {
+            0% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(186, 26, 26, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col items-center justify-center p-margin-side selection:bg-error-container selection:text-on-error-container">
+<!-- Transactional Screen - No Global Nav Shells -->
+<main class="w-full max-w-md mx-auto flex flex-col items-center text-center">
+<!-- Error Icon Container -->
+<div class="relative mb-stack-lg">
+<div class="w-32 h-32 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-[64px] text-on-surface-variant" data-icon="error" data-weight="fill" style="font-variation-settings: &quot;FILL&quot; 1;">
+                    error
+                </span>
+</div>
+<!-- Decorative connection line break -->
+
+
+</div>
+<!-- Content -->
+<div class="mb-stack-lg space-y-stack-md w-full">
+<h1 class="text-headline-md font-headline text-on-surface">
+                Missed Checkpoint
+            </h1>
+<div class="bg-surface border border-outline-variant rounded-xl p-6 relative overflow-hidden">
+
+<p class="text-body-md font-body text-on-surface">
+                    Photo checkpoint missed. This session can't be submitted.
+                </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/50">
+<p class="text-body-md font-body text-on-surface-variant text-left flex items-start gap-3">
+<span class="material-symbols-outlined text-outline shrink-0 mt-0.5" data-icon="info">info</span>
+                        To ensure accurate impact tracking, all required visual checkpoints must be completed during the active session. You will need to start a new session to record your progress.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full space-y-stack-sm mt-stack-lg">
+<button class="w-full h-14 bg-primary hover:bg-primary/90 text-on-error rounded-xl flex items-center justify-center gap-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-sm font-label text-label-md">
+<span class="material-symbols-outlined" data-icon="restart_alt">restart_alt</span>
+                Restart Session
+            </button>
+<button class="w-full h-14 bg-transparent border border-outline hover:bg-surface-container-low text-on-surface rounded-xl flex items-center justify-center gap-2 transition-colors font-label text-label-md">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+                Return Home
+            </button>
+</div>
+</main>
+
+
+</body></html>

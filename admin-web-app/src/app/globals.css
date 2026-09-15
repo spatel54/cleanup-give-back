@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* CleanUpGiveBack admin design tokens - mirrors admin/tailwind.config.ts + admin/app/globals.css
+   so ported page content renders with identical colors, type, spacing, and radii. */
+@theme {
+  --color-bg-app: #fcf9f8;
+  --color-bg-surface: #ffffff;
+  --color-bg-surface-elevated: #f6f3f2;
+  --color-text-primary: #1c1b1b;
+  --color-text-tertiary: #3e4a3d;
+  --color-border-outline: #bdcaba;
+  --color-primary: #007536;
+  --color-primary-brand: #009540;
+  /* Majority CTA hover — darker than AA primary; do not invent per-button greens */
+  --color-primary-hover: #007d35;
+  --color-accent-lime: #c2d832;
+  --color-status-approved-bg: #f7fff1;
+  --color-status-approved-text: #007536;
+  --color-status-approved-border: #007536;
+  --color-status-pending-bg: #ffddb5;
+  --color-status-pending-text: #835400;
+  --color-status-pending-border: #fcab29;
+  --color-status-declined-bg: #ffd9de;
+  --color-status-declined-text: #ba1a1a;
+  --color-status-declined-border: #ba1a1a;
+  /* Slightly deeper declined fill for button hover (derived from red/50) */
+  --color-status-declined-hover: #ffc5ca;
+
+  --font-heading: var(--font-sanchez), Georgia, serif;
+  --font-body: var(--font-noto-sans), system-ui, sans-serif;
+  --font-data: var(--font-ibm-plex-sans), 'Courier New', monospace;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+
+  /* Explicit max-widths - Tailwind v4 falls back to --spacing-* for max-w-*,
+     so --spacing-2xl: 40px would otherwise collapse max-w-2xl to 40px. */
+  --max-width-xs: 20rem;
+  --max-width-sm: 24rem;
+  --max-width-md: 28rem;
+  --max-width-lg: 32rem;
+  --max-width-xl: 36rem;
+  --max-width-2xl: 42rem;
+  --max-width-3xl: 48rem;
+  --max-width-4xl: 56rem;
+  --max-width-5xl: 64rem;
+  --max-width-6xl: 72rem;
+  --max-width-7xl: 80rem;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-search: 22px;
+
+  --shadow-nav-bottom: 0 -4px 5px rgba(0, 0, 0, 0.02);
+  --shadow-bar-top: 0 4px 5px rgba(0, 0, 0, 0.15);
+
+  --color-overlay-scrim: rgba(28, 27, 27, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Admin interface styling consistency */
+.sidebar-nav-link {
+  @apply flex items-center min-h-11 rounded-sm font-semibold text-xs leading-[18px] transition-[color,background-color,padding,gap] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-600;
+}
+
+.sidebar-nav-link-active {
+  @apply bg-green-50 text-green-700 border border-green-200;
+}
+
+.sidebar-nav-link-idle {
+  @apply text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-transparent;
+}
+
+/* Native date inputs ignore min-width via Tailwind alone in WebKit/Blink - mirrors admin. */
+.period-date-input {
+  display: block;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.period-date-input::-webkit-calendar-picker-indicator {
+  margin-left: 0;
+  flex-shrink: 0;
+}
+
+/* Google Places Autocomplete attaches `.pac-container` to <body>. Full-screen heatmaps use
+   z-[100]; keep suggestions above so the dropdown is visible while typing. */
+.pac-container {
+  z-index: 11000 !important;
+}
+
+/* Search-result address popup on the fullscreen county map - high contrast above the pin. */
+.heatmap-search-popup.maplibregl-popup {
+  z-index: 5;
+}
+
+.heatmap-search-popup .maplibregl-popup-content {
+  position: relative;
+  color: #1c1b1b;
+  background: #ffffff;
+  padding: 12px 36px 12px 12px;
+  border-radius: 8px;
+  border: 1px solid #bdcaba;
+  box-shadow: var(--shadow-bar-top);
+  font-family: var(--font-noto-sans), system-ui, sans-serif;
+}
+
+.heatmap-search-popup .heatmap-search-popup__label {
+  margin: 0;
+  color: #1c1b1b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.heatmap-search-popup .maplibregl-popup-close-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #1c1b1b;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+.heatmap-search-popup .maplibregl-popup-close-button:hover {
+  background: #f6f3f2;
+  color: #007536;
+  opacity: 1;
+}
+
+.heatmap-search-popup .maplibregl-popup-tip {
+  border-top-color: #ffffff;
+}

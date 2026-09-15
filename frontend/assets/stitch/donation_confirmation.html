@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Donation Confirmed — Clean-Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sanchez:wght@400;600;700&family=Noto+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#009540", "on-primary": "#ffffff", "primary-container": "#008739",
+        "on-primary-container": "#f7fff2", "primary-fixed-dim": "#66de7f",
+        "secondary": "#835400", "on-secondary": "#ffffff", "secondary-container": "#fcab29",
+        "error": "#ba1a1a", "on-error": "#ffffff", "error-container": "#ffdad6",
+        "surface": "#fcf9f8", "on-surface": "#1c1b1b", "surface-variant": "#e5e2e1",
+        "on-surface-variant": "#3e4a3d", "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f6f3f2", "surface-container": "#f0edec",
+        "surface-container-high": "#eae7e7",
+        "outline": "#6e7a6c", "outline-variant": "#bdcaba",
+        "background": "#fcf9f8", "on-background": "#1c1b1b"
+      },
+      fontFamily: {
+        "headline": ["Sanchez","serif"],
+        "body": ["Noto Sans","sans-serif"],
+        "label": ["Noto Sans","sans-serif"],
+        "data": ["JetBrains Mono","monospace"]
+      },
+      fontSize: {
+        "display-lg": ["34px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],
+        "headline-md": ["24px",{lineHeight:"32px",fontWeight:"600"}],
+        "headline-sm": ["20px",{lineHeight:"28px",fontWeight:"600"}],
+        "body-md": ["16px",{lineHeight:"24px",fontWeight:"400"}],
+        "label-md": ["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],
+        "data-lg": ["28px",{lineHeight:"32px",letterSpacing:"-0.05em",fontWeight:"500"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Noto Sans', sans-serif; min-height: max(884px, 100dvh); }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.delay-100 { animation-delay: 100ms; opacity: 0; }
+.delay-200 { animation-delay: 200ms; opacity: 0; }
+.delay-300 { animation-delay: 300ms; opacity: 0; }
+.delay-400 { animation-delay: 400ms; opacity: 0; }
+
+/* Rainbow top border for celebration card */
+.celebration-border::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #009540, #83fb98, #fcab29, #009540);
+  background-size: 300% 100%;
+  animation: gradient-shift 3s linear infinite;
+  border-radius: 1rem 1rem 0 0;
+}
+@keyframes gradient-shift {
+  0% { background-position: 100% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.btn-primary {
+  transition: transform 140ms cubic-bezier(0.23,1,0.32,1), background-color 140ms ease;
+}
+.btn-primary:active { transform: scale(0.97); }
+.btn-secondary {
+  transition: transform 140ms cubic-bezier(0.23,1,0.32,1), background-color 120ms ease;
+}
+.btn-secondary:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { background-color: #005320; }
+  .btn-secondary:hover { background-color: #eae7e7; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center p-6 antialiased relative overflow-hidden">
+
+<!-- Back button -->
+<a aria-label="Return to home" href="home_hamburger.html" class="absolute top-4 left-4 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors active:scale-95 duration-150 text-on-surface shadow-sm">
+  <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</a>
+
+<!-- Confirmation card -->
+<div class="celebration-border relative w-full max-w-sm bg-surface-container-lowest rounded-2xl shadow-xl px-8 py-10 flex flex-col items-center text-center animate-fade-in-up">
+
+  <!-- Checkmark -->
+  <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-6 shadow-md animate-fade-in-up delay-100">
+    <span class="material-symbols-outlined text-on-primary text-[32px]" style="font-variation-settings:'FILL' 1;">check</span>
+  </div>
+
+  <!-- Headline -->
+  <h1 class="font-headline text-display-lg text-on-background mb-3 animate-fade-in-up delay-200">Thank you!</h1>
+
+  <!-- Body -->
+  <p class="font-body text-body-md text-on-surface-variant mb-6 leading-relaxed animate-fade-in-up delay-200">
+    Your donation is helping fund cleanup supplies and community programs. A confirmation receipt has been sent to your email.
+  </p>
+
+  <!-- Donation summary card -->
+  <div class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-5 mb-8 animate-fade-in-up delay-300 text-left">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+      <span class="font-label text-label-md text-on-surface-variant uppercase tracking-wide text-[11px]">Donation Summary</span>
+    </div>
+    <div class="flex justify-between items-center py-2 border-b border-outline-variant">
+      <span class="font-body text-body-md text-on-surface">Donation amount</span>
+      <span class="font-data text-[20px] font-medium tracking-tight text-primary" style="font-family:'JetBrains Mono',monospace;">$25.00</span>
+    </div>
+    <div class="flex justify-between items-center pt-2">
+      <span class="font-label text-label-md text-on-surface-variant">Transaction ID</span>
+      <span class="font-label text-label-md text-on-surface">#DON-2026-001</span>
+    </div>
+  </div>
+
+  <!-- CTAs -->
+  <div class="w-full space-y-3 animate-fade-in-up delay-400">
+    <button id="btn-home" class="btn-primary w-full bg-primary text-on-primary font-label text-label-md py-4 rounded-xl flex justify-center items-center gap-2 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/50">
+      Return to Home
+    </button>
+    <button id="btn-history" class="btn-secondary w-full bg-surface-container text-on-surface font-label text-label-md py-4 rounded-xl flex justify-center items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary/30">
+      View Donation History
+    </button>
+  </div>
+
+</div>
+
+<script>
+document.getElementById('btn-home').addEventListener('click', function() {
+  window.location.href = 'home_hamburger.html';
+});
+document.getElementById('btn-history').addEventListener('click', function() {
+  window.location.href = 'donation_history.html';
+});
+</script>
+</body></html>

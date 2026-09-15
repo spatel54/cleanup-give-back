@@ -1,0 +1,226 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cart - Clean-Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sanchez:wght@400;600;700&amp;family=Noto+Sans:wght@400;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e5e2e1",
+                    "inverse-surface": "#313030",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#89173c",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-fixed": "#2a1800",
+                    "primary-fixed-dim": "#66de7f",
+                    "on-primary-fixed-variant": "#005320",
+                    "primary": "#006b2c",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-container": "#fcab29",
+                    "surface-tint": "#006e2d",
+                    "on-surface": "#1c1b1b",
+                    "surface-dim": "#dcd9d9",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#a62f51",
+                    "secondary-fixed-dim": "#ffb957",
+                    "on-background": "#1c1b1b",
+                    "on-error": "#ffffff",
+                    "background": "#fcf9f8",
+                    "on-primary-fixed": "#002109",
+                    "on-secondary-fixed-variant": "#643f00",
+                    "primary-fixed": "#83fb98",
+                    "inverse-primary": "#66de7f",
+                    "primary-container": "#008739",
+                    "on-tertiary-fixed": "#3f0016",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-secondary-container": "#694300",
+                    "tertiary-container": "#c64869",
+                    "surface-container-high": "#eae7e7",
+                    "on-surface-variant": "#3e4a3d",
+                    "tertiary-fixed-dim": "#ffb2bf",
+                    "secondary-fixed": "#ffddb5",
+                    "surface": "#fcf9f8",
+                    "surface-container": "#f0edec",
+                    "on-primary-container": "#f7fff2",
+                    "secondary": "#835400",
+                    "surface-container-low": "#f6f3f2",
+                    "outline-variant": "#bdcaba",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#ffd9de",
+                    "outline": "#6e7a6c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Sanchez", "serif"],
+                    "display": ["Sanchez", "serif"],
+                    "body": ["Noto Sans", "sans-serif"],
+                    "label": ["Noto Sans", "sans-serif"],
+                    "data": ["JetBrains Mono", "monospace"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Noto Sans', sans-serif; background-color: #fcf9f8; color: #1c1b1b; }
+        h1, h2, h3, .font-headline { font-family: 'Sanchez', serif; }
+        .data-font { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Focus state overrides */
+        input:focus, button:focus { outline: 2px solid #006b2c; outline-offset: 2px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col antialiased">
+<!-- TopAppBar (From JSON) -->
+<header class="bg-background flex justify-between items-center w-full px-6 py-4 docked full-width top-0 z-40 sticky shadow-sm shadow-surface-variant/30">
+<div class="flex items-center gap-4">
+<a aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-surface-container transition-colors active:scale-95 duration-150 text-on-surface" href="shop_home___prd___reference_aligned.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span></a>
+<h1 class="font-headline text-[24px] leading-[32px] font-bold text-primary">Clean-Up Give Back</h1>
+</div>
+<div class="flex items-center">
+<!-- Placeholder for right actions if needed -->
+</div>
+</header>
+<main class="flex-grow pb-24 md:pb-8 pt-4">
+<div class="max-w-4xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+<!-- Left Column: Cart Items & Donations -->
+<div class="lg:col-span-7 flex flex-col gap-8">
+<!-- Page Title -->
+<div>
+<h2 class="font-headline text-[34px] leading-[40px] font-bold text-on-surface tracking-tight mb-2">Your Cart</h2>
+<p class="text-[16px] text-on-surface-variant">Review your items and continue to checkout.</p>
+</div>
+<!-- Cart Items List -->
+<section aria-label="Shopping Cart Items" class="flex flex-col gap-4">
+<!-- Item 1: Trash Cleanup Kit -->
+<div class="group flex gap-4 p-4 rounded-xl bg-surface-container-lowest border border-surface-variant transition-all hover:border-outline-variant hover:shadow-sm">
+<!-- Product Image Placeholder -->
+<div class="w-24 h-24 shrink-0 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden relative">
+<img alt="Trash Cleanup Kit with gloves and bags" class="object-cover w-full h-full" data-alt="A brightly lit, high-quality photograph of a professional environmental trash cleanup kit resting on a clean white surface. The kit includes heavy-duty green gloves, a sturdy grabber tool, and a roll of thick black trash bags. The lighting is crisp and modern, matching a bright, clean light-mode interface aesthetic. The colors are predominantly white, deep black, and primary green (#009540), conveying a sense of readiness and environmental impact." src="https://lh3.googleusercontent.com/aida/AP1WRLuwuXn67cxDiw3VhRRlEXUOY_WV1qlbLtx4v-BGRXB0w6jIQUqdNwtP3BzFh-EwyvEZdonCXUNt1WpSWfOZVznsJLfawaTN1gj3o0USdcuqQs56sCVOc6i0iHSteCC4AtaKHDsMNXhBMcXJMgy_Gtz7hbdOzNFOUPAVhVEcafd0v1LIciRYzSGd__wAwbg4pwLlIW2pqv_RUz_dX3yQwJUnYFpkRzqFJE0vt_aGyc5BMpbDxafdKYQ3_sU">
+</div>
+<div class="flex flex-col flex-grow justify-between py-1">
+<div class="flex justify-between items-start gap-2">
+<div>
+<h3 class="font-bold text-[16px] leading-[24px] text-on-surface">Trash Cleanup Kit</h3>
+<p class="text-[14px] text-on-surface-variant mt-0.5">Essential gear for safe pickups</p>
+</div>
+<button aria-label="Remove Trash Cleanup Kit" class="text-on-surface-variant hover:text-error transition-colors p-1 -mr-1 -mt-1 rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex items-center gap-3 bg-surface-container rounded-lg p-1">
+<button aria-label="Decrease quantity" class="w-8 h-8 flex items-center justify-center rounded-[6px] text-on-surface bg-surface-container-lowest hover:bg-surface-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="data-font text-[14px] font-medium w-4 text-center">1</span>
+<button aria-label="Increase quantity" class="w-8 h-8 flex items-center justify-center rounded-[6px] text-on-surface bg-surface-container-lowest hover:bg-surface-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<span class="data-font text-[18px] font-medium text-on-surface">$29.99</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Reusable Tote Bag -->
+</section>
+<!-- Donation Section -->
+<section aria-labelledby="donation-heading" class="mt-4 p-6 rounded-[24px] bg-primary-container/10 border border-primary/20 relative overflow-hidden">
+<!-- Subtle background decoration -->
+<div class="absolute -right-8 -top-8 text-primary/5 pointer-events-none transform rotate-12">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<h3 class="font-headline text-[20px] font-bold text-primary" id="donation-heading">Support our mission</h3>
+</div>
+<p class="text-[14px] text-on-surface-variant mb-5 ml-13 max-w-md">
+                            Your optional donation helps fund local community cleanup events and provides supplies to volunteers worldwide.
+                        </p>
+<div class="grid grid-cols-4 gap-3 mb-4">
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="donation_amount" type="radio" value="5">
+<div class="h-12 flex items-center justify-center rounded-lg border-2 border-surface-variant bg-surface-container-lowest text-on-surface font-semibold hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary transition-all">
+                                    $5
+                                </div>
+</label>
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="donation_amount" type="radio" value="10">
+<div class="h-12 flex items-center justify-center rounded-lg border-2 border-surface-variant bg-surface-container-lowest text-on-surface font-semibold hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary transition-all shadow-sm">
+                                    $10
+                                </div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="donation_amount" type="radio" value="25">
+<div class="h-12 flex items-center justify-center rounded-lg border-2 border-surface-variant bg-surface-container-lowest text-on-surface font-semibold hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary transition-all">
+                                    $25
+                                </div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="donation_amount" type="radio" value="custom">
+<div class="h-12 flex items-center justify-center rounded-lg border-2 border-surface-variant bg-surface-container-lowest text-on-surface font-semibold hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all text-[14px]">
+                                    Other
+                                </div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5 lg:sticky lg:top-24">
+<div class="bg-surface-container-lowest p-6 rounded-[24px] border border-surface-variant shadow-sm flex flex-col gap-6">
+<h3 class="font-headline text-[20px] font-bold text-on-surface border-b border-surface-variant pb-4">Order Summary</h3>
+<div class="flex flex-col gap-3 text-[16px]">
+<div class="flex justify-between items-center text-on-surface">
+<span class="">Subtotal <span class="text-on-surface-variant text-[14px] ml-1">(1 item)</span></span>
+<span class="data-font font-medium">$29.99</span>
+</div>
+<div class="flex justify-between items-center text-primary font-medium">
+<span class="flex items-center gap-1">Donation <span class="material-symbols-outlined text-[16px]">favorite</span></span>
+<span class="data-font">$10.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant text-[14px]">
+<span class="">Shipping</span>
+<span class="">Calculated next</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant text-[14px]">
+<span class="">Taxes</span>
+<span class="">Calculated next</span>
+</div>
+</div>
+<div class="border-t border-surface-variant pt-4 flex justify-between items-end">
+<span class="font-bold text-[18px] text-on-surface">Total</span>
+<span class="data-font text-[28px] leading-[32px] font-bold text-on-surface tracking-tighter">$39.99</span>
+</div>
+<a class="w-full bg-primary hover:bg-primary-container text-on-primary font-bold text-[16px] h-14 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] mt-2 shadow-md hover:shadow-lg" href="thank_you___no_tote_bag_.html"><span class="material-symbols-outlined">lock</span>Checkout</a>
+<div class="flex items-center justify-center gap-2 text-[12px] text-on-surface-variant mt-[-8px]">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+                        Secure encrypted checkout
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Suppressed BottomNavBar as this is a transactional flow leading to checkout -->
+
+
+<nav class="md:hidden fixed bottom-0 w-full z-40 flex justify-around items-center px-4 py-3 bg-surface-container border-t border-outline-variant rounded-t-xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe"><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="text-[10px] font-medium mt-1">Home</span></a><a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-xl px-4 py-1.5 transition-colors active:scale-95 duration-200" href="shop_home___prd___reference_aligned.html"><span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">shopping_bag</span><span class="text-[10px] font-medium mt-1">Shop</span></a><a class="flex flex-col items-center justify-center -mt-6 bg-primary text-on-primary rounded-full w-14 h-14 shadow-lg active:scale-95 transition-transform duration-200 border-4 border-background" href="#"><span class="material-symbols-outlined text-[30px]">add</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#"><span class="material-symbols-outlined text-[24px]">history</span><span class="text-[10px] font-medium mt-1">Sessions</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="text-[10px] font-medium mt-1">Account</span></a></nav></body></html>

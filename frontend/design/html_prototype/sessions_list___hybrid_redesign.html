@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sessions — Clean-Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans:wght@400;500;600;700&family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary-fixed-dim": "#66de7f",
+          "on-error-container": "#93000a",
+          "outline-variant": "#bdcaba",
+          "on-secondary-container": "#694300",
+          "secondary": "#835400",
+          "on-surface": "#1c1b1b",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary": "#ffffff",
+          "on-primary-container": "#f7fff2",
+          "inverse-primary": "#66de7f",
+          "surface": "#fcf9f8",
+          "on-primary": "#ffffff",
+          "surface-container-high": "#eae7e7",
+          "on-surface-variant": "#3e4a3d",
+          "surface-variant": "#e5e2e1",
+          "on-primary-fixed-variant": "#005320",
+          "surface-tint": "#006e2d",
+          "surface-container": "#f0edec",
+          "outline": "#6e7a6c",
+          "error-container": "#ffdad6",
+          "secondary-fixed": "#ffddb5",
+          "on-error": "#ffffff",
+          "surface-dim": "#dcd9d9",
+          "primary-fixed": "#83fb98",
+          "tertiary-fixed": "#ffd9de",
+          "surface-bright": "#fcf9f8",
+          "surface-container-low": "#f6f3f2",
+          "error": "#ba1a1a",
+          "inverse-surface": "#313030",
+          "on-secondary-fixed": "#2a1800",
+          "secondary-container": "#fcab29",
+          "primary": "#009540",
+          "primary-container": "#008739",
+          "background": "#fcf9f8",
+          "on-background": "#1c1b1b",
+          "inverse-on-surface": "#f3f0ef"
+        },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+          sm: "0.25rem",
+          md: "0.75rem",
+          lg: "1rem",
+          xl: "1.5rem",
+          full: "9999px"
+        },
+        fontFamily: {
+          headline: ["Sanchez", "serif"],
+          body: ["Noto Sans", "sans-serif"],
+          label: ["Noto Sans", "sans-serif"],
+          data: ["IBM Plex Mono", "monospace"]
+        },
+        spacing: {
+          "margin-side": "24px"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #fcf9f8; color: #1c1b1b; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .chevron-icon { transition: transform 0.2s ease; display: inline-block; }
+  .chevron-icon.open { transform: rotate(90deg); color: #009540; }
+  .row-detail { display: none; }
+  .row-detail.open { display: flex; }
+  .session-row.hidden-row { display: none; }
+</style>
+</head>
+<body class="font-body antialiased min-h-screen flex flex-col pb-safe">
+
+<!-- ── Top App Bar ───────────────────────────────────────────────────── -->
+<header class="fixed top-0 w-full z-40 bg-surface border-b border-outline-variant flex justify-between items-center px-6 py-2 h-16">
+  <div class="flex items-center gap-4">
+    <span class="font-headline text-xl font-bold text-primary">Clean Up Give Back</span>
+  </div>
+  <nav class="hidden md:flex items-center gap-6">
+    <a class="text-on-surface-variant hover:text-primary font-label text-sm font-semibold transition-colors py-4" href="home_dashboard___final_branding.html">Home</a>
+    <a class="text-on-surface-variant hover:text-primary font-label text-sm font-semibold transition-colors py-4" href="shop_home___prd___reference_aligned.html">Shop</a>
+    <a class="text-primary font-label text-sm font-semibold border-b-2 border-primary py-4" href="#">Sessions</a>
+    <a href="session_setup___prd_aligned_standardized.html" class="bg-primary text-on-primary px-4 py-2 rounded-full font-label text-sm font-semibold hover:bg-primary-container transition-colors shadow-sm">Track</a>
+  </nav>
+  <div class="flex items-center gap-4">
+    <button class="text-on-surface-variant hover:bg-surface-container rounded-full p-2 transition-colors active:scale-95 duration-200 relative">
+      <span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span>
+      <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+    </button>
+    <button class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:opacity-80 transition-opacity">
+      <img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUf3HZ1f0_r32to2rzRDVC9LvQaGbEUzsUQ23hJazN6JohsnxcORHj8iCWDpD3FXTbbtWycDzdD4_o8A2p8ydI3D9FcCMNAy9pm9YVLHryQR1AcA7IMkJc2zJNmzCuXghfYOIzn1Sdy6dL1ENtVKS-Gwc-YmjhICOfjpLr_TNx6_GpxEcps4AK0C78-m1mzXjaoqbdFB_l-MuN95uYSSYnDTekKPwkmQUA3NbL_b05hiArOXvAyLqV5dDs1TfivliWC062v4bHok">
+    </button>
+  </div>
+</header>
+
+<!-- ── Main Content ──────────────────────────────────────────────────── -->
+<main class="flex-grow pt-20 pb-28 px-margin-side max-w-3xl mx-auto w-full">
+
+  <!-- Page title -->
+  <div class="pt-4 pb-5">
+    <h1 class="font-headline text-2xl font-bold text-on-surface">Sessions</h1>
+  </div>
+
+  <!-- Search bar -->
+  <div class="relative mb-3">
+    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl select-none">search</span>
+    <input
+      id="search-input"
+      type="text"
+      placeholder="Search logs"
+      class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-10 pr-4 font-body text-sm text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+    >
+  </div>
+
+  <!-- Filter chips -->
+  <div class="flex overflow-x-auto hide-scrollbar gap-2 py-1 mb-7" id="filter-chips">
+
+    <!-- All -->
+    <button
+      class="chip shrink-0 font-label text-sm font-semibold px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border
+             bg-primary text-on-primary border-primary"
+      data-filter="all"
+      aria-pressed="true"
+    >
+      <span class="chip-label">All</span>
+      <span class="chip-count hidden font-label text-sm font-normal ml-1" data-status="all"></span>
+    </button>
+
+    <!-- Approved — active style: green -->
+    <button
+      class="chip shrink-0 font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border
+             bg-surface-container-low text-outline border-outline-variant"
+      data-filter="approved"
+      aria-pressed="false"
+    >
+      <span class="chip-label">Approved</span>
+      <span class="chip-count font-label text-sm font-normal ml-1" data-status="approved"></span>
+    </button>
+
+    <!-- Under Review — active style: amber -->
+    <button
+      class="chip shrink-0 font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border
+             bg-surface-container-low text-outline border-outline-variant"
+      data-filter="under-review"
+      aria-pressed="false"
+    >
+      <span class="chip-label">Under Review</span>
+      <span class="chip-count font-label text-sm font-normal ml-1" data-status="under-review"></span>
+    </button>
+
+    <!-- Not Approved — active style: red -->
+    <button
+      class="chip shrink-0 font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border
+             bg-surface-container-low text-outline border-outline-variant"
+      data-filter="not-approved"
+      aria-pressed="false"
+    >
+      <span class="chip-label">Not Approved</span>
+      <span class="chip-count font-label text-sm font-normal ml-1" data-status="not-approved"></span>
+    </button>
+
+  </div>
+
+  <!-- ── THIS WEEK ────────────────────────────────────────────────────── -->
+  <section class="mb-6" id="group-this-week">
+    <p class="font-label text-[11px] font-semibold text-outline tracking-widest mb-2 uppercase">This Week</p>
+    <div class="h-px bg-outline-variant mb-1.5"></div>
+
+    <!-- Lake Park — Approved -->
+    <div class="session-row bg-surface-container-low rounded-xl mb-2 overflow-hidden" data-status="approved" data-title="lake park">
+      <button class="row-toggle w-full flex items-center min-h-[72px] px-3 py-3 gap-0 text-left" aria-expanded="false">
+        <div class="w-14 flex flex-col items-center justify-center gap-0.5 shrink-0 py-1">
+          <span class="font-label text-[10px] font-medium text-outline tracking-widest leading-none uppercase">Jun</span>
+          <span class="font-headline text-[22px] font-bold text-on-surface leading-none">3</span>
+        </div>
+        <div class="w-px self-stretch bg-outline-variant mx-3 my-2 shrink-0"></div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5">
+            <p class="font-label text-sm font-semibold text-on-surface truncate flex-1">Lake Park</p>
+            <div class="bg-primary/10 border border-primary/20 text-primary px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-wide flex items-center gap-1 shrink-0">
+              <span class="material-symbols-outlined text-[12px]">check_circle</span> Approved
+            </div>
+          </div>
+          <p class="font-body text-xs text-outline">9:30–11:00 AM</p>
+        </div>
+        <span class="chevron-icon material-symbols-outlined text-outline text-[20px] ml-3 shrink-0">chevron_right</span>
+      </button>
+      <div class="row-detail border-t border-outline-variant/40 pl-3 pr-4 pb-4">
+        <div class="w-14 shrink-0 mr-3"></div>
+        <div class="flex-1 pt-3 space-y-1.5">
+          <p class="font-data text-sm text-on-surface">1.5 hrs · River Cleanup</p>
+          <a href="session_setup___prd_aligned_standardized.html"
+             class="mt-1 inline-flex items-center gap-1 font-label text-sm font-semibold text-primary hover:underline">
+            View full details
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- River Trail — Under Review -->
+    <div class="session-row bg-surface-container-low rounded-xl mb-2 overflow-hidden" data-status="under-review" data-title="river trail">
+      <button class="row-toggle w-full flex items-center min-h-[72px] px-3 py-3 gap-0 text-left" aria-expanded="false">
+        <div class="w-14 flex flex-col items-center justify-center gap-0.5 shrink-0 py-1">
+          <span class="font-label text-[10px] font-medium text-outline tracking-widest leading-none uppercase">Jun</span>
+          <span class="font-headline text-[22px] font-bold text-on-surface leading-none">1</span>
+        </div>
+        <div class="w-px self-stretch bg-outline-variant mx-3 my-2 shrink-0"></div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5">
+            <p class="font-label text-sm font-semibold text-on-surface truncate flex-1">River Trail</p>
+            <div class="bg-secondary-container/20 border border-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-wide flex items-center gap-1 shrink-0">
+              <span class="material-symbols-outlined text-[12px]">pending</span> Under Review
+            </div>
+          </div>
+          <p class="font-body text-xs text-outline">10:00–12:00 PM</p>
+        </div>
+        <span class="chevron-icon material-symbols-outlined text-outline text-[20px] ml-3 shrink-0">chevron_right</span>
+      </button>
+      <div class="row-detail border-t border-outline-variant/40 pl-3 pr-4 pb-4">
+        <div class="w-14 shrink-0 mr-3"></div>
+        <div class="flex-1 pt-3 space-y-1.5">
+          <p class="font-data text-sm text-on-surface">2.0 hrs · River Cleanup</p>
+          <a href="session_setup___prd_aligned_standardized.html"
+             class="mt-1 inline-flex items-center gap-1 font-label text-sm font-semibold text-primary hover:underline">
+            View full details
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LAST WEEK ────────────────────────────────────────────────────── -->
+  <section class="mb-6" id="group-last-week">
+    <p class="font-label text-[11px] font-semibold text-outline tracking-widest mb-2 uppercase">Last Week</p>
+    <div class="h-px bg-outline-variant mb-1.5"></div>
+
+    <!-- Downtown Des Plaines — Not Approved -->
+    <div class="session-row bg-surface-container-low rounded-xl mb-2 overflow-hidden" data-status="not-approved" data-title="downtown des plaines">
+      <button class="row-toggle w-full flex items-center min-h-[72px] px-3 py-3 gap-0 text-left" aria-expanded="false">
+        <div class="w-14 flex flex-col items-center justify-center gap-0.5 shrink-0 py-1">
+          <span class="font-label text-[10px] font-medium text-outline tracking-widest leading-none uppercase">May</span>
+          <span class="font-headline text-[22px] font-bold text-on-surface leading-none">28</span>
+        </div>
+        <div class="w-px self-stretch bg-outline-variant mx-3 my-2 shrink-0"></div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5">
+            <p class="font-label text-sm font-semibold text-on-surface truncate flex-1">Downtown Des Plaines</p>
+            <div class="bg-error/10 border border-error/30 text-error px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-wide flex items-center gap-1 shrink-0">
+              <span class="material-symbols-outlined text-[12px]">cancel</span> Not Approved
+            </div>
+          </div>
+          <p class="font-body text-xs text-outline">1:00–2:00 PM</p>
+        </div>
+        <span class="chevron-icon material-symbols-outlined text-outline text-[20px] ml-3 shrink-0">chevron_right</span>
+      </button>
+      <div class="row-detail border-t border-outline-variant/40 pl-3 pr-4 pb-4">
+        <div class="w-14 shrink-0 mr-3"></div>
+        <div class="flex-1 pt-3 space-y-1.5">
+          <p class="font-data text-sm text-on-surface">1.0 hr · Park Cleanup</p>
+          <a href="session_setup___prd_aligned_standardized.html"
+             class="mt-1 inline-flex items-center gap-1 font-label text-sm font-semibold text-primary hover:underline">
+            View full details
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empty state -->
+  <p id="empty-state" class="hidden font-body text-sm text-outline text-center mt-10">No sessions match your filter.</p>
+
+</main>
+
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface border-t border-outline-variant rounded-t-xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="home_dashboard___final_branding.html">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-label text-[10px] font-semibold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="shop_home___prd___reference_aligned.html">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label text-[10px] font-semibold mt-1">Shop</span>
+</a>
+<!-- Prominent Track Button -->
+<a class="flex flex-col items-center justify-center -mt-6 bg-primary text-on-primary rounded-full w-14 h-14 shadow-lg active:scale-95 transition-transform duration-200 border-4 border-surface" href="session_setup___prd_aligned_standardized.html">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-xl px-4 py-1.5 transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="history" data-weight="fill" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label text-[10px] font-semibold mt-1">Sessions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="account.html">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-label text-[10px] font-semibold mt-1">Account</span>
+</a>
+</nav>
+
+<script>
+  // ── Chip active-state styles per filter ──────────────────────────────
+  var CHIP_ACTIVE = {
+    'all':          'bg-primary text-on-primary border-primary',
+    'approved':     'bg-primary text-on-primary border-primary',
+    'under-review': 'bg-secondary-container text-on-secondary-fixed border-secondary-container',
+    'not-approved': 'bg-error-container text-on-error-container border-error-container'
+  };
+  var CHIP_INACTIVE = 'bg-surface-container-low text-outline border-outline-variant';
+
+  var activeFilter = 'all';
+
+  // ── Count sessions per status ─────────────────────────────────────────
+  function countByStatus() {
+    var counts = { approved: 0, 'under-review': 0, 'not-approved': 0 };
+    var query = document.getElementById('search-input').value.toLowerCase().trim();
+    document.querySelectorAll('.session-row').forEach(function(row) {
+      var status = row.dataset.status;
+      var title = row.dataset.title;
+      var matchesSearch = query === '' || title.includes(query);
+      if (matchesSearch && counts[status] !== undefined) {
+        counts[status]++;
+      }
+    });
+    return counts;
+  }
+
+  // ── Render chip counts ───────────────────────────────────────────────
+  function renderChipCounts() {
+    var counts = countByStatus();
+    var total = counts['approved'] + counts['under-review'] + counts['not-approved'];
+
+    document.querySelectorAll('[data-filter]').forEach(function(chip) {
+      var filter = chip.dataset.filter;
+      var countEl = chip.querySelector('.chip-count');
+      if (!countEl) return;
+
+      var isActive = filter === activeFilter;
+
+      // Hide count when this chip is active; show when inactive
+      if (isActive) {
+        countEl.classList.add('hidden');
+      } else {
+        countEl.classList.remove('hidden');
+        if (filter === 'all') {
+          countEl.textContent = total;
+        } else {
+          countEl.textContent = counts[filter] || 0;
+        }
+      }
+    });
+  }
+
+  // ── Apply chip active/inactive styles ────────────────────────────────
+  function renderChipStyles() {
+    document.querySelectorAll('[data-filter]').forEach(function(chip) {
+      var filter = chip.dataset.filter;
+      var isActive = filter === activeFilter;
+
+      // Remove all possible active/inactive classes
+      var allActive = Object.values(CHIP_ACTIVE).join(' ').split(' ');
+      allActive.forEach(function(cls) { if (cls) chip.classList.remove(cls); });
+      CHIP_INACTIVE.split(' ').forEach(function(cls) { if (cls) chip.classList.remove(cls); });
+
+      // Apply correct set
+      var classes = isActive ? CHIP_ACTIVE[filter] : CHIP_INACTIVE;
+      classes.split(' ').forEach(function(cls) { if (cls) chip.classList.add(cls); });
+
+      chip.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
+
+  // ── Filter + search sessions ─────────────────────────────────────────
+  function applyFilters() {
+    var query = document.getElementById('search-input').value.toLowerCase().trim();
+    var visibleCount = 0;
+
+    document.querySelectorAll('.session-row').forEach(function(row) {
+      var status = row.dataset.status;
+      var title = row.dataset.title;
+      var matchesFilter = activeFilter === 'all' || status === activeFilter;
+      var matchesSearch = query === '' || title.includes(query);
+
+      if (matchesFilter && matchesSearch) {
+        row.classList.remove('hidden-row');
+        visibleCount++;
+      } else {
+        row.classList.add('hidden-row');
+        // Collapse hidden rows
+        var detail = row.querySelector('.row-detail');
+        var chevron = row.querySelector('.chevron-icon');
+        var toggle = row.querySelector('.row-toggle');
+        if (detail) detail.classList.remove('open');
+        if (chevron) { chevron.classList.remove('open'); chevron.textContent = 'chevron_right'; }
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Hide empty section groups
+    ['group-this-week', 'group-last-week'].forEach(function(id) {
+      var group = document.getElementById(id);
+      if (!group) return;
+      var anyVisible = Array.from(group.querySelectorAll('.session-row'))
+        .some(function(r) { return !r.classList.contains('hidden-row'); });
+      group.style.display = anyVisible ? '' : 'none';
+    });
+
+    document.getElementById('empty-state').classList.toggle('hidden', visibleCount > 0);
+    renderChipCounts();
+  }
+
+  // ── Wire up filter chips ─────────────────────────────────────────────
+  document.querySelectorAll('[data-filter]').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      activeFilter = this.dataset.filter;
+      renderChipStyles();
+      applyFilters();
+    });
+  });
+
+  // ── Wire up search ───────────────────────────────────────────────────
+  document.getElementById('search-input').addEventListener('input', applyFilters);
+
+  // ── Accordion toggle ─────────────────────────────────────────────────
+  document.querySelectorAll('.row-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var row = this.closest('.session-row');
+      var detail = row.querySelector('.row-detail');
+      var chevron = this.querySelector('.chevron-icon');
+      var isOpen = detail.classList.contains('open');
+
+      // Collapse all open rows
+      document.querySelectorAll('.row-detail.open').forEach(function(d) { d.classList.remove('open'); });
+      document.querySelectorAll('.chevron-icon.open').forEach(function(c) {
+        c.classList.remove('open');
+        c.textContent = 'chevron_right';
+      });
+      document.querySelectorAll('.row-toggle[aria-expanded="true"]').forEach(function(b) {
+        b.setAttribute('aria-expanded', 'false');
+      });
+
+      // Open this row if it was closed
+      if (!isOpen) {
+        detail.classList.add('open');
+        chevron.classList.add('open');
+        chevron.textContent = 'expand_less';
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ── Init ─────────────────────────────────────────────────────────────
+  renderChipStyles();
+  applyFilters();
+</script>
+</body>
+</html>

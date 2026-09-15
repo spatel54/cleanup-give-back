@@ -1,0 +1,42 @@
+{
+  "$schema": "https://cleanupgiveback.local/figma-tokens/v1",
+  "collection": "Primitives",
+  "mode": "Value",
+  "source": {
+    "figmaFileKey": "DrDcQH14n7ntDQ80F7au9S",
+    "designSystemPage": "1:3",
+    "exportedFrom": "docs/frontend/brand.md + frontend/design/figma/design.md",
+    "exportedAt": "2026-07-13"
+  },
+  "variables": {
+    "green/500": { "type": "COLOR", "value": "#009540" },
+    "green/50": { "type": "COLOR", "value": "#f7fff1" },
+    "gray/900": { "type": "COLOR", "value": "#1c1b1b" },
+    "gray/700": { "type": "COLOR", "value": "#3e4a3d" },
+    "gray/500": { "type": "COLOR", "value": "#6e7a6c" },
+    "gray/300": { "type": "COLOR", "value": "#bdcaba" },
+    "gray/200": { "type": "COLOR", "value": "#e5e2e1" },
+    "white": { "type": "COLOR", "value": "#ffffff" },
+    "cream/50": { "type": "COLOR", "value": "#fcf9f8" },
+    "lime/500": { "type": "COLOR", "value": "#c2d832" },
+    "amber/100": { "type": "COLOR", "value": "#ffddb5" },
+    "amber/700": { "type": "COLOR", "value": "#835400" },
+    "amber/500": { "type": "COLOR", "value": "#fcab29" },
+    "red/50": { "type": "COLOR", "value": "#ffd9de" },
+    "red/600": { "type": "COLOR", "value": "#ba1a1a" },
+    "black/alpha-2": { "type": "COLOR", "value": "rgba(0,0,0,0.02)", "scope": "EFFECT_COLOR" },
+    "black/alpha-15": { "type": "COLOR", "value": "rgba(0,0,0,0.15)", "scope": "EFFECT_COLOR" }
+  },
+  "codeOnly": {
+    "tour/mint": {
+      "type": "COLOR",
+      "value": "#dcebe2",
+      "note": "Onboarding home/track tour canvas — not yet a Figma variable; RN token colors.bgTour"
+    },
+    "chip/bg": {
+      "type": "COLOR",
+      "value": "#f0edec",
+      "note": "Neutral chip fill — notification preference rows; RN token colors.chipBg"
+    }
+  }
+}

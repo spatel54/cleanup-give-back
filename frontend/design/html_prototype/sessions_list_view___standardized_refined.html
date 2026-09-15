@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Clean-Up Give Back - Sessions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Noto+Sans:wght@400;500;600;700&amp;family=Sanchez:ital@0;1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#66de7f",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#bdcaba",
+                        "on-secondary-container": "#694300",
+                        "secondary": "#835400",
+                        "on-surface": "#1c1b1b",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#f7fff2",
+                        "inverse-primary": "#66de7f",
+                        "surface": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "on-tertiary-fixed": "#3f0016",
+                        "primary": "#006b2c",
+                        "background": "#fcf9f8",
+                        "primary-container": "#008739",
+                        "on-tertiary-fixed-variant": "#89173c",
+                        "on-surface-variant": "#3e4a3d",
+                        "surface-variant": "#e5e2e1",
+                        "on-primary-fixed-variant": "#005320",
+                        "secondary-fixed-dim": "#ffb957",
+                        "surface-tint": "#006e2d",
+                        "surface-container": "#f0edec",
+                        "outline": "#6e7a6c",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffddb5",
+                        "on-error": "#ffffff",
+                        "tertiary": "#a62f51",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#83fb98",
+                        "tertiary-fixed": "#ffd9de",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-container": "#c64869",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "inverse-surface": "#313030",
+                        "on-secondary-fixed": "#2a1800",
+                        "secondary-container": "#fcab29",
+                        "on-primary-fixed": "#002109",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-background": "#1c1b1b",
+                        "inverse-on-surface": "#f3f0ef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-side": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sanchez", "serif"],
+                        "display": ["Sanchez", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "label": ["Noto Sans", "sans-serif"],
+                        "data": ["IBM Plex Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-body antialiased min-h-screen flex flex-col pb-safe">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-40 bg-surface border-b border-outline-variant flex justify-between items-center px-6 py-2 h-16"><div class="flex items-center gap-4"><span class="font-headline text-xl font-bold text-primary">Clean Up Give Back</span></div><nav class="hidden md:flex items-center gap-6"><a class="text-primary font-label text-sm font-semibold border-b-2 border-primary py-4" href="#">Home</a><a class="text-on-surface-variant hover:text-primary font-label text-sm font-semibold transition-colors py-4" href="#">Shop</a><a class="text-on-surface-variant hover:text-primary font-label text-sm font-semibold transition-colors py-4" href="#">Sessions</a><button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label text-sm font-semibold hover:bg-primary-container transition-colors shadow-sm">Track</button></nav><div class="flex items-center gap-4"><button class="text-on-surface-variant hover:bg-surface-container rounded-full p-2 transition-colors active:scale-95 duration-200 relative"><span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span></button><button class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:opacity-80 transition-opacity"><img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUf3HZ1f0_r32to2rzRDVC9LvQaGbEUzsUQ23hJazN6JohsnxcORHj8iCWDpD3FXTbbtWycDzdD4_o8A2p8ydI3D9FcCMNAy9pm9YVLHryQR1AcA7IMkJc2zJNmzCuXghfYOIzn1Sdy6dL1ENtVKS-Gwc-YmjhICOfjpLr_TNx6_GpxEcps4AK0C78-m1mzXjaoqbdFB_l-MuN95uYSSYnDTekKPwkmQUA3NbL_b05hiArOXvAyLqV5dDs1TfivliWC062v4bHok"></button></div></header>
+<!-- Main Content -->
+<main class="flex-grow pt-20 pb-28 px-margin-side max-w-3xl mx-auto w-full">
+<!-- Summary Metric -->
+<section class="mb-stack-lg pt-4 text-center">
+<h2 class="font-data text-3xl font-medium text-primary tracking-tight">42.5</h2>
+<p class="font-label text-on-surface-variant text-sm mt-1 uppercase tracking-wider">Total Hours Logged</p>
+</section>
+<!-- Search & Filters -->
+<section class="mb-stack-lg space-y-stack-md">
+<!-- Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-10 pr-4 font-body text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search sessions..." type="text">
+</div>
+<!-- Filters -->
+<div class="flex items-center justify-center mb-4">
+  <div class="flex items-center space-x-1 bg-surface-container-low rounded-full p-1 border border-outline-variant/30">
+    <button class="bg-primary text-on-primary rounded-full px-6 py-1.5 text-label-md font-semibold shadow-sm transition-colors">List</button>
+    <button class="text-on-surface-variant hover:bg-surface-container-high rounded-full px-6 py-1.5 text-label-md font-medium transition-colors">Map</button>
+  </div>
+</div><div class="flex overflow-x-auto hide-scrollbar space-x-2 py-1">
+<button class="shrink-0 bg-primary-container text-on-primary-container border border-primary font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors">All</button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors">Approved</button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Under Review
+                </button>
+<button class="shrink-0 bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container font-label text-sm px-4 py-1.5 rounded-full whitespace-nowrap transition-colors flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span> Not Approved
+                </button>
+</div>
+</section>
+<!-- Sessions List -->
+<div class="space-y-stack-lg">
+<!-- Group: THIS WEEK -->
+<div>
+<h3 class="font-label text-xs font-bold text-outline uppercase tracking-widest mb-stack-md">This Week</h3>
+<div class="space-y-stack-md">
+<!-- Session Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col md:flex-row group hover:border-primary/50 transition-colors">
+<!-- Map Preview -->
+<div class="h-32 md:h-auto md:w-48 bg-surface-container relative shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A stylized, top-down minimalist map view of a city park trail system. The map uses a light mode aesthetic with off-white backgrounds, soft green park areas, and a distinct primary green path indicating a tracked route. The style is clean, functional, and aligns with an environmental tracking application." data-location="City Park" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_Ymp9E8_HHIeJ8xzufvn9Dpupgql8QCmtwaANQhe06Dy7Kvtv7K7Ujhceryl8o-DA2XQkyuqr9KdVrIMvJnX0upM8sdKz6FXh1g0YzU3zSiqXWHTO3i3M1yLr7U9dgk3EN9rvkUj5PnTfdExfx4VkNUfB-lVlqhD-jTW0pqiTfydn20vAtje_7G0IhebLq-gY2gNZyHRJ-W-fPpATx0uUBA2BjAXFm3j0PzQBBCiCYeKBAYMuL_yE-qzdiotOqEhI9cq4CSiEi9o')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 backdrop-blur-sm rounded px-2 py-0.5 border border-outline-variant/50">
+<span class="font-data text-xs text-on-surface font-medium">1.2 mi</span>
+</div>
+</div>
+<!-- Content -->
+<div class="p-4 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline text-headline-sm text-on-surface">City Park Trail Cleanup</h4>
+<!-- Status Badge -->
+<div class="bg-primary/10 border border-primary/20 text-primary px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-wide flex items-center gap-1 shrink-0 ml-2">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> Approved
+                                    </div>
+</div>
+<div class="flex items-center text-on-surface-variant font-body text-sm mb-3">
+<span class="material-symbols-outlined text-[16px] mr-1">location_on</span>
+<span class="">Downtown City Park</span>
+<span class="mx-2 text-outline-variant">•</span>
+<span class="">Oct 24, 2023</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-3 border-t border-outline-variant/30">
+<div>
+<p class="font-label text-xs text-outline mb-0.5">Time</p>
+<p class="font-data text-sm text-on-surface">09:00 - 11:30</p>
+</div>
+<div>
+<p class="font-label text-xs text-outline mb-0.5">Metrics</p>
+<p class="font-data text-sm text-on-surface font-medium">2.5h <span class="text-outline-variant mx-1 font-body">|</span> 15.2 lbs</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Session Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col md:flex-row group hover:border-primary/50 transition-colors">
+<div class="h-32 md:h-auto md:w-48 bg-surface-container relative shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A clean, abstract map visualization of a suburban riverside path. The visual features a light grey background with a winding pale blue river and a vibrant amber highlighted path representing an unverified clean-up route. The aesthetic is flat, modern, and data-focused." data-location="Riverside Path" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxvsYe3sOPF3rkoDGHRmwu9EdM8vcPUkhS2twEb0ohlM7FbjuQoIvXmGV3peIjRybDYQkIAUMx6xy57OrpZuuta62GlgMK6pIGZ4PqPCVoiNbPjv4DXEDfeJViys3ShudajFZv9cVLxjgfexHrHSGJi8zBEzBowCItt81sgoz8_CF2KZA7wArh8GyzBlqxbrbuZASKuQpmOtfCE9Eqy90EcTu_ihMiQLc5Bp3UlpY9mcyvODriSLOc3q8EraY4iTGaVyJFfquoGQ4')"></div>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 backdrop-blur-sm rounded px-2 py-0.5 border border-outline-variant/50">
+<span class="font-data text-xs text-on-surface font-medium">0.8 mi</span>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline text-headline-sm text-on-surface">Riverfront Path Sweep</h4>
+<!-- Status Badge -->
+<div class="bg-secondary-container/20 border border-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-wide flex items-center gap-1 shrink-0 ml-2">
+<span class="material-symbols-outlined text-[12px]">pending</span> Under Review
+                                    </div>
+</div>
+<div class="flex items-center text-on-surface-variant font-body text-sm mb-3">
+<span class="material-symbols-outlined text-[16px] mr-1">location_on</span>
+<span class="">East Riverfront</span>
+<span class="mx-2 text-outline-variant">•</span>
+<span class="">Oct 22, 2023</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-3 border-t border-outline-variant/30">
+<div>
+<p class="font-label text-xs text-outline mb-0.5">Time</p>
+<p class="font-data text-sm text-on-surface">14:15 - 15:45</p>
+</div>
+<div>
+<p class="font-label text-xs text-outline mb-0.5">Metrics</p>
+<p class="font-data text-sm text-on-surface font-medium">1.5h <span class="text-outline-variant mx-1 font-body">|</span> 8.4 lbs</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Group: LAST WEEK -->
+<div>
+<h3 class="font-label text-xs font-bold text-outline uppercase tracking-widest mb-stack-md">Last Week</h3>
+<div class="space-y-stack-md">
+<!-- Session Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col md:flex-row opacity-75">
+<div class="h-32 md:h-auto md:w-48 bg-surface-container relative shrink-0">
+<div class="absolute inset-0 bg-cover bg-center grayscale opacity-60" data-alt="A simple, muted map graphic showing a small circular route around an urban block. The map is rendered in greyscale to indicate a rejected or inactive state, maintaining the app's clean, minimalist visual language." data-location="Urban Block" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOrGK3XSPO84vEI8Us1vWSLGZhJoB48FNoFrgyhmE9IKt4H_tafRdmdbQYJG_p5xXzH2gUncdDZUk9hf8so35J1T3CAYRdQij_PbFCB_glketnyGZjhE6QK8baqXUO_CwHPkcb7D_3o9Jb30mgglRhb2Kp8DnFuf2EC9Q_vBPaWsBX9tnbg6k7ij0z-gHY-Lfq7laGCtDHbbec1e39TLKYib82F9nlgojtXH94CJ_tqDaKcPDEMbMeNTIvodx4SPkzkAtPJp9Nmt4')"></div>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 backdrop-blur-sm rounded px-2 py-0.5 border border-outline-variant/50">
+<span class="font-data text-xs text-on-surface font-medium">0.2 mi</span>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline text-headline-sm text-on-surface">Quick Block Check</h4>
+<!-- Status Badge -->
+<div class="bg-error/10 border border-error/30 text-error px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-wide flex items-center gap-1 shrink-0 ml-2">
+<span class="material-symbols-outlined text-[12px]">cancel</span> Not Approved
+                                    </div>
+</div>
+<div class="flex items-center text-on-surface-variant font-body text-sm mb-3">
+<span class="material-symbols-outlined text-[16px] mr-1">location_on</span>
+<span class="">Main St. Area</span>
+<span class="mx-2 text-outline-variant">•</span>
+<span class="">Oct 15, 2023</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-3 border-t border-outline-variant/30">
+<div>
+<p class="font-label text-xs text-outline mb-0.5">Time</p>
+<p class="font-data text-sm text-on-surface">17:00 - 17:15</p>
+</div>
+<div>
+<p class="font-label text-xs text-outline mb-0.5">Metrics</p>
+<p class="font-data text-sm text-on-surface font-medium">0.25h <span class="text-outline-variant mx-1 font-body">|</span> 0.0 lbs</p>
+</div>
+</div>
+<p class="text-xs text-error mt-2 font-body italic">Route too short for verification.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface dark:bg-background border-t border-outline-variant dark:border-outline pb-safe block md:hidden">
+<div class="flex justify-around items-center h-20 px-4 w-full">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label text-[10px] uppercase tracking-wide">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined mb-1">shopping_bag</span>
+<span class="font-label text-[10px] uppercase tracking-wide">Shop</span>
+</button>
+<!-- Track Button (Primary Action) -->
+<div class="-mt-8 relative z-10">
+<button class="bg-primary hover:bg-primary-container text-on-primary rounded-full w-14 h-14 flex items-center justify-center shadow-lg transform transition active:scale-95">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<!-- Active Tab: Sessions -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed bg-primary-container/10 rounded-xl px-3 py-1 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wide">Sessions</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label text-[10px] uppercase tracking-wide">Account</span>
+</button>
+</div>
+</nav>
+<!-- Web Navigation Cluster (Hidden on mobile) -->
+
+
+
+</body></html>

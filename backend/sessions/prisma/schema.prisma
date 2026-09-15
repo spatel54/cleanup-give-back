@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SessionStatus {
+  active
+  under_review
+  approved
+  not_approved
+  invalid
+}
+
+model Session {
+  id               String        @id @default(uuid()) @db.Uuid
+  userId           String        @map("user_id") @db.Uuid
+  activity         String?
+  courtOrdered     Boolean       @default(false) @map("court_ordered")
+  description      String?
+  startedAt        DateTime?     @map("started_at") @db.Timestamptz(6)
+  endedAt          DateTime?     @map("ended_at") @db.Timestamptz(6)
+  durationSeconds  Int?          @map("duration_seconds")
+  distanceMiles    Decimal?      @map("distance_miles") @db.Decimal
+  route            Json?
+  status           SessionStatus @default(active)
+  /** Volunteer-facing reason when admin declines (`admin/db/004_admin_refinements.sql`). */
+  declineReason    String?       @map("decline_reason")
+  adjustedHours    Decimal?      @map("adjusted_hours") @db.Decimal
+  letterheadGeneratedAt DateTime? @map("letterhead_generated_at") @db.Timestamptz(6)
+  plausibilitySignal Json?       @map("plausibility_signal")
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  checkpoints      Checkpoint[]
+
+  @@map("sessions")
+}
+
+/** Maps to the existing `court_orders` table (`admin/db/001_admin_portal_migration.sql`) —
+ * one row per court-ordered volunteer, managed by admin-web-app's `upsertCourtOrder`. */
+model CourtOrder {
+  id             String    @id @default(uuid()) @db.Uuid
+  userId         String    @map("user_id") @db.Uuid
+  requiredHours  Decimal   @map("required_hours") @db.Decimal
+  dueDate        DateTime? @map("due_date") @db.Date
+  caseReference  String?   @map("case_reference")
+  hoursResetAt   DateTime? @map("hours_reset_at") @db.Timestamptz(6)
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("court_orders")
+}
+
+model Checkpoint {
+  id             String    @id @default(uuid()) @db.Uuid
+  sessionId      String    @map("session_id") @db.Uuid
+  selfiePath     String?   @map("selfie_path")
+  progressPath   String?   @map("progress_path")
+  capturedAt     DateTime? @map("captured_at") @db.Timestamptz(6)
+  submittedEarly Boolean   @default(false) @map("submitted_early")
+  /** WGS84 — set when the mobile client submits a checkpoint with GPS. */
+  latitude       Float?
+  longitude      Float?
+  session        Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("checkpoints")
+}

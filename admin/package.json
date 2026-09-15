@@ -1,0 +1,42 @@
+{
+  "name": "cleanupgiveback-admin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ARCHIVED 2026-07-30 — use admin-web-app/ for admin UI. See README.md.",
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "check:imports": "node scripts/check-import-boundary.js"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^4.1.6",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.8",
+    "d3-geo": "^3.1.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.0",
+    "json2csv": "^6.0.0-alpha.2",
+    "next": "^15.4.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "recharts": "^3.10.0",
+    "resend": "^4.6.0",
+    "topojson-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/topojson-client": "^3.1.5",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}

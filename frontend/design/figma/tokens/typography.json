@@ -1,0 +1,126 @@
+{
+  "$schema": "https://cleanupgiveback.local/figma-tokens/v1",
+  "collection": "Typography",
+  "mode": "Value",
+  "source": {
+    "figmaFileKey": "DrDcQH14n7ntDQ80F7au9S",
+    "designSystemPage": "1:3",
+    "exportedFrom": "frontend/design/figma/design.md §5.4",
+    "exportedAt": "2026-07-13"
+  },
+  "textStyles": {
+    "Display/Hero": {
+      "family": "Sanchez",
+      "weight": "Regular",
+      "size": 40,
+      "lineHeight": 48,
+      "rn": "textStyles.displayHero",
+      "css": "--typography-display-hero-*"
+    },
+    "Headline/Page": {
+      "family": "Sanchez",
+      "weight": "Regular",
+      "size": 28,
+      "lineHeight": 36,
+      "rn": "textStyles.headlinePage",
+      "css": "--typography-headline-page-*"
+    },
+    "Headline/Detail": {
+      "family": "Sanchez",
+      "weight": "Regular",
+      "size": 20,
+      "lineHeight": 28,
+      "rn": "textStyles.headlineDetail",
+      "css": "--typography-headline-detail-*"
+    },
+    "Body/Default": {
+      "family": "Noto Sans",
+      "weight": "Regular",
+      "size": 16,
+      "lineHeight": 24,
+      "rn": "textStyles.bodyDefault",
+      "css": "--typography-body-default-*"
+    },
+    "Body/Large": {
+      "family": "Noto Sans",
+      "weight": "Regular",
+      "size": 18,
+      "lineHeight": 26,
+      "rn": "textStyles.bodyLarge",
+      "css": "--typography-body-large-*"
+    },
+    "Body/Small": {
+      "family": "Noto Sans",
+      "weight": "Regular",
+      "size": 14,
+      "lineHeight": 20,
+      "rn": "textStyles.bodySmall",
+      "css": "--typography-body-small-*"
+    },
+    "Body/Emphasis": {
+      "family": "Noto Sans",
+      "weight": "Medium",
+      "size": 16,
+      "lineHeight": 24,
+      "rn": "textStyles.bodyEmphasis",
+      "css": "--typography-body-emphasis-*"
+    },
+    "Body/Strong": {
+      "family": "Noto Sans",
+      "weight": "Bold",
+      "size": 16,
+      "lineHeight": 24,
+      "rn": "textStyles.bodyStrong",
+      "css": "--typography-body-strong-*"
+    },
+    "Label/Overline": {
+      "family": "IBM Plex Sans",
+      "weight": "Medium",
+      "size": 12,
+      "lineHeight": 18,
+      "letterSpacingEm": 0.08,
+      "rn": "textStyles.labelOverline",
+      "css": "--typography-label-overline-*"
+    },
+    "Label/Status": {
+      "family": "IBM Plex Sans",
+      "weight": "Medium",
+      "size": 12,
+      "lineHeight": 16,
+      "rn": "textStyles.labelStatus",
+      "css": "--typography-label-status-*"
+    },
+    "Label/Button": {
+      "family": "IBM Plex Sans",
+      "weight": "SemiBold",
+      "size": 16,
+      "lineHeight": 20,
+      "rn": "textStyles.labelButton",
+      "css": "--typography-label-button-*"
+    },
+    "Nav/Tab": {
+      "family": "IBM Plex Sans",
+      "weight": "SemiBold",
+      "size": 12,
+      "lineHeight": 18,
+      "rn": "textStyles.navTab",
+      "css": "--typography-nav-tab-*"
+    },
+    "Data/Stat": {
+      "family": "IBM Plex Sans",
+      "weight": "SemiBold",
+      "size": 28,
+      "lineHeight": 36,
+      "rn": "textStyles.dataStat",
+      "css": "--typography-data-stat-*"
+    },
+    "Data/Timer": {
+      "family": "IBM Plex Sans",
+      "weight": "Medium",
+      "size": 40,
+      "lineHeight": 48,
+      "rn": "textStyles.dataTimer",
+      "css": "--typography-data-timer-*"
+    }
+  }
+}

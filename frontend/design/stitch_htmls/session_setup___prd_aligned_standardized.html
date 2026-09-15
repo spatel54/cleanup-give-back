@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Session Setup - Clean Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#835400",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#f7fff2",
+                      "on-tertiary-fixed-variant": "#89173c",
+                      "surface-variant": "#e5e2e1",
+                      "secondary-container": "#fcab29",
+                      "primary-fixed-dim": "#66de7f",
+                      "surface-dim": "#dcd9d9",
+                      "surface": "#fcf9f8",
+                      "on-surface": "#1c1b1b",
+                      "surface-tint": "#006e2d",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-bright": "#fcf9f8",
+                      "primary-fixed": "#83fb98",
+                      "background": "#fcf9f8",
+                      "primary-container": "#008739",
+                      "secondary-fixed": "#ffddb5",
+                      "surface-container-high": "#eae7e7",
+                      "outline": "#6e7a6c",
+                      "on-primary-fixed-variant": "#005320",
+                      "tertiary-fixed": "#ffd9de",
+                      "on-secondary-fixed": "#2a1800",
+                      "surface-container": "#f0edec",
+                      "secondary-fixed-dim": "#ffb957",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#fffbff",
+                      "tertiary-fixed-dim": "#ffb2bf",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#002109",
+                      "inverse-primary": "#66de7f",
+                      "outline-variant": "#bdcaba",
+                      "on-tertiary-fixed": "#3f0016",
+                      "on-surface-variant": "#3e4a3d",
+                      "tertiary": "#a62f51",
+                      "on-secondary-fixed-variant": "#643f00",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "tertiary-container": "#c64869",
+                      "on-secondary-container": "#694300",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-background": "#1c1b1b",
+                      "surface-container-highest": "#e5e2e1",
+                      "inverse-surface": "#313030",
+                      "on-error-container": "#93000a",
+                      "primary": "#006b2c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Sanchez"],
+                      "display": ["Sanchez"],
+                      "body": ["Noto Sans"],
+                      "label": ["Noto Sans"],
+                      "data": ["JetBrains Mono"]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans', sans-serif; background-color: #fcf9f8; color: #1c1b1b; }
+        h1, h2, h3, .font-headline { font-family: 'Sanchez', serif; }
+        .font-data { font-family: 'JetBrains Mono', monospace; }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #006b2c;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #006b2c;
+        }
+        
+        canvas#signature-pad {
+            border: 1px dashed #bdcaba;
+            border-radius: 0.5rem;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-24 md:pb-0 md:pt-20">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-background border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-6 py-4 docked full-width top-0 z-40 fixed md:absolute">
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim">
+<a href="{{DATA:SCREEN:SCREEN_93}}" aria-label="Go Back" class="hover:bg-surface-container-low dark:hover:bg-surface-container-highest p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</a>
+<span class="font-headline text-headline-sm font-semibold">Session Setup</span>
+</div>
+<div class="text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-6 py-24 md:py-8 max-w-2xl">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/30 mb-8">
+<h2 class="font-headline text-2xl mb-2 text-on-surface">Ready to Make an Impact?</h2>
+<p class="text-on-surface-variant font-body mb-6">Fill out the details below before starting your clean-up session. Accuracy helps us track global impact.</p>
+<form class="space-y-6">
+<!-- What activity is this? -->
+<div>
+<label class="block font-label text-label-md text-on-surface mb-2" for="activity">What activity is this?</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body text-body-md placeholder:text-on-surface-variant/50 transition-colors" id="activity" placeholder="e.g. River Bank Cleanup, Highway Litter Removal" type="text">
+</div>
+<!-- Date -->
+<div>
+<label class="block font-label text-label-md text-on-surface mb-2" for="date">Date</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">calendar_today</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg pl-12 pr-4 py-3 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-data text-body-md transition-colors appearance-none" id="date" type="date" value="2023-10-27">
+</div>
+</div>
+<!-- Court Ordered Status -->
+<div class="flex items-center justify-between bg-surface-container-low p-4 rounded-lg border border-outline-variant/20">
+<div>
+<span class="block font-label text-label-md text-on-surface">Court Ordered Status</span>
+<span class="text-sm text-on-surface-variant font-body">Does this session count towards mandated hours?</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-surface-variant appearance-none cursor-pointer transition-all duration-300 z-10" id="court-ordered" name="toggle" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="court-ordered"></label>
+</div>
+</div>
+<!-- Description -->
+<div>
+<label class="block font-label text-label-md text-on-surface mb-2" for="description">Description (Optional)</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body text-body-md placeholder:text-on-surface-variant/50 transition-colors resize-none" id="description" placeholder="Add any specific goals or details about this session..." rows="3"></textarea>
+</div>
+<!-- Digital Signature -->
+<div class="mt-8 pt-6 border-t border-outline-variant/30">
+<label class="block font-label text-label-md text-on-surface mb-2 flex items-center justify-between">
+<span class="">Digital Signature</span>
+<button class="text-sm text-primary hover:text-primary-container font-label" onclick="clearSignature()" type="button">Clear</button>
+</label>
+<div class="bg-surface rounded-lg relative overflow-hidden">
+<canvas class="w-full h-32 bg-white" height="128" id="signature-pad" width="600"></canvas>
+<div class="absolute bottom-2 left-4 right-4 pointer-events-none flex justify-between items-center opacity-40">
+<span class="material-symbols-outlined text-outline">draw</span>
+<span class="font-data text-xs text-outline">Sign here</span>
+</div>
+</div>
+</div>
+<!-- Permissions Check -->
+<div class="bg-surface-container-low p-4 rounded-lg flex flex-col gap-3">
+<h3 class="font-label text-sm text-on-surface-variant uppercase tracking-wider">Required Permissions</h3>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-full text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<span class="font-body text-on-surface">Location Services</span>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-surface-variant p-2 rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<span class="font-body text-on-surface">Camera Access</span>
+</div>
+<button class="text-sm text-primary font-label hover:underline" type="button">Enable</button>
+</div>
+</div>
+<!-- Action -->
+<div class="pt-6">
+<a href="{{DATA:SCREEN:SCREEN_104}}" class="w-full bg-primary hover:bg-primary-container text-on-primary font-headline text-lg py-4 rounded-lg shadow-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">play_arrow</span>
+                        Start Session
+                    </a>
+</div>
+</form>
+</div>
+</main>
+<script>
+        // Simple Signature Pad Implementation
+        const canvas = document.getElementById('signature-pad');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        // Set up context
+        ctx.strokeStyle = '#1c1b1b';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            // Get correct coordinates relative to canvas
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            let clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            let clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            
+            [lastX, lastY] = [x, y];
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            let clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            let clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            lastX = (clientX - rect.left) * scaleX;
+            lastY = (clientY - rect.top) * scaleY;
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false);
+
+        canvas.addEventListener('touchstart', startDrawing, {passive: true});
+        canvas.addEventListener('touchmove', draw, {passive: true});
+        canvas.addEventListener('touchend', () => isDrawing = false);
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // Handle window resize
+        function resizeCanvas() {
+            // Keep aspect ratio but fit container
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            // We maintain the internal resolution defined in HTML attributes,
+            // CSS handles visual scaling.
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+
+
+</body></html>

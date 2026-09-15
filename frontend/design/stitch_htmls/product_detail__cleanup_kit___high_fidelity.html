@@ -1,0 +1,199 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Trash Cleanup Kit - Clean-Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans:wght@400;600&amp;family=Sanchez:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error-container": "#ffdad6",
+                      "surface-container-highest": "#e5e2e1",
+                      "inverse-surface": "#313030",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#89173c",
+                      "on-tertiary-container": "#fffbff",
+                      "on-secondary-fixed": "#2a1800",
+                      "primary-fixed-dim": "#66de7f",
+                      "on-primary-fixed-variant": "#005320",
+                      "primary": "#006b2c",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#fcf9f8",
+                      "secondary-container": "#fcab29",
+                      "surface-tint": "#006e2d",
+                      "on-surface": "#1c1b1b",
+                      "surface-dim": "#dcd9d9",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#a62f51",
+                      "secondary-fixed-dim": "#ffb957",
+                      "on-background": "#1c1b1b",
+                      "on-error": "#ffffff",
+                      "background": "#fcf9f8",
+                      "on-primary-fixed": "#002109",
+                      "on-secondary-fixed-variant": "#643f00",
+                      "primary-fixed": "#83fb98",
+                      "inverse-primary": "#66de7f",
+                      "primary-container": "#008739",
+                      "on-tertiary-fixed": "#3f0016",
+                      "inverse-on-surface": "#f3f0ef",
+                      "on-secondary-container": "#694300",
+                      "tertiary-container": "#c64869",
+                      "surface-container-high": "#eae7e7",
+                      "on-surface-variant": "#3e4a3d",
+                      "tertiary-fixed-dim": "#ffb2bf",
+                      "secondary-fixed": "#ffddb5",
+                      "surface": "#fcf9f8",
+                      "surface-container": "#f0edec",
+                      "on-primary-container": "#f7fff2",
+                      "secondary": "#835400",
+                      "surface-container-low": "#f6f3f2",
+                      "outline-variant": "#bdcaba",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed": "#ffd9de",
+                      "outline": "#6e7a6c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Sanchez", "serif"],
+                      "body": ["Noto Sans", "sans-serif"],
+                      "label": ["Noto Sans", "sans-serif"],
+                      "data": ["JetBrains Mono", "monospace"]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans', sans-serif; }
+        h1, h2, h3, h4, .font-headline { font-family: 'Sanchez', serif; }
+        .font-data { font-family: 'JetBrains Mono', monospace; }
+        
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+          font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 border-b border-outline-variant md:border-none shadow-sm md:shadow-none">
+<a href="{{DATA:SCREEN:SCREEN_118}}" class="text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity active:scale-95 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</a>
+<h1 class="font-headline text-headline-sm font-semibold text-on-surface">Clean-Up Give Back</h1>
+<div class="w-6"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow container mx-auto px-6 py-8 max-w-6xl">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+<!-- Product Image Section -->
+<div class="space-y-6">
+<div class="aspect-square bg-surface-container rounded-xl overflow-hidden shadow-sm border border-outline-variant">
+<img alt="Trash Cleanup Kit" class="w-full h-full object-cover mix-blend-multiply" data-alt="A professional product shot of a comprehensive environmental cleanup starter kit laid out neatly on a clean, off-white surface. The kit includes a sturdy, bright green professional-grade trash grabber with yellow accents, a high-visibility neon yellow safety vest folded neatly, and a stack of blue premium nitrile gloves. The lighting is studio-quality, bright and even, highlighting the textures of the materials against the soft, warm minimalist background. The aesthetic is clean, purposeful, and modern." src="https://lh3.googleusercontent.com/aida/AP1WRLuwuXn67cxDiw3VhRRlEXUOY_WV1qlbLtx4v-BGRXB0w6jIQUqdNwtP3BzFh-EwyvEZdonCXUNt1WpSWfOZVznsJLfawaTN1gj3o0USdcuqQs56sCVOc6i0iHSteCC4AtaKHDsMNXhBMcXJMgy_Gtz7hbdOzNFOUPAVhVEcafd0v1LIciRYzSGd__wAwbg4pwLlIW2pqv_RUz_dX3yQwJUnYFpkRzqFJE0vt_aGyc5BMpbDxafdKYQ3_sU">
+</div>
+<div class="grid grid-cols-4 gap-4">
+<button class="aspect-square bg-surface-container rounded-lg overflow-hidden border-2 border-primary">
+<img alt="Thumbnail 1" class="w-full h-full object-cover mix-blend-multiply" src="https://lh3.googleusercontent.com/aida/AP1WRLuwuXn67cxDiw3VhRRlEXUOY_WV1qlbLtx4v-BGRXB0w6jIQUqdNwtP3BzFh-EwyvEZdonCXUNt1WpSWfOZVznsJLfawaTN1gj3o0USdcuqQs56sCVOc6i0iHSteCC4AtaKHDsMNXhBMcXJMgy_Gtz7hbdOzNFOUPAVhVEcafd0v1LIciRYzSGd__wAwbg4pwLlIW2pqv_RUz_dX3yQwJUnYFpkRzqFJE0vt_aGyc5BMpbDxafdKYQ3_sU">
+</button>
+<button class="aspect-square bg-surface-container rounded-lg overflow-hidden border border-outline-variant hover:border-primary transition-colors"><img alt="Grabber" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuVugvK242RUdA_iWF4GjrHHlsiDMAKmf0eaGW9cZeRNJ2fpjHQVBXBp1M6bRP9_wYoYdFfHWmXiipvrAMtgygzYsB-4-YKn0kXGfMup7cQONM-M2VXnl2PL07FAY6hiXjQkMZYNCVaL_KxcYAudRdHTqk40BTmPUblgw2Z59UyDVt4Gwo_pBVVWU9R45sZZ976o541w9KkvIcb5k2MenYtd6s88AuNujrxMmdFNuQx3TAaxV02mt7vWH8"></button>
+<button class="aspect-square bg-surface-container rounded-lg overflow-hidden border border-outline-variant hover:border-primary transition-colors"><img alt="Safety Vest" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtB1rkOCr__6x6xoeFS1XUNUT-oygbQCPWhNEtfrBcOZ7ABkFJlunPFz0ZPJsdPBWVcnnzrEOYaAJpCn5MbpAEoqfDsQluCVTPd1TaoZlxw5mRC8j6_VIRbZmu1Rs20lr50AdPRuV9tKTHmBOoKmhdZKalKhcuP_SDrB-fF21A3ZXkRHCLJvfUWN4TaLYg1AvbsLYKIehWm5etZDEp184jsT8bHAZZylyJ4mlICdwaQnwBTRC5FOHDbBwE"></button>
+<button class="aspect-square bg-surface-container rounded-lg overflow-hidden border border-outline-variant hover:border-primary transition-colors"><img alt="Gloves" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtTgrqeU1uaSlwEYDihkhlMnl-f1GsNJZ1jnglAFb7dAUzTxJ_HGtnQcEIk1DJcuobs2nFRKPsy91NcYEtPjazfQ-maDRXiUvXBVlUB_0tgZ3GK_zgk0zYiGD29kdVynjLBtqsUJ0oajIt2-V49-FRqW371TPAN9B-j58HT46OM16-ToUukAlKPDVCQXgOmqw1tuWyGP6rva_3vsL3GMXapNqiQgTaRYLzjxh8QzyzqKrjqdeCN51GXcQ"></button>
+</div>
+</div>
+<!-- Product Details Section -->
+<div class="flex flex-col justify-start">
+<div class="mb-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container text-on-primary-container font-label">
+                        Best Seller
+                    </span>
+</div>
+<h2 class="font-headline text-4xl lg:text-5xl font-bold text-on-surface mb-4">Trash Cleanup Kit</h2>
+<div class="flex items-end gap-4 mb-6">
+<span class="font-data text-3xl font-medium text-primary">$29.99</span>
+<span class="text-on-surface-variant text-sm mb-1 font-body">In Stock</span>
+</div>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed mb-8">
+                    Our comprehensive starter kit includes a professional-grade trash grabber, high-visibility adult safety vest, and 10 pairs of premium nitrile gloves. Everything you need to start your first cleanup session with confidence.
+                </p>
+<div class="space-y-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden bg-surface-container flex-shrink-0"><img alt="Grabber" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuVugvK242RUdA_iWF4GjrHHlsiDMAKmf0eaGW9cZeRNJ2fpjHQVBXBp1M6bRP9_wYoYdFfHWmXiipvrAMtgygzYsB-4-YKn0kXGfMup7cQONM-M2VXnl2PL07FAY6hiXjQkMZYNCVaL_KxcYAudRdHTqk40BTmPUblgw2Z59UyDVt4Gwo_pBVVWU9R45sZZ976o541w9KkvIcb5k2MenYtd6s88AuNujrxMmdFNuQx3TAaxV02mt7vWH8"></div>
+<span class="font-body text-on-surface">36" Ergonomic Grabber</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden bg-surface-container flex-shrink-0"><img alt="Vest" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtB1rkOCr__6x6xoeFS1XUNUT-oygbQCPWhNEtfrBcOZ7ABkFJlunPFz0ZPJsdPBWVcnnzrEOYaAJpCn5MbpAEoqfDsQluCVTPd1TaoZlxw5mRC8j6_VIRbZmu1Rs20lr50AdPRuV9tKTHmBOoKmhdZKalKhcuP_SDrB-fF21A3ZXkRHCLJvfUWN4TaLYg1AvbsLYKIehWm5etZDEp184jsT8bHAZZylyJ4mlICdwaQnwBTRC5FOHDbBwE"></div>
+<span class="font-body text-on-surface">One-size High-Vis Vest</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden bg-surface-container flex-shrink-0"><img alt="Gloves" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtTgrqeU1uaSlwEYDihkhlMnl-f1GsNJZ1jnglAFb7dAUzTxJ_HGtnQcEIk1DJcuobs2nFRKPsy91NcYEtPjazfQ-maDRXiUvXBVlUB_0tgZ3GK_zgk0zYiGD29kdVynjLBtqsUJ0oajIt2-V49-FRqW371TPAN9B-j58HT46OM16-ToUukAlKPDVCQXgOmqw1tuWyGP6rva_3vsL3GMXapNqiQgTaRYLzjxh8QzyzqKrjqdeCN51GXcQ"></div>
+<span class="font-body text-on-surface">10x Heavy-Duty Gloves</span>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-8 mt-auto">
+<div class="flex flex-col sm:flex-row gap-4 items-stretch">
+<!-- Quantity Selector -->
+<div class="flex items-center bg-surface-container rounded-lg border border-outline-variant h-14">
+<button aria-label="Decrease quantity" class="px-4 text-on-surface-variant hover:text-primary transition-colors h-full flex items-center">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-data text-lg font-medium w-8 text-center text-on-surface">1</span>
+<button aria-label="Increase quantity" class="px-4 text-on-surface-variant hover:text-primary transition-colors h-full flex items-center">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Add to Cart Button -->
+<a href="{{DATA:SCREEN:SCREEN_88}}" class="flex-grow bg-primary text-on-primary rounded-lg h-14 font-label text-lg font-semibold flex items-center justify-center gap-2 hover:bg-surface-tint active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined">shopping_cart</span>
+                            Add to Cart
+                        </a>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-2 text-sm text-on-surface-variant font-body justify-center sm:justify-start">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+<span class="">Free shipping on orders over $50</span>
+</div>
+</div>
+</div>
+</main>
+
+
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface border-t border-outline-variant rounded-t-xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-label text-[10px] font-semibold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-xl px-4 py-1.5 transition-colors active:scale-95 duration-200" href="{{DATA:SCREEN:SCREEN_118}}">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_bag" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label text-[10px] font-semibold mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center -mt-6 bg-primary text-on-primary rounded-full w-14 h-14 shadow-lg active:scale-95 transition-transform duration-200 border-4 border-surface" href="#">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="history">history</span>
+<span class="font-label text-[10px] font-semibold mt-1">Sessions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-label text-[10px] font-semibold mt-1">Account</span>
+</a>
+</nav></body></html>

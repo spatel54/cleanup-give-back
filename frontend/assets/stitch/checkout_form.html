@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Checkout - Clean-Up Give Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sanchez:wght@400;600;700&family=Noto+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#009540", "on-primary": "#ffffff", "primary-container": "#008739",
+        "on-primary-container": "#f7fff2", "primary-fixed": "#83fb98",
+        "secondary": "#835400", "on-secondary": "#ffffff", "secondary-container": "#fcab29",
+        "error": "#ba1a1a", "on-error": "#ffffff", "error-container": "#ffdad6",
+        "surface": "#fcf9f8", "on-surface": "#1c1b1b", "surface-variant": "#e5e2e1",
+        "on-surface-variant": "#3e4a3d", "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f6f3f2", "surface-container": "#f0edec",
+        "surface-container-high": "#eae7e7",
+        "outline": "#6e7a6c", "outline-variant": "#bdcaba",
+        "background": "#fcf9f8", "on-background": "#1c1b1b"
+      },
+      fontFamily: { "headline": ["Sanchez","serif"], "body": ["Noto Sans","sans-serif"], "label": ["Noto Sans","sans-serif"], "data-lg": ["JetBrains Mono","monospace"] },
+      fontSize: {
+        "display-lg": ["34px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],
+        "headline-md": ["24px",{lineHeight:"32px",fontWeight:"600"}],
+        "headline-sm": ["20px",{lineHeight:"28px",fontWeight:"600"}],
+        "body-lg": ["18px",{lineHeight:"28px",fontWeight:"400"}],
+        "body-md": ["16px",{lineHeight:"24px",fontWeight:"400"}],
+        "label-md": ["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],
+        "data-lg": ["28px",{lineHeight:"32px",letterSpacing:"-0.05em",fontWeight:"500"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Noto Sans', sans-serif; min-height: max(884px, 100dvh); }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+:root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+
+/* Stagger form sections */
+.section-block {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: sectionIn 260ms var(--ease-out) forwards;
+}
+.section-block:nth-child(1) { animation-delay: 40ms; }
+.section-block:nth-child(2) { animation-delay: 100ms; }
+.section-block:nth-child(3) { animation-delay: 160ms; }
+@keyframes sectionIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Input focus ring — Emil: fast, responsive */
+.field-input {
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  outline: none;
+}
+.field-input:focus {
+  border-color: #009540;
+  box-shadow: 0 0 0 3px rgba(0,107,44,0.15);
+}
+
+/* Emil: button press feedback */
+.btn-place-order {
+  transition: transform 140ms var(--ease-out), background-color 140ms ease, box-shadow 140ms ease;
+}
+.btn-place-order:active { transform: scale(0.97); }
+
+.btn-back {
+  transition: transform 140ms var(--ease-out), background-color 120ms ease;
+}
+.btn-back:active { transform: scale(0.95); }
+
+/* Emil: hover only on pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  .btn-place-order:hover { background-color: #005320; box-shadow: 0 4px 12px rgba(0,107,44,0.3); }
+  .btn-back:hover { background-color: #f0edec; }
+}
+</style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body">
+
+<!-- TopAppBar -->
+<header class="bg-surface w-full top-0 sticky border-b border-outline-variant flex items-center justify-between px-4 py-4 z-40">
+  <button id="btn-back-nav" class="btn-back text-primary p-2 -ml-2 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary/40" aria-label="Return to cart">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </button>
+  <h1 class="font-headline text-headline-md font-bold text-primary">Checkout</h1>
+  <div class="flex items-center gap-1 text-on-surface-variant text-[13px]">
+    <span class="material-symbols-outlined text-[16px]">lock</span>
+    <span class="font-label">Secure</span>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="flex-1 w-full max-w-lg mx-auto px-6 py-8 pb-32 space-y-6">
+
+  <!-- Order summary -->
+  <div class="section-block bg-surface-container-lowest border border-outline-variant rounded-xl p-5">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">shopping_bag</span>
+      <h2 class="text-headline-sm font-headline text-on-background">Order Summary</h2>
+    </div>
+    <div class="flex justify-between items-center py-2 border-b border-outline-variant">
+      <div>
+        <p class="font-body text-body-md text-on-surface">Trash Cleanup Kit</p>
+        <p class="font-label text-label-md text-on-surface-variant">Qty: 1</p>
+      </div>
+      <span class="font-data-lg text-primary">$29.99</span>
+    </div>
+    <div class="flex justify-between items-center pt-3">
+      <span class="font-label text-label-md text-on-surface-variant">Shipping</span>
+      <span class="font-label text-label-md text-primary">Free</span>
+    </div>
+    <div class="flex justify-between items-center pt-2 border-t border-outline-variant mt-2">
+      <span class="font-headline text-headline-sm text-on-background">Total</span>
+      <span class="font-data-lg text-on-background">$29.99</span>
+    </div>
+  </div>
+
+  <!-- Shipping Information -->
+  <div class="section-block bg-surface-container-lowest border border-outline-variant rounded-xl p-5">
+    <div class="flex items-center gap-2 mb-5">
+      <span class="material-symbols-outlined text-primary text-[20px]">local_shipping</span>
+      <h2 class="text-headline-sm font-headline text-on-background">Shipping Information</h2>
+    </div>
+
+    <fieldset class="space-y-4">
+      <legend class="sr-only">Shipping address</legend>
+
+      <div>
+        <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="full-name">Full Name</label>
+        <input id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Jane Doe"
+          class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+          aria-required="true">
+      </div>
+
+      <div>
+        <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="address">Street Address</label>
+        <input id="address" name="address" type="text" autocomplete="street-address" placeholder="123 Main St"
+          class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+          aria-required="true">
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="city">City</label>
+          <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="Springfield"
+            class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+            aria-required="true">
+        </div>
+        <div>
+          <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="state">State</label>
+          <input id="state" name="state" type="text" autocomplete="address-level1" placeholder="IL" maxlength="2"
+            class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50 uppercase"
+            aria-required="true">
+        </div>
+      </div>
+
+      <div>
+        <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="zip">ZIP Code</label>
+        <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="62701" maxlength="5"
+          class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+          aria-required="true">
+      </div>
+    </fieldset>
+  </div>
+
+  <!-- Payment Information -->
+  <div class="section-block bg-surface-container-lowest border border-outline-variant rounded-xl p-5">
+    <div class="flex items-center gap-2 mb-5">
+      <span class="material-symbols-outlined text-primary text-[20px]">credit_card</span>
+      <h2 class="text-headline-sm font-headline text-on-background">Payment</h2>
+    </div>
+
+    <fieldset class="space-y-4">
+      <legend class="sr-only">Payment details</legend>
+
+      <div>
+        <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="card-number">Card Number</label>
+        <div class="relative">
+          <input id="card-number" name="card-number" type="text" inputmode="numeric" autocomplete="cc-number"
+            placeholder="1234 5678 9012 3456" maxlength="19"
+            class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 pr-12 font-data-lg text-body-md text-on-surface placeholder:text-on-surface-variant/50 tracking-wider"
+            aria-required="true">
+          <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[22px]">credit_card</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="expiry">Expiry</label>
+          <input id="expiry" name="expiry" type="text" inputmode="numeric" autocomplete="cc-exp"
+            placeholder="MM / YY" maxlength="7"
+            class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+            aria-required="true">
+        </div>
+        <div>
+          <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="cvv">CVV</label>
+          <input id="cvv" name="cvv" type="text" inputmode="numeric" autocomplete="cc-csc"
+            placeholder="•••" maxlength="4"
+            class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+            aria-required="true" aria-describedby="cvv-hint">
+          <p id="cvv-hint" class="sr-only">3 or 4 digit security code on the back of your card</p>
+        </div>
+      </div>
+
+      <div>
+        <label class="block font-label text-label-md text-on-surface-variant mb-1.5" for="name-on-card">Name on Card</label>
+        <input id="name-on-card" name="name-on-card" type="text" autocomplete="cc-name" placeholder="Jane Doe"
+          class="field-input w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50"
+          aria-required="true">
+      </div>
+    </fieldset>
+
+    <p class="flex items-center gap-2 text-on-surface-variant text-[13px] font-label mt-4">
+      <span class="material-symbols-outlined text-[16px]">lock</span>
+      Your payment info is encrypted and never stored on our servers.
+    </p>
+  </div>
+
+</main>
+
+<!-- Sticky CTA -->
+<div class="fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant px-6 py-4 safe-bottom z-50">
+  <button id="btn-place-order" class="btn-place-order w-full bg-primary text-on-primary font-label text-label-md py-4 rounded-xl flex justify-center items-center gap-2 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/50">
+    <span class="material-symbols-outlined text-[20px]">lock</span>
+    Place Order · $29.99
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('btn-back-nav').onclick = () => { window.location.href = 'shopping_cart__no_tote_bag_.html'; };
+  document.getElementById('btn-place-order').onclick = () => { window.location.href = 'thank_you___no_tote_bag_.html'; };
+
+  // Card number auto-format
+  const cardInput = document.getElementById('card-number');
+  cardInput.addEventListener('input', (e) => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 16);
+    e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+  });
+
+  // Expiry auto-format
+  const expiryInput = document.getElementById('expiry');
+  expiryInput.addEventListener('input', (e) => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
+    e.target.value = v;
+  });
+
+  // State uppercase
+  const stateInput = document.getElementById('state');
+  stateInput.addEventListener('input', () => { stateInput.value = stateInput.value.toUpperCase(); });
+});
+</script>
+</body></html>

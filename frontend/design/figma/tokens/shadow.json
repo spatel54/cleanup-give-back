@@ -1,0 +1,45 @@
+{
+  "$schema": "https://cleanupgiveback.local/figma-tokens/v1",
+  "collection": "Shadow",
+  "mode": "Value",
+  "source": {
+    "figmaFileKey": "rye7OGQxun1HxkrFSfrzU6",
+    "designSystemPage": "1:5",
+    "exportedFrom": "frontend/src/constants/tokens.ts (shadows) + docs/frontend/brand.md §Elevation",
+    "exportedAt": "2026-08-09"
+  },
+  "notes": {
+    "policy": "Structural chrome only (PRD §11.7) — navbar and section-header separators. All other surfaces (cards, buttons, images, containers) use border contrast, not shadows.",
+    "colorAlias": "Both styles use color/shadow/strong (black/alpha-15) as their Figma effect color; RN shadowOpacity carries the actual alpha per style since RN shadow color/opacity are separate properties."
+  },
+  "variables": {
+    "shadow/nav/bottom": {
+      "type": "EFFECT",
+      "figmaStyle": "Shadow/Nav/Bottom",
+      "appliesTo": "BottomNav top-edge separator",
+      "rn": "shadows.navBottom",
+      "value": {
+        "shadowColor": "#000",
+        "shadowOffset": { "width": 0, "height": -4 },
+        "shadowOpacity": 0.02,
+        "shadowRadius": 5,
+        "elevation": 2
+      },
+      "css": "box-shadow: 0 -4px 5px rgba(0,0,0,0.02)"
+    },
+    "shadow/bar/top": {
+      "type": "EFFECT",
+      "figmaStyle": "Shadow/Bar/Top",
+      "appliesTo": "TopAppBar / sticky header separator",
+      "rn": "shadows.barTop",
+      "value": {
+        "shadowColor": "#000",
+        "shadowOffset": { "width": 0, "height": 4 },
+        "shadowOpacity": 0.15,
+        "shadowRadius": 5,
+        "elevation": 4
+      },
+      "css": "box-shadow: 0 4px 5px rgba(0,0,0,0.15)"
+    }
+  }
+}

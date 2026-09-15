@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/docs-backpressure.sh"
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": ".cursor/hooks/docs-backpressure.sh",
+        "matcher": "Write|StrReplace|ApplyPatch|EditNotebook"
+      }
+    ]
+  }
+}

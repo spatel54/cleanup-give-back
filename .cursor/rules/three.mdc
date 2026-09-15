@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+# Agent workflow
+
+1. **Spec-first:** Read or add specs in `docs/frontend/specs/` or `docs/backend/specs/` before feature work.
+2. **MCP-first for externals:** If the task needs GitHub, search, Slack, WhatsApp, Sanity, browser checks, or cross-session memory, use the matching MCP server per `.cursor/rules/mcp.mdc` (config: `~/.cursor/mcp.json`). Read tool schemas before calling.
+3. **Verify:** `cd frontend && npx tsc --noEmit` before marking done; Expo Go or EAS dev build for native checks.
+4. **Sync docs:** Follow `.cursor/rules/docs-backpressure.mdc` — update files under `docs/` as appropriate.
+5. **Communicate:** Follow `.cursor/rules/concise-execution.mdc` — ask mid-task when blocked; keep completion wrap-ups short.

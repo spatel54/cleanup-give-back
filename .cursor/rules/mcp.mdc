@@ -1,0 +1,41 @@
+---
+description: Prefer MCP tools for external integrations; map tasks to the right server
+alwaysApply: true
+---
+
+# MCP tools
+
+**Use MCP tools** when a task touches an external service, live web data, browser automation, or cross-session memory. Do not guess APIs or skip available MCP — read the tool schema first, then call the tool.
+
+**Config:** All user MCP servers are declared in `~/.cursor/mcp.json` (`/Users/dvgenis/.cursor/mcp.json`). Cursor plugins (e.g. Sanity) are separate from that file but still appear as MCP servers in the IDE.
+
+**How to call:** List/read descriptors under the project MCP folder, then `CallMcpTool` with the runtime `server` id (usually `user-<mcp.json key>`). Check schema before every call. If auth fails, run the server’s auth flow once, then retry — do not spam `mcp_auth`.
+
+## Task → server
+
+| Task | Server (`mcp.json` key) | Examples |
+|------|-------------------------|----------|
+| GitHub issues, PRs, code search, file contents | `github` | `search_issues`, `get_pull_request`, `search_code`, `get_file_contents` |
+| Web / local search | `brave-search` | `brave_web_search`, `brave_local_search` |
+| Slack channels, history, post/reply | `slack` | `slack_list_channels`, `slack_post_message`, `slack_get_channel_history` |
+| WhatsApp chats and messages | `whatsapp` | `list_chats`, `send_message`, `search_contacts` |
+| Browser test in Cursor IDE | *(built-in)* `cursor-ide-browser` | `browser_navigate`, `browser_snapshot`, `browser_click` |
+| Headless browser / web E2E | `playwright` | `browser_navigate`, `browser_snapshot`, `browser_take_screenshot` |
+| Sanity schemas, GROQ, CMS docs | *(plugin)* `plugin-sanity-Sanity` | `get_schema`, `query_documents`, `search_docs`, `read_docs` |
+| NotebookLM research & notebooks | `notebooklm-mcp` | `notebook_query`, `research_start`, `source_get_content` |
+| Gemini image/video / media analysis | `gemini` | `generate_image`, `analyze_media`, `generate_video` |
+| Overleaf LaTeX projects | `overleaf` | edit/sync project files (check MCP status if errors) |
+| Cross-session project memory | `memory-bank` | `read_memory_bank_file`, `update_active_context`, `track_progress` |
+| Complex multi-step reasoning | `sequential-thinking` | `sequentialthinking` |
+
+## Defaults for this repo
+
+- **Research & docs:** `brave-search` or Sanity `search_docs` / `read_docs` before improvising from training data.
+- **GitHub:** `github` MCP for read/search/triage; `gh` CLI is also fine for PR create/merge when the user asks.
+- **Web / Expo web build:** `cursor-ide-browser` in IDE; `playwright` for scripted checks — not for in-app RN unit tests (`npm test`).
+- **Comms:** `slack` or `whatsapp` MCP — never shell out to unofficial APIs.
+- **Sanity CMS work:** always `get_schema` before GROQ writes; use `list_sanity_rules` / `get_sanity_rules` for query patterns.
+
+## Fallbacks
+
+If an MCP server is down or missing tools, say so briefly, then use the next best option (`gh`, `WebSearch`, terminal). Do not use browser MCP to work around a missing integration unless the user asked for browser testing.

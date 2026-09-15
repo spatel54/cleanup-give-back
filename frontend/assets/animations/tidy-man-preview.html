@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Loading sessions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #3e4a3d;
+    }
+    #phone {
+      position: relative;
+      width: min(390px, 100vw);
+      height: min(844px, 100dvh);
+      background: #fcf9f8;
+      overflow: hidden;
+    }
+    #sky {
+      position: absolute;
+      inset: 0 0 45% 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      background: #fcf9f8;
+    }
+    .cloud {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: auto;
+      height: auto;
+      aspect-ratio: 506 / 330;
+      color: #dcebe2;
+      overflow: visible;
+      will-change: transform;
+    }
+    #ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 55%;
+      bottom: 0;
+      background: #009540;
+      z-index: 0;
+    }
+    #scene {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: transparent;
+    }
+    #label {
+      position: absolute;
+      top: 58%;
+      left: 0;
+      right: 0;
+      margin: 0;
+      text-align: center;
+      font-family: Sanchez, serif;
+      font-size: 28px;
+      line-height: 36px;
+      font-weight: 400;
+      color: #fcf9f8;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="phone">
+    <div id="sky"></div>
+    <div id="ground"></div>
+    <svg id="scene" viewBox="0 0 390 844" preserveAspectRatio="none" fill="none"></svg>
+    <p id="label">Loading sessions</p>
+  </div>
+  <script>
+    const W = 390, H = 844;
+    const VIEW = 72;
+    const PIVOT = { x: 38, y: 40 };
+    const BRISTLE_ARC = [
+      { x: 45.3, y: 44.5 },
+      { x: 62.1, y: 47.8 },
+      { x: 59.1, y: 52.6 },
+      { x: 54.3, y: 57.6 },
+      { x: 46.4, y: 62.6 },
+    ];
+    const COLORS = { handle: "#835400", head: "#c2d832", collar: "#3e4a3d", stroke: "#1c1b1b" };
+    const DOT_COLORS = ["#3e4a3d", "#6e7a6c", "#3e4a3d", "#5c665b", "#6e7a6c"];
+    const PLANT_SEC = 0.12, STROKE_SEC = 0.24, RECOVER_SEC = 0.18, MIN_STROKE_SEC = 0.08;
+    const STROKE_ANGLE = -16, WALK_SPEED = 140, SCRAPE_SPEED = 100, CONTACT_SLACK = 6, MAX_STROKES = 5;
+    const HIT_PUSH = 220, HIT_PUSH_SPREAD = 80, HIT_HOP = 220, HIT_HOP_SPREAD = 50, HIT_FOLLOW = 90;
+    const GRAVITY = 1680, FLOOR_FRICTION = 5, SLEEP_SPEED = 12, SUBSTEPS = 8;
+    const HEAD = "M20.6736,59.9844c1.2983-1.388,3.5826-3.6053,4.8424-4.9521-1.4537.886-4.2076,3.37-5.6142,4.2624A46.0024,46.0024,0,0,1,14.41,54.5235a23.6424,23.6424,0,0,0,9.05-4.15,29.78,29.78,0,0,1-10.084,2.9036,47.9434,47.9434,0,0,1-3.4267-5.45c7.1521,1.9446,14.9291-.92,19.73-5.92,1.2414.7174,2.835,1.59,4.1359,2.2474a3.2052,3.2052,0,0,1,1.6174,1.9094c1.7464,4.6657.728,8.7784-2.4318,12.475-1.3221,1.5467-3.2938,3.9123-5.0353,4.9607A33.9572,33.9572,0,0,1,20.6736,59.9844Z";
+    const HANDLE = "M36.41,39.1206l-2.5918-1.5c.684-1.1936,1.3464-2.3568,2.0156-3.516Q43.0888,21.5374,50.3463,8.9716c.0989-.1713.1948-.3449.3033-.51A1.4973,1.4973,0,0,1,53.234,9.9742c-.81,1.4511-1.6532,2.8832-2.484,4.3224Q44.3857,25.322,38.02,36.347C37.4975,37.2525,36.9705,38.1556,36.41,39.1206Z";
+    const COLLAR = "M35.17,44.2183,30.05,41.2608c.5348-.9183,1.0216-1.82,1.5756-2.6789a.9318.9318,0,0,1,1.31-.3181q1.7127.9444,3.3875,1.9568a.9384.9384,0,0,1,.377,1.2973C36.2334,42.4269,35.696,43.3,35.17,44.2183Z";
+
+    function bezier(t, x1, y1, x2, y2) {
+      let x = Math.max(0, Math.min(1, t));
+      for (let i = 0; i < 5; i++) {
+        const u = 1 - x;
+        const cx = 3 * u * u * x * x1 + 3 * u * x * x * x2 + x * x * x;
+        const dx = 3 * u * u * x1 + 6 * u * x * (x2 - x1) + 3 * x * x * (1 - x2);
+        if (Math.abs(dx) < 1e-6) break;
+        x -= (cx - t) / dx;
+      }
+      const u = 1 - x;
+      return 3 * u * u * x * y1 + 3 * u * x * x * y2 + x * x * x;
+    }
+    const easeOut = (t) => bezier(t, 0.23, 1, 0.32, 1);
+    const easeInOut = (t) => bezier(t, 0.77, 0, 0.175, 1);
+
+    const broomDraw = W * 0.46;
+    const broomScale = broomDraw / VIEW;
+    const unit = broomDraw / 112;
+    const floorY = H * 0.55;
+    const broomBaseY = Math.max(4, floorY - 63.5 * broomScale);
+    const startX = broomDraw * 0.02;
+    const offX = W + broomDraw * 0.35;
+    const walkSpeed = WALK_SPEED * (W / 280);
+    const scrapeSpeed = SCRAPE_SPEED * (W / 280);
+
+    const world = {
+      broomX: startX,
+      broomY: broomBaseY,
+      broomAngle: 0,
+      broomVx: 0,
+      prevBroomX: startX,
+      prevBroomAngle: 0,
+      stationX: startX,
+      stepFromX: startX,
+      stepToX: startX,
+      phase: "plant",
+      phaseT: 0,
+      recoverFromAngle: STROKE_ANGLE,
+      strokeCount: 0,
+      particles: [],
+    };
+
+    function rotateAround(px, py, ox, oy, deg) {
+      const a = deg * Math.PI / 180;
+      const dx = px - ox, dy = py - oy;
+      return { x: ox + dx * Math.cos(a) - dy * Math.sin(a), y: oy + dx * Math.sin(a) + dy * Math.cos(a) };
+    }
+
+    function worldBristlePoint(origX, origY) {
+      const local = rotateAround(origX, origY, PIVOT.x, PIVOT.y, world.broomAngle);
+      return { x: world.broomX + broomScale * local.x, y: world.broomY + broomScale * local.y };
+    }
+
+    function bristleFaceX(py) {
+      const pts = BRISTLE_ARC.map((p) => worldBristlePoint(p.x, p.y));
+      if (py <= pts[0].y) return pts[0].x;
+      const last = pts[pts.length - 1];
+      if (py >= last.y) return last.x;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const a = pts[i], b = pts[i + 1];
+        const minY = Math.min(a.y, b.y), maxY = Math.max(a.y, b.y);
+        if (py < minY || py > maxY) continue;
+        const span = b.y - a.y;
+        const t = Math.abs(span) < 1e-6 ? 0 : (py - a.y) / span;
+        return a.x + t * (b.x - a.x);
+      }
+      return last.x;
+    }
+
+    function pile(seed) {
+      let a = seed >>> 0;
+      const rng = () => {
+        a = (a + 0x6d2b79f5) >>> 0;
+        let t = a;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+      const front = bristleFaceX(floorY - 3);
+      const cx = front + 5 * unit;
+      world.particles = [];
+      for (let i = 0; i < 8; i++) {
+        const r = (3.6 + rng() * 1.4) * unit;
+        const rad = 7.2 * Math.sqrt(rng()) * unit;
+        const ang = rng() * Math.PI - 0.2;
+        const x = Math.max(front + r + 0.4, cx + Math.cos(ang) * rad * 0.9);
+        world.particles.push({
+          x, y: floorY - r, vx: 0, vy: 0, r,
+          spread: rng() * 2 - 1, struck: false,
+          color: DOT_COLORS[i % DOT_COLORS.length],
+        });
+      }
+    }
+    pile(1);
+
+    function asleep(p) {
+      return p.y + p.r >= floorY - 0.6 && Math.abs(p.vx) < SLEEP_SPEED && Math.abs(p.vy) < SLEEP_SPEED;
+    }
+
+    function stepParticles(dt) {
+      for (const p of world.particles) {
+        if (asleep(p)) {
+          p.vx = 0;
+          p.vy = 0;
+          p.y = floorY - p.r;
+          continue;
+        }
+        const drag = Math.exp(-(0.55 + 0.06 * p.r) * dt);
+        p.vy += GRAVITY * dt;
+        p.vx *= drag; p.vy *= drag;
+        p.x += p.vx * dt; p.y += p.vy * dt;
+        if (p.y + p.r > floorY) {
+          p.y = floorY - p.r;
+          p.vy = 0;
+          p.vx *= Math.exp(-(FLOOR_FRICTION + p.r * 0.35) * dt);
+          if (Math.abs(p.vx) < SLEEP_SPEED) p.vx = 0;
+        }
+        if (p.x < p.r) { p.x = p.r; p.vx = Math.abs(p.vx) * 0.15; }
+      }
+    }
+
+    function brushDots() {
+      if (world.phase !== "stroke") return;
+      for (const p of world.particles) {
+        const face = bristleFaceX(p.y);
+        const behind = p.x + p.r < face;
+        const overlapping = p.x - p.r < face;
+        if (!overlapping) continue;
+        if (p.struck && !behind) continue;
+        p.x = face + p.r;
+        if (!p.struck) {
+          p.struck = true;
+          const s = W / 280;
+          p.vx = world.broomVx + (HIT_PUSH + p.spread * HIT_PUSH_SPREAD) * s;
+          p.vy = -(HIT_HOP + Math.abs(p.spread) * HIT_HOP_SPREAD) * s;
+          continue;
+        }
+        p.vx = Math.max(p.vx, world.broomVx + HIT_FOLLOW * (W / 280));
+      }
+    }
+
+    function touchingDots() {
+      for (const p of world.particles) {
+        const face = bristleFaceX(p.y);
+        if (p.x - p.r <= face + CONTACT_SLACK * unit && p.x + p.r >= face - 4) return true;
+      }
+      return false;
+    }
+
+    function resetLoop() {
+      world.stationX = startX;
+      world.broomX = startX;
+      world.prevBroomX = startX;
+      world.broomAngle = 0;
+      world.prevBroomAngle = 0;
+      world.broomVx = 0;
+      world.phase = "plant";
+      world.phaseT = 0;
+      world.recoverFromAngle = STROKE_ANGLE;
+      world.strokeCount = 0;
+      pile((Math.random() * 1000) | 0);
+    }
+
+    function canStroke() {
+      return world.strokeCount < MAX_STROKES;
+    }
+
+    function beginStroke() {
+      world.phase = "stroke";
+      world.phaseT = 0;
+      world.strokeCount += 1;
+      for (const p of world.particles) p.struck = false;
+    }
+
+    function beginRecover() {
+      world.recoverFromAngle = world.broomAngle;
+      world.phase = "recover";
+      world.phaseT = 0;
+      world.broomVx = 0;
+    }
+
+    function afterRest() {
+      world.broomAngle = 0;
+      world.broomVx = 0;
+      if (world.stationX >= offX - 0.5) { resetLoop(); return; }
+      if (canStroke() && touchingDots()) { world.phase = "plant"; world.phaseT = 0; return; }
+      world.phase = "walk";
+      world.phaseT = 0;
+    }
+
+    function advancePhase() {
+      if (world.phase === "plant") {
+        if (canStroke() && touchingDots()) beginStroke();
+        else { world.phase = "walk"; world.phaseT = 0; }
+        return;
+      }
+      if (world.phase === "stroke") { beginRecover(); return; }
+      if (world.phase === "recover") afterRest();
+    }
+
+    const DURS = { plant: PLANT_SEC, stroke: STROKE_SEC, recover: RECOVER_SEC, walk: Infinity };
+
+    function updateBroom(dt) {
+      world.prevBroomX = world.broomX;
+      world.prevBroomAngle = world.broomAngle;
+      world.phaseT += dt;
+      const dur = DURS[world.phase];
+      const u = Math.min(1, world.phaseT / Math.max(dur, 1e-5));
+      if (world.phase === "plant") {
+        world.broomAngle = 0;
+        world.broomX = world.stationX;
+        world.broomVx = 0;
+      } else if (world.phase === "stroke") {
+        world.broomAngle = STROKE_ANGLE * easeOut(u);
+        if (touchingDots()) {
+          world.broomX += scrapeSpeed * dt;
+          world.stationX = world.broomX;
+          world.broomVx = scrapeSpeed;
+        } else {
+          world.broomVx = 0;
+          if (world.phaseT >= MIN_STROKE_SEC) { beginRecover(); return; }
+        }
+      } else if (world.phase === "recover") {
+        world.broomAngle = world.recoverFromAngle * (1 - easeInOut(u));
+        world.broomX = world.stationX;
+        world.broomVx = 0;
+      } else {
+        world.broomAngle = 0;
+        world.broomX += walkSpeed * dt;
+        world.stationX = world.broomX;
+        world.broomVx = walkSpeed;
+        if (world.broomX >= offX - 0.5) { resetLoop(); return; }
+        if (canStroke() && touchingDots()) { beginStroke(); return; }
+      }
+      if (world.phase !== "walk" && world.phaseT >= dur) advancePhase();
+    }
+
+    const ns = "http://www.w3.org/2000/svg";
+    const CLOUD_D = "M396.007,191.19c-0.478,0-1.075,0-1.554,0c-6.693-54.147-52.833-96.103-108.773-96.103c-48.171,0-89.051,31.078-103.753,74.349c-16.734-8.128-35.381-12.67-55.224-12.67C56.658,156.765,0,213.542,0,283.707c0,67.416,52.594,122.64,118.934,126.703v0.239h277.91c60.244-0.358,108.893-49.366,108.893-109.729C505.617,240.317,456.609,191.19,396.007,191.19z";
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sky = document.getElementById("sky");
+    const CLOUD_VX = 16;
+    const clouds = [
+      { xRatio: 0.28, yRatio: 0.04, w: 32 },
+      { xRatio: 0.72, yRatio: 0.06, w: 38 },
+      { xRatio: 0.40, yRatio: 0.28, w: 24 },
+      { xRatio: 0.05, yRatio: 0.10, w: 64 },
+      { xRatio: 0.84, yRatio: 0.32, w: 52 },
+      { xRatio: 0.52, yRatio: 0.14, w: 80 },
+      { xRatio: 0.12, yRatio: 0.34, w: 44 },
+    ].map((spec) => {
+      const el = document.createElementNS(ns, "svg");
+      el.setAttribute("class", "cloud");
+      el.setAttribute("viewBox", "0 90 505.736 330");
+      el.style.width = spec.w + "px";
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", CLOUD_D);
+      path.setAttribute("fill", "currentColor");
+      el.appendChild(path);
+      sky.appendChild(el);
+      return {
+        el,
+        x: spec.xRatio * sky.clientWidth,
+        y: spec.yRatio * sky.clientHeight,
+        w: spec.w,
+        vx: CLOUD_VX,
+      };
+    });
+    function placeCloud(c) {
+      c.el.style.transform = "translate3d(" + c.x + "px," + c.y + "px,0)";
+    }
+    function stepClouds(dt) {
+      if (reduceMotion) return;
+      const limit = sky.clientWidth;
+      for (const c of clouds) {
+        c.x += c.vx * dt;
+        if (c.x > limit) c.x = -c.w;
+        placeCloud(c);
+      }
+    }
+    clouds.forEach(placeCloud);
+
+    const svg = document.getElementById("scene");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    const groundFill = document.createElementNS(ns, "rect");
+    groundFill.setAttribute("x", "0");
+    groundFill.setAttribute("y", String(floorY));
+    groundFill.setAttribute("width", String(W));
+    groundFill.setAttribute("height", String(H - floorY));
+    groundFill.setAttribute("fill", "#009540");
+    svg.appendChild(groundFill);
+
+    const dots = world.particles.map((p) => {
+      const c = document.createElementNS(ns, "circle");
+      c.setAttribute("fill", p.color);
+      svg.appendChild(c);
+      return c;
+    });
+
+    const broom = document.createElementNS(ns, "g");
+    const rotated = document.createElementNS(ns, "g");
+    const flipped = document.createElementNS(ns, "g");
+    flipped.setAttribute("transform", "translate(72,0) scale(-1,1)");
+    [
+      [HEAD, COLORS.head],
+      [HANDLE, COLORS.handle],
+      [COLLAR, COLORS.collar],
+    ].forEach(([d, fill]) => {
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", d);
+      path.setAttribute("fill", fill);
+      flipped.appendChild(path);
+    });
+    [
+      [HEAD, "round", "round"],
+      [HANDLE, null, null],
+      [COLLAR, null, null],
+    ].forEach(([d, linecap, linejoin]) => {
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", d);
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", COLORS.stroke);
+      path.setAttribute("stroke-width", "2");
+      if (linecap) path.setAttribute("stroke-linecap", linecap);
+      if (linejoin) path.setAttribute("stroke-linejoin", linejoin);
+      else path.setAttribute("stroke-miterlimit", "10");
+      flipped.appendChild(path);
+    });
+    rotated.appendChild(flipped);
+    broom.appendChild(rotated);
+    svg.appendChild(broom);
+
+    function syncDotCount() {
+      while (dots.length < world.particles.length) {
+        const c = document.createElementNS(ns, "circle");
+        svg.insertBefore(c, broom);
+        dots.push(c);
+      }
+    }
+
+    function draw() {
+      syncDotCount();
+      broom.setAttribute(
+        "transform",
+        "translate(" + world.broomX + "," + world.broomY + ") scale(" + broomScale + ")"
+      );
+      rotated.setAttribute(
+        "transform",
+        "rotate(" + world.broomAngle + "," + PIVOT.x + "," + PIVOT.y + ")"
+      );
+      world.particles.forEach((p, i) => {
+        dots[i].setAttribute("cx", p.x);
+        dots[i].setAttribute("cy", p.y);
+        dots[i].setAttribute("r", p.r);
+        dots[i].setAttribute("fill", p.color);
+      });
+    }
+
+    let last = performance.now();
+    function loop(now) {
+      const dt = Math.min((now - last) / 1000, 1 / 30);
+      last = now;
+      const h = dt / SUBSTEPS;
+      for (let i = 0; i < SUBSTEPS; i++) {
+        updateBroom(h);
+        stepParticles(h);
+        brushDots();
+      }
+      stepClouds(dt);
+      draw();
+      requestAnimationFrame(loop);
+    }
+    draw();
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>

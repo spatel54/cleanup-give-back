@@ -1,0 +1,17 @@
+{
+  "$schema": "https://cleanupgiveback.local/figma-tokens/v1",
+  "collection": "Radius",
+  "mode": "Value",
+  "source": {
+    "figmaFileKey": "DrDcQH14n7ntDQ80F7au9S",
+    "designSystemPage": "1:3",
+    "exportedFrom": "frontend/design/figma/design.md §7",
+    "exportedAt": "2026-07-13"
+  },
+  "variables": {
+    "radius/sm": { "type": "FLOAT", "value": 8, "css": "--radius-sm" },
+    "radius/md": { "type": "FLOAT", "value": 16, "css": "--radius-md" },
+    "radius/search": { "type": "FLOAT", "value": 22, "css": "--radius-search" },
+    "radius/full": { "type": "FLOAT", "value": 9999, "css": "--radius-full" }
+  }
+}

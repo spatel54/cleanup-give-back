@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en" style="width: 390px; height: 701px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Submission Confirmation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sanchez:wght@400;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#89173c",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "inverse-primary": "#66de7f",
+                        "on-surface": "#1c1b1b",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#c64869",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffddb5",
+                        "on-primary-fixed": "#002109",
+                        "primary-container": "#008739",
+                        "surface-tint": "#006e2d",
+                        "tertiary": "#a62f51",
+                        "on-primary-container": "#f7fff2",
+                        "primary-fixed-dim": "#66de7f",
+                        "outline-variant": "#bdcaba",
+                        "on-tertiary-fixed": "#3f0016",
+                        "surface-container": "#f0edec",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb957",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-container": "#fcab29",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#005320",
+                        "secondary": "#835400",
+                        "background": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#83fb98",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "outline": "#6e7a6c",
+                        "surface-container-high": "#eae7e7",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed": "#2a1800",
+                        "on-background": "#1c1b1b",
+                        "tertiary-fixed": "#ffd9de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3e4a3d",
+                        "on-secondary-container": "#694300",
+                        "error-container": "#ffdad6",
+                        "primary": "#009540"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-side": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    fontFamily: {
+                        "headline": ["Sanchez", "serif"],
+                        "display": ["Sanchez", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "label": ["Noto Sans", "sans-serif"],
+                        "data": ["IBM Plex Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+
+        /* Staggered Entrance Animations */
+        .animate-fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative overflow-hidden font-body">
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-side relative z-10 w-full max-w-md mx-auto">
+<!-- Success Icon -->
+<div class="mb-stack-lg animate-fade-up">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant relative shadow-sm"><div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-white shadow-sm"><span class="material-symbols-outlined !text-5xl font-bold">check</span></div><div class="absolute inset-[-12px] border border-outline-variant/50 rounded-full"></div></div>
+</div>
+<!-- Headers -->
+<h1 class="font-display text-4xl font-bold text-on-surface mb-stack-sm animate-fade-up delay-100 text-center tracking-tight">
+            Submitted
+        </h1>
+<p class="font-body text-lg text-on-surface-variant mb-stack-lg animate-fade-up delay-200 text-center">
+            Your session is under review.
+        </p>
+<!-- Status Badge -->
+<div class="animate-fade-up delay-300 mb-stack-lg">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-[#fef3c7] text-[#92400e] rounded-full border border-[#fcd34d] bg-secondary-container text-on-secondary-container border-secondary">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span>
+<span class="font-label font-semibold tracking-wide text-sm uppercase">Under Review</span>
+</div>
+</div>
+<!-- Session Summary Card -->
+<div class="w-full bg-surface border border-outline-variant shadow-sm rounded-xl p-6 mb-stack-lg animate-fade-up delay-400">
+<h3 class="font-label text-sm text-on-surface-variant uppercase tracking-wider mb-4 border-b border-outline-variant pb-2">Session Summary</h3>
+<div class="space-y-4">
+<!-- Data Point 1 -->
+<div class="flex justify-between items-center animate-fade-up delay-400">
+<span class="font-body text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg">calendar_today</span>
+                        Date
+                    </span>
+<span class="font-data text-on-surface font-medium">Oct 24, 2023</span>
+</div>
+<!-- Data Point 2 -->
+<div class="flex justify-between items-center animate-fade-up delay-500">
+<span class="font-body text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg">title</span>
+                        Title
+                    </span>
+<span class="font-body text-on-surface font-medium text-right max-w-[150px] truncate">Coastal Cleanup</span>
+</div>
+<!-- Data Point 3 (Highlighted Metric) -->
+<div class="mt-4 pt-4 border-t border-outline-variant flex justify-between items-end animate-fade-up delay-[600ms]">
+<span class="font-body text-on-surface-variant flex items-center gap-2 pb-1">
+<span class="material-symbols-outlined text-outline text-lg">timer</span>
+                        Duration
+                    </span>
+<span class="font-data text-4xl font-semibold text-primary tracking-tight">1h 24m</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-stack-md animate-fade-up delay-[700ms]">
+<button class="w-full bg-primary text-white font-label text-base py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors active:scale-[0.98]">
+<span class="">View Session</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="w-full bg-transparent border border-outline text-on-surface font-label text-base py-4 rounded-lg flex items-center justify-center hover:bg-surface-container transition-colors active:scale-[0.98]">
+                Return Home
+            </button>
+</div>
+</main>
+<div aria-hidden="true" data-snapdom-sandbox="true" id="snapdom-sandbox" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div>
+
+
+
+</body></html>

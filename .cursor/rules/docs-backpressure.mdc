@@ -1,0 +1,49 @@
+---
+description: Mandatory living-doc updates after code or product changes
+alwaysApply: true
+---
+
+# Documentation backpressure
+
+A task is **not complete** until living docs under `docs/` match the change. Templates are copy-only.
+
+**Templates:** `docs/frontend/context/TEMPLATE.md`, `docs/backend/context/TEMPLATE.md`, `docs/adr/template.md`, `docs/frontend/specs/TEMPLATE.md`, `docs/backend/specs/TEMPLATE.md`
+
+**Index:** [docs/README.md](../../docs/README.md). Root keeps only `README.md`, `AGENTS.md`, `CLAUDE.md` (stubs), and `.cursor/`.
+
+## After every code or behavior change
+
+| Change type | Update |
+|-------------|--------|
+| Edits under `frontend/src/app/` | [docs/frontend/context/app.md](../../docs/frontend/context/app.md) |
+| Edits under `frontend/assets/` | [docs/frontend/context/assets.md](../../docs/frontend/context/assets.md) |
+| Edits under `frontend/src/components/` | [docs/frontend/context/components.md](../../docs/frontend/context/components.md) |
+| Edits under `frontend/src/hooks/` or `frontend/src/constants/` | `docs/frontend/context/<scope>.md` if that scope file exists |
+| New domain term or role | [docs/frontend/context/project.md](../../docs/frontend/context/project.md) → Ontology |
+| Local design choice | relevant `docs/frontend/context/*.md` → Decisions |
+| Code pattern change | relevant `docs/frontend/context/*.md` → Patterns |
+| New hard rule | relevant `docs/frontend/context/*.md` → Policies |
+| Shipped feature with spec | matching `docs/frontend/specs/*.md` or `docs/backend/specs/*.md` — check ACs |
+| Architecture decision | `docs/adr/ADR-NNN-*.md` + [overview.md](../../docs/adr/overview.md) |
+| Backend domain work | matching `docs/backend/context/*.md` |
+| Completed planned work | [implementation-plan.md](../../docs/implementation-plan.md) |
+| End of session | [progress.md](../../docs/progress.md) |
+| User-visible capability changed | [current.md](../../docs/current.md) |
+| Brand, UI tokens, or copy tone | [brand.md](../../docs/frontend/brand.md) |
+| Org account access (no secrets in repo) | [accounts-and-access.md](../../docs/accounts-and-access.md) |
+| Agent commands or repo layout | [agents/AGENTS.md](../../docs/agents/AGENTS.md) |
+| Product vision or setup | root `README.md` only |
+
+## Verification before “done”
+
+```bash
+cd frontend && npx tsc --noEmit
+npm run lint # when relevant
+npm test # when relevant
+```
+
+## When unsure
+
+- Spec exists? Check off ACs in `docs/*/specs/` before claiming done.
+- Architectural? ADR + link from [project.md](../../docs/frontend/context/project.md).
+- What runs today changed? Update [current.md](../../docs/current.md).

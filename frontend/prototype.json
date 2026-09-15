@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Clean-Up-Give-Back Prototype",
+    "slug": "Clean-Up-Give-Back",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "cleanupgiveback",
+    "userInterfaceStyle": "automatic",
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
