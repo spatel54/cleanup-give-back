@@ -9,7 +9,7 @@ import type { WeeklyHoursDatum } from '../components/WeeklyHoursChart';
  */
 
 export const homeUser = {
-  firstName: 'Shivam',
+  firstName: 'Alex',
 };
 
 export const weeklyStreakHours = 5;

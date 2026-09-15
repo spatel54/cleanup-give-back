@@ -15,7 +15,7 @@ export type PasswordResetEmailInput = {
 export const PASSWORD_RESET_EMAIL_SUBJECT = 'Forgot Password?';
 
 /** Placeholder CTA target for preview/test sends until a recovery link exists. */
-export const PASSWORD_RESET_EMAIL_PLACEHOLDER_URL = 'https://cleanupgiveback.org/reset-password';
+export const PASSWORD_RESET_EMAIL_PLACEHOLDER_URL = 'https://example.org/reset-password';
 
 export const PASSWORD_RESET_EMAIL_COPY = {
   headline: 'Forgot Password?',

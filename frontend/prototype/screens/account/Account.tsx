@@ -38,7 +38,7 @@ export function Account({ go }: Props) {
           <View style={styles.avatar}>
             <Text style={styles.avatarText}>SP</Text>
           </View>
-          <Text style={styles.profileName}>Shivam Patel</Text>
+          <Text style={styles.profileName}>Alex Morgan</Text>
           <Text style={styles.profileEmail}>shivam@email.com</Text>
           <Text style={styles.profileMeta}>Court-Ordered: No</Text>
         </View>

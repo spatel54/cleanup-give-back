@@ -23,7 +23,7 @@
 
 ## Product pricing (verified against live site 2026-07-10)
 
-Source of truth: [cleanupgiveback.org/products](https://cleanupgiveback.org/products) (catalog linked from [cleanupgiveback.org/shop](https://cleanupgiveback.org/shop)).
+Source of truth: [example.org/products](https://example.org/products) (catalog linked from [example.org/shop](https://example.org/shop)).
 
 | Product (live-site name) | Figma `shop_home` card title | Detail frame | Price |
 |--------------------------|------------------------------|--------------|-------|
@@ -35,7 +35,7 @@ Source of truth: [cleanupgiveback.org/products](https://cleanupgiveback.org/prod
 
 Corrected 2026-07-10 (prices): Tote Bags, "Adult Clean Up Kit", and "Child Clean Up Kit" cards on `shop_home` were all showing the placeholder price `$23.99` (copy-pasted from the Trash Grabber card). Updated in Figma directly to $3.00, $12.99, and $9.99 respectively via node IDs `515:1551`, `515:1599`, `515:1583`.
 
-Added 2026-07-10 (product detail frames + naming): Duplicated `shop_product_view` (`492:114`) into four SKU frames in `Shop Flow` (`627:166`). Body copy pulled verbatim from [cleanupgiveback.org/products](https://cleanupgiveback.org/products). `shop_home` card titles renamed to live-site names (`515:1550`, `515:1598`, `515:1582`). Tote detail includes Earth/Ocean color swatches (`905:730` row). Hero images left as `#f0edec` placeholders — media deferred. Prototype: View buttons on `shop_home` → matching detail frames; back arrows → `498:606`.
+Added 2026-07-10 (product detail frames + naming): Duplicated `shop_product_view` (`492:114`) into four SKU frames in `Shop Flow` (`627:166`). Body copy pulled verbatim from [example.org/products](https://example.org/products). `shop_home` card titles renamed to live-site names (`515:1550`, `515:1598`, `515:1582`). Tote detail includes Earth/Ocean color swatches (`905:730` row). Hero images left as `#f0edec` placeholders — media deferred. Prototype: View buttons on `shop_home` → matching detail frames; back arrows → `498:606`.
 
 ## Flow — Shop
 

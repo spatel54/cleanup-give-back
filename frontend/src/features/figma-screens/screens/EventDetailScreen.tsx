@@ -227,7 +227,7 @@ export function EventDetailScreen() {
   }, [event]);
 
   const handleVisit = useCallback(() => {
-    void Linking.openURL('https://cleanupgiveback.org');
+    void Linking.openURL('https://example.org');
   }, []);
 
   const handleRegister = useCallback(() => {

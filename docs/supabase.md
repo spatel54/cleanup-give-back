@@ -144,7 +144,7 @@ Deploy from `backend/sessions/` when implemented (see [sessions-api.md](backend/
 
 ### Transactional email (Resend)
 
-**Status (2026-08-03):** Sending domain `cleanupgiveback.org` is **verified** in Resend. Fly `example-sessions` has `RESEND_API_KEY`, `EMAIL_FROM`, and `ADMIN_NOTIFY_EMAIL`. Admin local mail uses the same vars in `admin-web-app/.env.local`. Vercel production admin still needs those vars if hosted approve/decline email is required.
+**Status (2026-08-03):** Sending domain `example.org` is **verified** in Resend. Fly `example-sessions` has `RESEND_API_KEY`, `EMAIL_FROM`, and `ADMIN_NOTIFY_EMAIL`. Admin local mail uses the same vars in `admin-web-app/.env.local`. Vercel production admin still needs those vars if hosted approve/decline email is required.
 
 The sessions API also serves email routes (auth required):
 

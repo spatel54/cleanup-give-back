@@ -17,7 +17,7 @@ Code-owned table HTML for the Forgot Password email (`buildPasswordResetEmailHtm
 
 **Reset Password** is primary `#009540` with a 2px `#004d21` stroke and white label in light and dark mode (no lime/amber overrides). Support contact is `support@example.org` — do not name Admin. Meta `color-scheme` / `supported-color-schemes` are `light only`, same as order and hours-reminder, so Apple Mail does not invert the dark headline/body on the cream card. All copy uses **`letter-spacing: 0.02em`** (head `<style>` plus inline on every text cell/link) so tracking matches order and hours-reminder.
 
-`resetUrl` is required. Preview/test scripts pass `https://cleanupgiveback.org/reset-password` until a Supabase recovery link is available.
+`resetUrl` is required. Preview/test scripts pass `https://example.org/reset-password` until a Supabase recovery link is available.
 
 Figma typo `messsage` is corrected to `message`. Off-canvas leftover copy in the Figma frame (inactive-hours nudge) is not in this email.
 

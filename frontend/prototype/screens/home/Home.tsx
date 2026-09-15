@@ -31,9 +31,9 @@ type TimePeriod = 'Day' | 'Month' | 'Year';
 // ── Fix 1: Dynamic greeting ────────────────────────────────────────────────────
 function getGreeting(): string {
   const hour = new Date().getHours();
-  if (hour < 12) return 'Good morning, Shivam';
-  if (hour < 17) return 'Good afternoon, Shivam';
-  return 'Good evening, Shivam';
+  if (hour < 12) return 'Good morning, Alex';
+  if (hour < 17) return 'Good afternoon, Alex';
+  return 'Good evening, Alex';
 }
 
 // ── Fix 2: Chart data ─────────────────────────────────────────────────────────

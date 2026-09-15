@@ -40,11 +40,11 @@ Suggested work order is at the [bottom](#suggested-order-of-work).
 ## 0. Counsel & publication (do this first)
 
 - [ ] **Legal review:** Counsel reviews Privacy Policy, Terms, retention, court-sharing, COPPA/AADC, and Illinois BIPA posture before public traffic. *(not started — this folder already requires it)*
-- [ ] **Publish Privacy Policy** on a stable HTTPS URL (e.g. `cleanupgiveback.org/privacy`), not only in-app. *(partial — in-app draft only)*
+- [ ] **Publish Privacy Policy** on a stable HTTPS URL (e.g. `example.org/privacy`), not only in-app. *(partial — in-app draft only)*
 - [ ] **Publish Terms of Service** on a stable HTTPS URL and wire the in-app Terms row (`AccountPrivacyScreen` is currently `onPress={() => {}}`). *(not started)*
 - [ ] **Fill the mailing address** (street + ZIP) on both documents. *(policy-only placeholder)*
 - [ ] **Effective / last-updated dates** match the hosted + in-app copies.
-- [ ] **Scope statement:** Policy covers mobile app, `cleanupgiveback.org`, and admin console — or say what it does *not* cover.
+- [ ] **Scope statement:** Policy covers mobile app, `example.org`, and admin console — or say what it does *not* cover.
 - [ ] **Signup acceptance:** Required checkbox for Privacy + Terms before account creation. *(not started / incomplete)*
 - [ ] App Store **Privacy Nutrition Labels** and Google Play **Data Safety** match the published policy (precise location, photos, contacts, identifiers, diagnostics). *(not started)*
 - [ ] iOS **PrivacyInfo.xcprivacy** / Android Data Safety declarations complete.
@@ -180,7 +180,7 @@ Suggested work order is at the [bottom](#suggested-order-of-work).
 - [ ] Background location **only** while a session is active; App Store justification matches policy. *(partial — product behavior yes; store copy/review pending)*
 - [ ] Rate limits: auth, password reset, photo upload, session ingest, PDF, email send. *(not started)*
 - [ ] Bot protection on public signup / donate / contact **when those forms are live**. *(when shipped)*
-- [ ] SPF + DKIM + **DMARC** on `cleanupgiveback.org`. *(partial — Resend domain verified)*
+- [ ] SPF + DKIM + **DMARC** on `example.org`. *(partial — Resend domain verified)*
 - [ ] Resend env vars on **Vercel production** as well as Fly/local. *(ops)*
 
 ---
@@ -203,7 +203,7 @@ Shop, donate, and tracker checkout are UI mocks; `backend/payments/` is empty. S
 - [ ] Error tracking (Sentry or similar) on mobile, admin, Fly. *(not started)*
 - [ ] External uptime checks on `https://sessions.example.com/health` (or `/health/deep`) and the Vercel admin host. *(not started — in-app Production Readiness panel exists)*
 - [ ] Confirm Supabase **automated backups** on; **test a restore once**. *(ops)*
-- [x] No fake testimonials in the app. *(n/a in app today — keep true on `cleanupgiveback.org`)*
+- [x] No fake testimonials in the app. *(n/a in app today — keep true on `example.org`)*
 
 ---
 

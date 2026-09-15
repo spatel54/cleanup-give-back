@@ -7,7 +7,7 @@ import { eventImageForLocation } from './home';
  * first-time-user empty state.
  */
 export const returningUserHomeDashboard: HomeDashboardData = {
-  homeUser: { firstName: 'Shivam' },
+  homeUser: { firstName: 'Alex' },
   weeklyStreakHours: 5,
   serviceHoursTotalLabel: '20.5 hrs',
   weekRangeLabel: 'October 21 - 28, 2026',

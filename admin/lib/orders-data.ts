@@ -87,7 +87,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'shipped',
     tracking: '9400111202550035000000',
     carrier: 'USPS',
-    shipping: shipping('Jordan Kim', '1842 N Milwaukee Ave', 'Chicago', 'IL', '60647', {
+    shipping: shipping('Jordan Kim', '100 Sample Street', 'Example City', 'IL', '00000', {
       phone: '(312) 555-0142',
     }),
     createdAt: '2026-07-15T10:22:00Z',
@@ -102,7 +102,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'shipped',
     tracking: '9400111202550035111111',
     carrier: 'USPS',
-    shipping: shipping('Devon Okafor', '2200 S Michigan Ave', 'Chicago', 'IL', '60616', {
+    shipping: shipping('Devon Okafor', '200 Sample Avenue', 'Example City', 'IL', '00000', {
       line2: 'Apt 4B',
       phone: '(773) 555-0198',
     }),
@@ -118,7 +118,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'paid',
     tracking: null,
     carrier: null,
-    shipping: shipping('Sophia Chen', '55 W Erie St', 'Chicago', 'IL', '60654'),
+    shipping: shipping('Sophia Chen', '300 Sample Boulevard', 'Example City', 'IL', '00000'),
     createdAt: '2026-07-18T09:00:00Z',
   },
   {
@@ -134,7 +134,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'pending',
     tracking: null,
     carrier: null,
-    shipping: shipping('Marcus Rivera', '4707 N Broadway', 'Chicago', 'IL', '60640', {
+    shipping: shipping('Marcus Rivera', '400 Sample Lane', 'Example City', 'IL', '00000', {
       phone: '(872) 555-0110',
     }),
     createdAt: '2026-07-20T16:30:00Z',
@@ -149,7 +149,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'shipped',
     tracking: '9400111202550035222222',
     carrier: 'UPS',
-    shipping: shipping('Luna Martinez', '901 W Randolph St', 'Chicago', 'IL', '60607', {
+    shipping: shipping('Luna Martinez', '500 Sample Court', 'Example City', 'IL', '00000', {
       line2: 'Unit 12',
     }),
     createdAt: '2026-07-16T11:10:00Z',
@@ -164,7 +164,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'shipped',
     tracking: '9400111202550035333333',
     carrier: 'USPS',
-    shipping: shipping('Miguel Santos', '1300 W Belmont Ave', 'Chicago', 'IL', '60657'),
+    shipping: shipping('Miguel Santos', '600 Sample Way', 'Example City', 'IL', '00000'),
     createdAt: '2026-07-10T08:45:00Z',
   },
   {
@@ -180,7 +180,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'pending',
     tracking: null,
     carrier: null,
-    shipping: shipping('Fatima Hassan', '233 S Wacker Dr', 'Chicago', 'IL', '60606', {
+    shipping: shipping('Fatima Hassan', '700 Sample Plaza', 'Example City', 'IL', '00000', {
       line2: 'Floor 18',
       phone: '(312) 555-0177',
     }),
@@ -196,7 +196,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: 'cancelled',
     tracking: null,
     carrier: null,
-    shipping: shipping('Tyler Washington', '1600 S Indiana Ave', 'Chicago', 'IL', '60616'),
+    shipping: shipping('Tyler Washington', '800 Sample Road', 'Example City', 'IL', '00000'),
     createdAt: '2026-07-11T13:20:00Z',
   },
 ];

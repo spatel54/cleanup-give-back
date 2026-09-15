@@ -25,7 +25,7 @@ const LIST_USERS_PAGE_SIZE = 1000;
 /** Non-routable placeholder domain for volunteers with no real email on file yet -
  * lets them still show up in pickers/lists. `isMockAddress` below is the single
  * source of truth other code should check before actually sending mail. */
-export const MOCK_EMAIL_DOMAIN = 'no-email.cleanupgiveback.internal';
+export const MOCK_EMAIL_DOMAIN = 'no-email.example.internal';
 
 export function isMockAddress(email: string | null | undefined): boolean {
   return Boolean(email && email.toLowerCase().endsWith(`@${MOCK_EMAIL_DOMAIN}`));

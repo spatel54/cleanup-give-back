@@ -87,7 +87,7 @@ export function Checkout({ go }: Props) {
                 required
                 value={city}
                 onChangeText={setCity}
-                placeholder="Chicago"
+                placeholder="Example City"
               />
             </View>
             <View style={styles.stateFlex}>

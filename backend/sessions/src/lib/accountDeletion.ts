@@ -94,7 +94,7 @@ async function anonymizeAuthUser(userId: string): Promise<void> {
   const supabase = getServiceSupabase();
   await unlinkSocialIdentities(userId);
   const { error } = await supabase.auth.admin.updateUserById(userId, {
-    email: `deleted-${userId}@noreply.cleanupgiveback.org`,
+    email: `deleted-${userId}@noreply.example.org`,
     password: randomBytes(32).toString('hex'),
     ban_duration: '876000h',
     user_metadata: {

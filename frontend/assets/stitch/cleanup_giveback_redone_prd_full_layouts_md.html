@@ -571,7 +571,7 @@ Explains that users can manage settings, notification preferences, order history
 
 ```text
 ┌─────────────────────────────────────┐
-│ Good morning, Shivam            🔔  │
+│ Good morning, Alex            🔔  │
 │ 3.5 hours this week                 │
 │                                     │
 │ Service Hours                       │
@@ -704,7 +704,7 @@ Home    [Shop]    Track     Sessions  Account
 │ Account                             │
 │                                     │
 │ SP                                  │
-│ Shivam Patel                        │
+│ Alex Morgan                        │
 │ shivam@email.com                    │
 │                                     │
 │ Records                             │
@@ -851,7 +851,7 @@ Do not show estimated pounds of trash, carbon savings, or environmental savings 
 
 ```text
 ┌─────────────────────────────────────┐
-│ Good morning, Shivam            🔔  │
+│ Good morning, Alex            🔔  │
 │ 3.5 hours this week                 │
 │                                     │
 │ Service Hours                       │
@@ -2068,7 +2068,7 @@ Users should be able to enable or disable:
 │ Account                             │
 │                                     │
 │ SP                                  │
-│ Shivam Patel                        │
+│ Alex Morgan                        │
 │ shivam@email.com                    │
 │ Court-Ordered: No                   │
 │                                     │

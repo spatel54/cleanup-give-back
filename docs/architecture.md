@@ -23,7 +23,7 @@ Related: [current.md](current.md), [supabase.md](supabase.md), [backend/specs/se
 | Photos | Client → Storage; API stores paths only |
 | Maps / weather | No backend; MapLibre + Carto/Esri + Open-Meteo |
 | Payments | Stripe Checkout on [`backend/sessions/`](../backend/sessions/) (`/payments/*`, `/webhooks/stripe`); tracker mock |
-| Email | Resend live (`cleanupgiveback.org` verified); admin local + Fly secrets |
+| Email | Resend live (`example.org` verified); admin local + Fly secrets |
 | Shipping | Shippo labels from Fly (`/shipping/*`, `/webhooks/shippo`); admin Buy label |
 | Env | `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_SUPABASE_*`; Fly: `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_NOTIFY_EMAIL` (+ optional `ADMIN_API_KEY` / service role) |
 

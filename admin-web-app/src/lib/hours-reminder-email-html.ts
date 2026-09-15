@@ -25,7 +25,7 @@ export const HOURS_REMINDER_SUBJECT = 'Missing you at Clean Up Give Back!';
 export const HOURS_REMINDER_CTA_LABEL = 'Open App';
 
 /** Swap when an App Store URL exists. */
-export const HOURS_REMINDER_OPEN_APP_URL = 'https://cleanupgiveback.org/';
+export const HOURS_REMINDER_OPEN_APP_URL = 'https://example.org/';
 
 /** Hosted on the production admin deploy - Resend needs a public image URL. */
 export const HOURS_REMINDER_ASSET_BASE = 'https://admin.example.com/email';

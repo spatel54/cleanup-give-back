@@ -8,7 +8,7 @@
 
 **Turn neighborhood cleanups into trusted service hours — with GPS, photo checkpoints, and an admin who can actually verify the work.**
 
-[Website](https://cleanupgiveback.org/) · 501(c)(3) nonprofit · Volunteer programs · Events · Donate · Store
+Sample nonprofit app · Volunteer programs · Events · Donate · Store
 
 <p>
   <img src="https://img.shields.io/badge/Expo-54-000020?logo=expo&logoColor=white" alt="Expo 54" />
@@ -19,7 +19,7 @@
 </p>
 
 <p>
-  <a href="https://cleanupgiveback.org/"><img src="https://img.shields.io/badge/Website-cleanupgiveback.org-009540" alt="Website" /></a>
+  <img src="https://img.shields.io/badge/Website-sample_only-lightgrey" alt="Website sample only" />
   <img src="https://img.shields.io/badge/iOS-source-lightgrey?logo=apple&logoColor=white" alt="iOS source" />
   <img src="https://img.shields.io/badge/Android-source-3DDC84?logo=android&logoColor=white" alt="Android source" />
   <img src="https://img.shields.io/badge/docs-living-009540" alt="Living docs" />
@@ -91,7 +91,7 @@ Browse [`frontend/`](frontend/), [`admin-web-app/`](admin-web-app/), and [`backe
 - `frontend/src/components/` — shared UI  
 - `frontend/src/features/` — session tracking, shop, onboarding, etc.  
 - `frontend/assets/` — images, fonts, branding  
-- `frontend/design/` — Figma-grounded design workspace  
+- `frontend/design/` — design workspace (HTML prototypes, tokens)  
 
 ---
 

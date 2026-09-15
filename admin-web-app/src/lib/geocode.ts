@@ -115,12 +115,12 @@ function isValidCoordinate(lat: number, lng: number): boolean {
  * In production, this would be replaced with real API calls.
  */
 function mockGeocodeLookup(lat: number, lng: number): GeocodingResult | null {
-  // Chicago/Illinois region (expanded for testing)
+  // Example City/Illinois region (expanded for testing)
   if (lat >= 40.0 && lat <= 42.5 && lng >= -89.0 && lng <= -87.0) {
     return {
       fips: {
         state: '17', // Illinois
-        county: '031', // Cook County (Chicago)
+        county: '031', // Cook County (Example City)
         tract: Math.random() > 0.5 ? '0001' : '0002' // Random tract for demo
       },
       names: {

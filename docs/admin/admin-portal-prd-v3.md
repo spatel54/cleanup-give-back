@@ -18,7 +18,7 @@ The Admin Web App is a **responsive Next.js console** for Admin to operate Clean
 |---|---|
 | **Local** | http://localhost:3000 (`cd admin-web-app && npm run dev`) |
 | **Production** | https://admin.example.com |
-| **Target domain** | `admin.cleanupgiveback.org` (DNS deferred — near-term) |
+| **Target domain** | `admin.example.org` (DNS deferred — near-term) |
 
 Admin gets a single pane of glass over:
 
@@ -354,7 +354,7 @@ Targets ≥ 44×44 px. Audits: [mobile-responsiveness-audit-2026-07-28.md](mobil
 |------------|-----|
 | Supabase project + migrations | Shared truth with mobile |
 | Fly `example-sessions` | Session lifecycle, Admin “ready for review” email, service-letter PDFs |
-| Resend + verified `cleanupgiveback.org` | Admin + Fly transactional mail |
+| Resend + verified `example.org` | Admin + Fly transactional mail |
 | Mobile feedback API write | Populate `/feedback` |
 | Stripe / payments writers | Real `/orders` + `/payments` (non-fixture) |
 | Optional Google Maps key | Places autocomplete + geocode fallback for events |
@@ -370,7 +370,7 @@ Prioritized for stakeholder + eng — **includes auth even while currently bypas
 |----------|------|---------|
 | P0 | **Re-enable production auth** | `BYPASS_AUTH=false` on Vercel; login/logout/claim guard verified; profile password change works against real Auth |
 | P0 | **Vercel Resend env** | Hosted approve/decline + notify-at-risk emails succeed |
-| P1 | **Custom domain** | `admin.cleanupgiveback.org` (or chosen host) → Vercel |
+| P1 | **Custom domain** | `admin.example.org` (or chosen host) → Vercel |
 | P1 | **Audit log viewer** | Browseable `/audit-log` (+ optional nav) |
 | P1 | **Court-hours authoring** | Upsert required hours / due date / case ref from Users or volunteer profile |
 | P2 | **Order fulfillment polish** | Status/tracking reliability on live rows; toast/error UX consistency |

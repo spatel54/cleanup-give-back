@@ -440,7 +440,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     includesKit: true,
     tracking: "9400111202550035000000",
     carrier: "USPS",
-    shipping: shipping("Jordan Kim", "1842 N Milwaukee Ave", "Chicago", "IL", "60647", {
+    shipping: shipping("Jordan Kim", "100 Sample Street", "Example City", "IL", "00000", {
       phone: "(312) 555-0142",
     }),
     createdAt: "2026-07-15T10:22:00Z",
@@ -457,7 +457,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     includesKit: true,
     tracking: "1Z9999999999999999",
     carrier: "UPS",
-    shipping: shipping("Devon Okafor", "4412 Ashford Dunwoody Rd", "Atlanta", "GA", "30346"),
+    shipping: shipping("Devon Okafor", "110 Sample Parkway", "Atlanta", "GA", "30346"),
     createdAt: "2026-07-12T14:05:00Z",
   },
   {
@@ -472,7 +472,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     includesKit: true,
     tracking: null,
     carrier: null,
-    shipping: shipping("Sophia Chen", "800 Fifth Ave", "New York", "NY", "10065"),
+    shipping: shipping("Sophia Chen", "120 Sample Heights", "New York", "NY", "10065"),
     createdAt: "2026-07-18T09:00:00Z",
   },
   {
@@ -488,7 +488,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: "pending",
     tracking: null,
     carrier: null,
-    shipping: shipping("Marcus Rivera", "1600 Pennsylvania Ave NW", "Washington", "DC", "20500"),
+    shipping: shipping("Marcus Rivera", "900 Sample Circle", "Washington", "DC", "20500"),
     fulfillmentMethod: "usps_ship",
     includesKit: true,
     createdAt: "2026-07-20T16:30:00Z",
@@ -503,7 +503,7 @@ export const MOCK_ORDERS: OrderRow[] = [
     status: "shipped",
     tracking: "773901234567890123",
     carrier: "FedEx",
-    shipping: shipping("Luna Martinez", "1 Hacker Way", "Menlo Park", "CA", "94025"),
+    shipping: shipping("Luna Martinez", "130 Sample Commons", "Menlo Park", "CA", "94025"),
     fulfillmentMethod: "usps_ship",
     includesKit: true,
     createdAt: "2026-07-16T11:10:00Z",

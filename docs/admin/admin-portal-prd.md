@@ -12,7 +12,7 @@
 
 ## 1. Overview
 
-The Admin Portal is a **responsive web application** accessible at a dedicated subdomain (e.g., `admin.cleanupgiveback.org`). It gives Admin a single pane of glass over:
+The Admin Portal is a **responsive web application** accessible at a dedicated subdomain (e.g., `admin.example.org`). It gives Admin a single pane of glass over:
 
 - All volunteer cleanup sessions and their approval lifecycle
 - Session letterhead generation — individual per session **and** bulk per volunteer across a date range

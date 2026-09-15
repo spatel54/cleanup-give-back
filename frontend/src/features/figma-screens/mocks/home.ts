@@ -34,7 +34,7 @@ export { eventImageForLocation };
 
 /** First-time user — empty stats; week fields are merged at render time in `HomeScreen`. */
 export const firstTimeHomeDashboard: HomeDashboardData = {
-  homeUser: { firstName: 'Shivam' },
+  homeUser: { firstName: 'Alex' },
   weeklyStreakHours: 0,
   serviceHoursTotalLabel: '0 min',
   ...getCurrentWeekMeta(),
